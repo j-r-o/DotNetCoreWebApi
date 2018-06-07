@@ -22,7 +22,7 @@ namespace Api.tests
         }
 
         [Fact]
-        public async Task ReturnHelloWorld()
+        public async Task ReturnOK()
         {
             // Act
             var response = await _client.GetAsync("api/values/OK");
@@ -32,7 +32,7 @@ namespace Api.tests
             
 
             // Assert
-            Assert.Equal("value !", responseString);
+            Assert.Equal("OK OK", responseString);
         }
     }
 }
