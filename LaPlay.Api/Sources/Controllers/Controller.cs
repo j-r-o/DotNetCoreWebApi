@@ -10,31 +10,26 @@ namespace LaPlay.Api.Sources.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class v1Controller : ControllerBase
     {
-        // GET api/values
-        // [HttpGet]
-        // public ActionResult<IEnumerable<string>> Get()
-        // {
-        //     return new string[] { "value1", "value2" };
-        // }
-
         private Tools.Tools _tools = new Tools.Tools();
 
-        // GET api/values
-        [HttpGet("OK")]
-        public ActionResult<string> Get()
+        // api/v1/route/XXXXX
+        [HttpGet("route/{id}")]
+        public string Get(string id)
+        {
+            return id;
+        }
+
+        // api/v1/test
+        [HttpGet("test")]
+        public ActionResult<string> ok()
         {
             // LaPlay.Api.Sources.Tools.Tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\"");
             Console.WriteLine(_tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\""));
 
-            return "OK OK";
-        }
+            return (_tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\""));
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
             return "OK OK";
         }
 
