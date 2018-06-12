@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{B26D70FF-CC19-4495-9F40-A7A868D3534C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaPlay.Api", "LaPlay.Api\LaPlay.Api.csproj", "{B26D70FF-CC19-4495-9F40-A7A868D3534C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{70EA6583-D242-451B-A4C1-71B406294A52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaPlay.Tests", "LaPlay.Tests\LaPlay.Tests.csproj", "{70EA6583-D242-451B-A4C1-71B406294A52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
