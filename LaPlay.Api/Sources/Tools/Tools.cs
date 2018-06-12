@@ -4,11 +4,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace LaPlay.Api.Sources.Tools
 {
     public class Tools
     {
+        public string drives()
+        {
+
+            DriveInfo[] driverslist = DriveInfo.GetDrives();
+            
+            List<string> drives = new List<String>();
+
+            foreach (DriveInfo d in driverslist)
+
+            {
+                drives.Add("Drive " + d.Name);
+
+                drives.Add("  File type: " + d.DriveType);
+
+                if (d.IsReady == true)
+
+                {
+
+                    drives.Add(" Total size of drive: " + d.TotalSize);
+
+                }
+            }
+
+            return String.Join("\r\n", drives.ToArray());
+        }
 
         public string Bash(string cmd)
         {

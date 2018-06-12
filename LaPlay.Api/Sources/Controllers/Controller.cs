@@ -22,13 +22,22 @@ namespace LaPlay.Api.Sources.Controllers
         }
 
         // api/v1/test
-        [HttpGet("test")]
+        [HttpGet("drives")]
+        public ActionResult<string> drives()
+        {
+            return _tools.drives();
+        }
+
+        // api/v1/bash
+        [HttpGet("bash")]
         public ActionResult<string> ok()
         {
-            // LaPlay.Api.Sources.Tools.Tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\"");
-            Console.WriteLine(_tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\""));
+            string cmd = "lsblk -J -o \"NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\"";
 
-            return (_tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\""));
+            // LaPlay.Api.Sources.Tools.Tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\"");
+            Console.WriteLine(_tools.Bash(cmd));
+
+            return (_tools.Bash(cmd));
 
             return "OK OK";
         }
