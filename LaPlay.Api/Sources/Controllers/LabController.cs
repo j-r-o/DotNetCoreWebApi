@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
+using LaPlay.Api.Sources.Tools;
+
+
+namespace LaPlay.Api.Sources.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class LabController : ControllerBase
+    {
+        private Tools.Tools _tools = new Tools.Tools();
+
+        // api/lab/test
+        [HttpGet("logBench")]
+        public ActionResult<long> logBench()
+        {
+            List<String> logs = new List<string>();
+
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+            Random r = new Random();
+
+            for(int i = 0; i < 100000; i++){
+
+                logs.Add(new string(Enumerable.Repeat(chars, 500).Select(s => s[r.Next(s.Length)]).ToArray()));
+            }
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            System.IO.File.WriteAllLines(@"./WriteLines.txt", logs);
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds / 1000;
+
+            return elapsedMs;
+        }
+
+        // api/lab/test
+        [HttpGet("drives")]
+        public ActionResult<string> drives()
+        {
+            return _tools.drives();
+        }
+
+        // api/lab/bash
+        [HttpGet("bash")]
+        public ActionResult<string> ok()
+        {
+            string cmd = "lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8";
+
+            // LaPlay.Api.Sources.Tools.Tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\"");
+            Console.WriteLine(_tools.Bash(cmd));
+
+            return (_tools.Bash(cmd));
+        }
+    }
+}
