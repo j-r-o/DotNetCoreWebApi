@@ -4,11 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
-using System.Collections.Generic;
 
-namespace LaPlay.Api.Sources.Tools
+namespace LaPlay.Api.Sources.Labo
 {
-    public class Tools
+    public class Labo
     {
         public string drives()
         {

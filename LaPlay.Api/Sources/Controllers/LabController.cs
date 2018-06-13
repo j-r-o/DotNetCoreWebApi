@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using LaPlay.Api.Sources.Tools;
+using LaPlay.Api.Sources.Labo;
 
 
 namespace LaPlay.Api.Sources.Controllers
@@ -13,7 +13,7 @@ namespace LaPlay.Api.Sources.Controllers
     [ApiController]
     public class LabController : ControllerBase
     {
-        private Tools.Tools _tools = new Tools.Tools();
+        private Labo.Labo _lab = new Labo.Labo();
 
         // api/lab/test
         [HttpGet("logBench")]
@@ -43,7 +43,7 @@ namespace LaPlay.Api.Sources.Controllers
         [HttpGet("drives")]
         public ActionResult<string> drives()
         {
-            return _tools.drives();
+            return _lab.drives();
         }
 
         // api/lab/bash
@@ -53,9 +53,9 @@ namespace LaPlay.Api.Sources.Controllers
             string cmd = "lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8";
 
             // LaPlay.Api.Sources.Tools.Tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\"");
-            Console.WriteLine(_tools.Bash(cmd));
+            Console.WriteLine(_lab.Bash(cmd));
 
-            return (_tools.Bash(cmd));
+            return (_lab.Bash(cmd));
         }
     }
 }
