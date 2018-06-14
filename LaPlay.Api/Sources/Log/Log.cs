@@ -7,28 +7,27 @@ using System.Diagnostics;
 
 namespace LaPlay.Api.Sources.Log
 {
-    public class Log
+    public class Log : ILog
     {
-
         private FileStream _logFile;
         private StreamWriter _writer;
 
         public Log()
         {
-            _logFile = File.Open(@"c:\mydirectory\target2.txt", FileMode.Append, FileAccess.Write);
+            _logFile = File.Open(@"log.txt", FileMode.Append, FileAccess.Write);
             _writer = new StreamWriter(_logFile, Encoding.UTF8, 1024, true);
         }
 
         public void info(String log){
-            
+            _writer.Write(log);
         }
 
         public void warning(String log){
-            
+            _writer.Write(log);
         }
 
         public void debug(String log){
-            
+            _writer.Write(log);
         }
     }
 }

@@ -5,10 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
+using LaPlay.Api.Sources.Log;
+
 namespace LaPlay.Api.Sources.Labo
 {
     public class Labo
     {
+        private readonly ILog _logs;
+
+        public Labo(ILog logs){
+            _logs = logs;
+        }
+
         public string drives()
         {
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using LaPlay.Api.Sources.Labo;
+using LaPlay.Api.Sources.Log;
 
 
 namespace LaPlay.Api.Sources.Controllers
@@ -13,9 +14,16 @@ namespace LaPlay.Api.Sources.Controllers
     [ApiController]
     public class LabController : ControllerBase
     {
-        private Labo.Labo _lab = new Labo.Labo();
+        private Labo.Labo _lab;
 
-        // api/lab/test
+        private ILog _log;
+
+        public LabController(ILog log){
+            _lab = new Labo.Labo(log);
+            _log = log;
+        }
+
+        // api/lab/logBench
         [HttpGet("logBench")]
         public ActionResult<long> logBench()
         {
@@ -27,6 +35,11 @@ namespace LaPlay.Api.Sources.Controllers
             for(int i = 0; i < 100000; i++){
 
                 logs.Add(new string(Enumerable.Repeat(chars, 500).Select(s => s[r.Next(s.Length)]).ToArray()));
+            }
+
+            for(int i = 0; i < 100000; i++){
+
+                _log.debug(logs[i]);
             }
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
