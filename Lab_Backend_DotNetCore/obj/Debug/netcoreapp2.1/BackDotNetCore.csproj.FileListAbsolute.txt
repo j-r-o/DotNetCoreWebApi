@@ -1,0 +1,14 @@
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/bin/Debug/netcoreapp2.1/BackDotNetCore.deps.json
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/bin/Debug/netcoreapp2.1/BackDotNetCore.runtimeconfig.json
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/bin/Debug/netcoreapp2.1/BackDotNetCore.runtimeconfig.dev.json
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/bin/Debug/netcoreapp2.1/BackDotNetCore.dll
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/bin/Debug/netcoreapp2.1/BackDotNetCore.pdb
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.csprojAssemblyReference.cache
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.csproj.CoreCompileInputs.cache
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.RazorAssemblyInfo.cache
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.RazorAssemblyInfo.cs
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.AssemblyInfoInputs.cache
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.AssemblyInfo.cs
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.RazorTargetAssemblyInfo.cache
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.dll
+/media/sf_D_DRIVE/_LaPlay/BackDotNetCore/obj/Debug/netcoreapp2.1/BackDotNetCore.pdb
