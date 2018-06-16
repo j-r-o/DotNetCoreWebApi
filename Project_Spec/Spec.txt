@@ -1,0 +1,19 @@
+6 disques
+
+- lister
+- partitionner
+- définir les maitres et esclaves
+- écouter les changements de fichiers pour relancer les syncors
+- raporter l etat de synchro
+- afficher l'etat de remplissage / dispo
+- afficher les stats smart
+
+
+pour la synchro il faut un truc qui 
+
+- lise la conf des maitres et escales
+- surveille les disques maitres
+- démarre la synchro lors d'une modif
+- dise ou ca en est
+
+-> utiliser inotifywatch pour surveiller les activites fichier

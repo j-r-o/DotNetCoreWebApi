@@ -1,0 +1,14 @@
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.csprojAssemblyReference.cache
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.csproj.CoreCompileInputs.cache
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.RazorAssemblyInfo.cache
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.RazorAssemblyInfo.cs
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.AssemblyInfoInputs.cache
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.AssemblyInfo.cs
+G:\_LaPlay\TestThread\bin\Debug\netcoreapp2.1\TestThread.deps.json
+G:\_LaPlay\TestThread\bin\Debug\netcoreapp2.1\TestThread.runtimeconfig.json
+G:\_LaPlay\TestThread\bin\Debug\netcoreapp2.1\TestThread.runtimeconfig.dev.json
+G:\_LaPlay\TestThread\bin\Debug\netcoreapp2.1\TestThread.dll
+G:\_LaPlay\TestThread\bin\Debug\netcoreapp2.1\TestThread.pdb
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.RazorTargetAssemblyInfo.cache
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.dll
+G:\_LaPlay\TestThread\obj\Debug\netcoreapp2.1\TestThread.pdb
