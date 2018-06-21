@@ -15,6 +15,11 @@ namespace LaPlay.Api.Sources.Log
 
         private ReaderWriterLockSlim rwls = new ReaderWriterLockSlim();
 
+        public ReaderWriterLockSlim getReaderWriterLockSlim()
+        {
+            return rwls;
+        }
+
         public Log()
         {
             //_logFile = File.Open(@"log.txt", FileMode.Append, FileAccess.Write);
