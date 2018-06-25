@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+
+    <!--<base href="http://www.codingthearchitecture.com/">--><base href=".">
+    
+    <meta name="description" content="Layers, hexagons, features and components - Coding the Architecture">
+    <meta name="keywords" content="">
+    <meta name="abstract" content="Software architecture for developers">
+    <meta name="author" content="Coding the Architecture">
+    <meta name="generator" content="Pebble (http://pebble.sourceforge.net)">
+    <title>Layers, hexagons, features and components - Coding the Architecture</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.codingthearchitecture.com/rss.xml">
+    <link rel="alternate" type="application/rdf+xml" title="RDF" href="http://www.codingthearchitecture.com/rdf.xml">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="http://www.codingthearchitecture.com/atom.xml">
+
+    <link rel="stylesheet" href="./Layers, hexagons, features and components - Coding the Architecture_files/bootstrap.min.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="./Layers, hexagons, features and components - Coding the Architecture_files/screen.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="./Layers, hexagons, features and components - Coding the Architecture_files/pebble.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="./Layers, hexagons, features and components - Coding the Architecture_files/print.css" type="text/css" media="print">
+    <link rel="stylesheet" href="./Layers, hexagons, features and components - Coding the Architecture_files/bootstrap-responsive.min.css" type="text/css" media="screen">
+
+    <link rel="shortcut icon" href="http://www.codingthearchitecture.com/themes/codingthearchitecture/images/favicon.ico" type="image/x-icon">
+
+    <script type="text/javascript" src="./Layers, hexagons, features and components - Coding the Architecture_files/fckeditor.js"></script>
+    <script type="text/javascript" src="./Layers, hexagons, features and components - Coding the Architecture_files/pebble.js"></script>
+
+    <script type="text/javascript" src="./Layers, hexagons, features and components - Coding the Architecture_files/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="./Layers, hexagons, features and components - Coding the Architecture_files/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='scripts/html5.js'></script>
+    <![endif]-->
+
+
+
+  </head>
+
+  <body>
+
+  
+
+
+
+  
+  <div id="page">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="http://www.codingthearchitecture.com/"><img src="./Layers, hexagons, features and components - Coding the Architecture_files/cta.png" alt="Coding the Architecture"></a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="http://www.codingthearchitecture.com/blogentries/1.html">Blog</a></li>
+                        <li><a href="http://www.codingthearchitecture.com/presentations/">Presentations</a></li>
+                  	<li><a href="https://leanpub.com/b/software-architecture">Books</a></li>
+                  	<li><a href="http://www.simonbrown.je/#training">Training</a></li>
+                    </ul>
+                    <form class="navbar-search pull-right" action="http://www.codingthearchitecture.com/search.action">
+                        <input name="query" type="text" value="" class="search-query input-small" placeholder="Search">
+                    </form>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+    <div class="container">
+
+			<div class="row">
+
+
+
+			</div>
+
+
+	
+        <div id="linearNavigation">
+
+
+
+
+  
+  
+    
+      <a href="http://www.codingthearchitecture.com/2016/03/29/codifying_the_rules_used_to_organise_your_code.html">&lt;&lt; Codifying the rules used to organise your code</a> |
+    
+    <a href="http://www.codingthearchitecture.com/">Home</a>
+    
+      | <a href="http://www.codingthearchitecture.com/2016/05/31/agile_software_architecture_documentation.html">Agile software architecture documentation &gt;&gt;</a>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</div>
+	<hr>
+        
+
+        
+
+
+
+
+
+
+
+
+  
+  
+<div class="contentItem published">
+  
+
+
+  <div class="contentItemLinks">
+  
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  
+
+    
+  
+</div>
+
+
+  <a name="a1461614533995"></a>
+  <h1><a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html">Layers, hexagons, features and components</a></h1>
+  <h2></h2>
+
+  <div class="contentItemBody">
+    
+      
+        
+        <p>
+This blog post is a follow-up to the discussions I've had with people after my recent <a href="http://www.codingthearchitecture.com/presentations/devoxxfr2016-modular-monoliths">Modular Monoliths</a> talks. I've been enthusiastically told that the "ports &amp; adapters" (hexagonal) architectural style is "vastly", "radically" and "hugely" different to a traditional layered architecture. I remain unconvinced, hence this blog post, which has a Java spin, but I'm also interested in how the concepts map to other programming languages. I'm also interested in exploring how we can better structure our code to prevent applications becoming big balls of mud. <a href="http://martinfowler.com/bliki/PresentationDomainDataLayering.html">Layers are not the only option</a>.
+</p>
+
+<h3>Setting the scene</h3>
+<p>
+Imagine you're building a simple web application where users interact with a web page and information is stored in a database. The UML class diagrams that follow illustrate some of the typical ways that the source code elements might be organised.
+</p>
+
+<p align="center">
+<img src="./Layers, hexagons, features and components - Coding the Architecture_files/20160425-architectural-styles.png" alt="Some approaches to organising code in a simple Java web app" class="thumbnail">
+</p>
+
+<p>
+Let's first list out the types in the leftmost diagram:
+</p>
+
+<ul>
+<li><b>CustomerController</b>: A web controller, something like a Spring MVC controller, which adapts requests from the web.</li>
+<li><b>CustomerService</b>: An interface that defines the "business logic" related to customers, sometimes referred to in DDD terms as a "domain service". This may or may not be needed, depending on the complexity of the domain.</li>
+<li><b>CustomerServiceImpl</b>: The implementation of the above service.</li>
+<li><b>CustomerDao</b>: An interface that defines how customer information will be persisted.</li>
+<li><b>JdbcCustomerDao</b>: An implementation of the above data access object.</li>
+</ul>
+
+<p>
+I'll talk about the use of interfaces later, but let's assume we're going to use interfaces for the purposes of dependency injection, substitution, testing, etc. Now let's look at the four UML class diagrams, from left to right.
+</p>
+
+<ol>
+<li><b>Layers</b>: This is what a typical layered architecture looks like. Code is sliced horizontally into layers, which are used as a way to group similar types of things. In a "strict layered architecture", layers should only depend on lower layers. In Java, layers are typically implemented as packages. As you can see from the diagram, all layer (inter-package) dependencies point downwards.</li>
+<li><b>Hexagonal (ports &amp; adapters)</b>: <a href="http://tpierrain.blogspot.fr/2016/04/hexagonal-layers.html">Thomas Pierrain has a great blog post</a> that describes the hexagonal architecture, as does <a href="http://alistair.cockburn.us/Hexagonal+architecture">Alistair Cockburn</a> of course. The essence is that the application is broken up into two regions: inside and outside. The inside region contains all of the domain concepts, whereas the outside region contains the interactions with the outside world (UIs, databases, third-party integrations, etc). One rule is that the outside depends on the inside; never the other way around. From a static perspective, you can see that the JdbcCustomerRepository depends on the domain package. Particularly when coupled with DDD, another rule is that everything on the inside is expressed in the <b>ubiquitous language</b>, so you'll see terms like "Repository" rather than "Data Access Object".</li>
+<li><b>Feature packages</b>: This is a vertical slicing, based upon related features, business concepts or aggregate roots. In typical Java implementations, all of the types are placed into a single package, which is named to reflect the concept that is being grouped. <a href="http://www.markhneedham.com/blog/2012/02/20/coding-packaging-by-vertical-slice/">Mark Needham has a blog post about this</a>, and the discussion comments are definitely worth reading.</li>
+<li><b>Components</b>: This is what I refer to as "package by component". It's similar to packaging by feature, with the exception that the application (the UI) is separate from the component. The goal is to bundle all of the functionality related to a single component into a single Java package. It's akin to taking a service-centric view of an application, which is something we're seeing with microservice architectures.</li>
+</ol>
+
+<h3>How different are these architectural styles?</h3>
+<p>
+On the face of it, these do all look like different ways to organise code and, therefore, different architectural styles. This starts to unravel very quickly once you start looking at code examples though. Take a look at the following example implementations of the ports &amp; adapters style.
+</p>
+
+<ul>
+<li><a href="https://github.com/sf105/goos-code/blob/master/src/auctionsniper/AuctionHouse.java">AuctionHouse</a> and <a href="https://github.com/sf105/goos-code/blob/master/src/auctionsniper/xmpp/XMPPAuctionHouse.java"> XMPPAuctionHouse</a></li>
+<li><a href="https://github.com/VaughnVernon/IDDD_Samples/blob/master/iddd_agilepm/src/main/java/com/saasovation/agilepm/domain/model/product/ProductRepository.java">ProductRepository</a> and <a href="https://github.com/VaughnVernon/IDDD_Samples/blob/master/iddd_agilepm/src/main/java/com/saasovation/agilepm/port/adapter/persistence/LevelDBProductRepository.java">LevelDBProductRepository</a></li>
+<li><a href="https://github.com/citerus/dddsample-core/blob/master/src/main/java/se/citerus/dddsample/domain/model/voyage/VoyageRepository.java">VoyageRepository</a> and <a href="https://github.com/citerus/dddsample-core/blob/master/src/main/java/se/citerus/dddsample/infrastructure/persistence/hibernate/VoyageRepositoryHibernate.java">VoyageRepositoryHibernate</a>.</li>
+</ul>
+
+<p>
+Spot anything? Yes, the interface (port) and implementation class (adapter) are both <b>public</b>. Most of the code examples I've found on the web have liberal usage of the public access modifier. And the same is true for examples of layered architectures. Marking all types as public means you're not taking advantage of the facilities that Java provides with regards to encapsulation. In some cases there's nothing preventing somebody writing some code to instantiate the concrete repository implementation, violating the architecture style. Coaching, discipline, code reviews and automated architecture violation checks in the build pipeline would catch this, assuming you have them. My experience suggests otherwise, especially when budgets and deadlines start to become tight. If left unchecked, this is what can turn a codebase into a big ball of mud.
+</p>
+
+<h3>Organisation vs encapsulation</h3>
+<p>
+Looking at this another way, when you make all types in your application public, the packages are simply an <b>organisation mechanism</b> (a grouping, like folders) rather than being used for <b>encapsulation</b>. Since public types can be used from anywhere in a codebase, you can effectively ignore the packages. The net result is that if you ignore the packages (because they don't provide any means of encapsulation and hiding), a ports &amp; adapters architecture is really just a layered architecture with some different naming. In fact, if all types are public, all four options presented before are exactly the same.
+</p>
+
+<p align="center">
+<img src="./Layers, hexagons, features and components - Coding the Architecture_files/20160425-architectural-styles-all-types-public.png" alt="Approaches without packages" class="thumbnail">
+</p>
+
+<p>
+Conceptually ports &amp; adapters <i>is</i> different from a traditional layered architecture, but syntactically it's really the same, especially if all types are marked as public. It's a well implemented n-layer architecture, where n is the number of layers through a slice of the application (e.g. 3; web-domain-database).
+</p>
+
+<h3>Utilising Java's access modifiers</h3>
+<p>
+The way Java types are placed into packages can actually make a huge difference to how accessible (or inaccessible) those types can be when Java's access modifiers are applied appropriately. Ignoring the controllers ... if I bring the packages back and mark (by fading) those types where the access modifier can be made more restrictive, the picture becomes pretty interesting.
+</p>
+
+<p align="center">
+<img src="./Layers, hexagons, features and components - Coding the Architecture_files/20160425-architectural-styles-type-access-reduced.png" alt="Access modifiers made more restrictive" class="thumbnail">
+</p>
+
+<p>
+The use of Java's access modifiers does provide a degree of differentiation between a layered architecture and a ports &amp; adapters architecture, but I still wouldn't say they are "vastly" different. Bundling the types into a smaller number of packages (options 3 &amp; 4) allows for something a little more radical. Since there are fewer inter-package dependencies, you can start to restrict the access modifiers. Java does allow interfaces to be marked as package protected (the default modifier) although if you do this you'll notice that the methods must still be marked as public. Having public methods on a type that's inaccessible outside of the package is a little odd, but it's not the end of the world.
+</p>
+
+<p>
+With option 3, "vertical slicing", you can take this to the extreme and make all types package protected. The caveat here is that no other code (e.g. web controllers) outside of the package will be able to easily reuse functionality provided by the CustomerService. This is not good or bad, it's just a trade-off of the approach. I don't often see interfaces being marked as package protected, but you can use this to your advantage with frameworks like Spring. Here's <a href="https://github.com/olivergierke/spring-restbucks/blob/master/src/main/java/org/springsource/restbucks/payment/PaymentRepository.java">an example from Oliver Gierke that does just this</a> (the implementation is created by the framework). Actually, Oliver's blog post titled <a href="http://olivergierke.de/2013/01/whoops-where-did-my-architecture-go/">Whoops! Where did my architecture go</a>, which is about reducing the number of public types in a codebase, is a recommended read.
+</p>
+
+<p>
+I'm not keen on how the presentation tier (CustomerController) is coupled in option 3, so I tend to use option 4. Re-introducing an inter-package dependency forces you to make the CustomerComponent interface public again, but I like this because it provides a single API into the functionality contained within the package. This means I can easily reuse that functionality across other web controllers, other UIs, APIs, etc. Provided you're not cheating and using reflection, the smaller number of public types results in a smaller number of possible dependencies. Options 3 &amp; 4 don't allow callers to go behind the service, directly to the DAO. Again, I like this because it provides an additional degree of encapsulation and modularity. The architecture rules are also simpler and easier to enforce, because the compiler can do some of this work for you. This echoes the very same design principles and approach to modularity that you'll find in a modern microservices architecture: a remotable service interface with a private implementation. This is no coincidence. Caveats apply (e.g. don't have all of your components share a single database schema) but a well-structured modular monolith will be easier to transform into a microservices architecture.
+</p>
+
+<h3>Testing</h3>
+<p>
+In the spirit of YAGNI, you might realise that some of those package protected DAO interfaces in options 3 and 4 aren't really necessary because there is only a single implementation. This post isn't about testing, so I'm just going to point you to <a href="http://www.codingthearchitecture.com/2015/06/12/unit_and_integration_are_ambiguous_names_for_tests.html">Unit and integration are ambiguous names for tests</a>. As I mention in my "Modular Monoliths" talk though, I think there's an interesting relationship between the architecture, the organisation of the code and the tests. I would like to see a much more <a href="http://www.codingthearchitecture.com/2015/03/08/package_by_component_and_architecturally_aligned_testing.html">architecturally-aligned approach to testing</a>.
+</p>
+
+<h3>Conclusions?</h3>
+<p>
+I've had the same discussion about layers vs ports &amp; adapters with a number of different people and opinions differ wildly as to how different the two approaches really are. A Google search will reveal the same thing, with numerous blog posts and questions on Stack Overflow about the topic. In my mind, a well implemented layered architecture isn't that different to a hexagonal architecture. They are certainly <i>conceptually</i> different but this isn't necessarily apparent from the typical implementations that I see. And that raises another interesting question: is there a canonical ports &amp; adapters example out there? Of course, module systems (OSGi, Java 9, etc) change the landscape because they allow us to differentiate between public and <b>published</b> types. I wonder how this will affect the code we write and, in particular, whether it will allow us to build more modular monoliths. Feel free to leave a comment or <a href="https://twitter.com/simonbrown">tweet me @simonbrown</a> with any thoughts. 
+</p>
+      
+      
+      
+    
+
+    <div class="metadata" style="clear: both;">
+      <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#responses">Responses[21]</a>
+      <a href="http://www.codingthearchitecture.com/responses/rss.xml?entry=1461614533995"><img src="./Layers, hexagons, features and components - Coding the Architecture_files/feed-icon-10x10.png" alt="RSS feed for responses to this blog entry" border="0"></a>
+    
+    
+    
+  
+</div>
+      
+        
+        
+        
+        
+      
+      
+      Posted by <a href="http://www.simonbrown.je/">Simon Brown</a> on 25 April 2016 21:02:13 BST
+      <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html">#</a>
+      
+    </div>
+  </div>
+
+      
+<div style="margin-top:20px">
+<h3>About the author</h3>
+<div style="margin-right: 8px; margin-bottom: 4px; float: left; text-align: center;">
+<img src="./Layers, hexagons, features and components - Coding the Architecture_files/sbrown.jpg" class="img-rounded" width="96px">
+</div>
+
+<p>
+Simon is an independent consultant specializing in software architecture, and the author of <a href="https://leanpub.com/b/software-architecture">Software Architecture for Developers</a> (a developer-friendly guide to software architecture, technical leadership and the balance with agility). He’s also the creator of the <a href="https://c4model.com/">C4 software architecture model</a> and the founder of <a href="https://structurizr.com/">Structurizr</a>, which is a collection of open source and commercial tooling to help software teams visualise, document and explore their software architecture.
+</p>
+
+<p>
+You can find Simon on Twitter at <a href="https://twitter.com/simonbrown">@simonbrown</a> ... see <a href="http://simonbrown.je/">simonbrown.je</a> for information about his speaking schedule, videos from past conferences and software architecture training.
+</p>
+</div>
+      
+
+  
+
+    
+
+    <br><br>
+    <a name="responses"></a>
+    
+
+
+
+
+
+
+
+<a name="comments"></a>
+
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461630775752" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461630775752">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461630775752.title"><a name="comment1461630775752"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461630775752.author" class="unauthenticated">Andy</span> on 26 April 2016 01:32:55 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461630775752" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461630775752">#</a>
+  </div>
+
+  <div id="comment1461630775752.body" class="responseBody">
+    It's that distinction between published and public that's crucial but difficult to define in the language. We've ended up using conventions and coaching to distinguish the two.<br>
+As we use .net (for package read assembly) we experimented using "internals visible to " to provide cross package access for testing. But ended up going the cultural way to encourage dependency only on published interfaces even within a package. I'd be interested to see how one could really make this distinction within the language in a more effective way.  <br>
+We are starting to see our granularity coarsen, with packages bound by deployment rather than by simply logical areas being more the norm. And in turn deployment too is becoming more coarse grained as we start to see less risk deploying whole services every time.<br>
+At the end of the day, a hacky coder is going to couple to your db schema behind your back anyway ;)
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461685015825" class="response approved" style="padding-left: 46px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461685015825">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461685015825.title"><a name="comment1461685015825"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461685015825.author" class="authenticated"><a href="http://www.simonbrown.je/" target="_blank" title="http://www.simonbrown.je" rel="nofollow">Simon Brown</a></span> on 26 April 2016 16:36:55 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461685015825" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461685015825">#</a>
+  </div>
+
+  <div id="comment1461685015825.body" class="responseBody">
+    I really like C#'s internal assembly visibility because it, again (see the other comments), provides a way to physically prevent dependencies that shouldn't be permitted. Having said that, I often get resistance from teams when I suggest they increase the number of class library projects to take advantage of this. It's all trade-offs...
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461642469608" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461642469608">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461642469608.title"><a name="comment1461642469608"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461642469608.author" class="unauthenticated">Anonymous</span> on 26 April 2016 04:47:49 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461642469608" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461642469608">#</a>
+  </div>
+
+  <div id="comment1461642469608.body" class="responseBody">
+    I believe you are overlooking one important aspect of the Ports and Adapters architecture. It encourages you to to separate the packages com.mycompany.myapp.web, com.mycompany.myapp.domain, and com.mycompany.myapp.database from your example into different source code projects (e.g. Maven modules, ...). This effectively makes it impossible for domain to access types that it is not supposed to access even though they are defined public. For example, CustomerServiceImpl would not be able to access JdbcCustomerRepository because it is in a project that domain doesn't depend on. Obviously you would end up with a lot of source code projects this way which is why you would usually divide your application into several bounded contexts: com.mycompany.myapp.context.web, com.mycompany.myapp.context.domain, and com.mycompany.myapp.context.database that implement a specific functional area of an application.
+<br>
+Once you have *.web, *.domain, and *.database (which should be named *.infrastructure and can implement access to a database or other external service) in different source code projects you gain the following advantages:
+<br>
+* The domain has no access to infrastructure specific libraries (e.g. Oracle JDBC driver) which ensures that it contains business logic only. It also ensures that the domain uses the infrastructure always through the interfaces it sees since it can't access the repository implementation.
+<br>
+* You can more easily swap the infrastructure project that the domain depends on with a stub or mock of the infrastructure.
+<br>
+* You can bundle only the infrastructure specific libraries you actually need (e.g. don't need to include an in-memory JDBC driver in the production version).
+<br>
+Ports and Adapter my not be the perfect fit in all cases but I believe one of the advantages it gives you is that unlike in option 3 and 4 domain has no access to third party libraries (JDBC drivers, JMS implementations, ....). This ensures that the business logic is truly independent of the environment in which it is going to run.
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461684698392" class="response approved" style="padding-left: 46px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461684698392">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461684698392.title"><a name="comment1461684698392"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461684698392.author" class="authenticated"><a href="http://www.simonbrown.je/" target="_blank" title="http://www.simonbrown.je" rel="nofollow">Simon Brown</a></span> on 26 April 2016 16:31:38 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461684698392" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461684698392">#</a>
+  </div>
+
+  <div id="comment1461684698392.body" class="responseBody">
+    Thanks, that makes a lot of sense. How many teams do you think use separate Maven modules/source code projects to physically separate the various parts of their application? And I'm guessing that you have a bunch of tests executed after deployment to confirm whether the correct (e.g.) adapters have been plugged in and configured appropriately?
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461767398319" class="response approved" style="padding-left: 62px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461767398319">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461767398319.title"><a name="comment1461767398319"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461767398319.author" class="unauthenticated">Anonymous</span> on 27 April 2016 15:29:58 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461767398319" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461767398319">#</a>
+  </div>
+
+  <div id="comment1461767398319.body" class="responseBody">
+    We follow this approach on the team I am working on. I would assume all teams that take modularity seriously to separate their project into several source projects with dependency inversion taken into account. Getting the packages right gives you only half of the benefit since you still have all those third party libs on a shared classpath.
+<br>
+In our case each source project has its own spring context and in the integration tests you either add the real or the stub context depending on what you intend to test.
+<br>
+I am following your blog for quite a while now and really like your take on linking source code to the architectural representation. Have you had a look at Structure101? It is the most useful tool I could find so far that doesn't rely on additional metadata (e.g. custom annotations) or other conventions.
+<br>
+Also recommend you to check out the book Java Application Architecture by Kirk not well written but good concepts.
+
+
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461653662174" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461653662174">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461653662174.title"><a name="comment1461653662174"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461653662174.author" class="unauthenticated"><a href="http://tpierrain.blogspot.fr/" target="_blank" title="http://tpierrain.blogspot.fr/" rel="nofollow">Thomas Pierrain (@tpierrain)</a></span> on 26 April 2016 07:54:22 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461653662174" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461653662174">#</a>
+  </div>
+
+  <div id="comment1461653662174.body" class="responseBody">
+    Hi Simon, thanks for the link. I'd like to add few comments here:
+<br><br>
+- "everything on the inside is expressed in the ubiquitous language, so you'll see terms like "Repository" rather than "Data Access Object".": in fact on the inside (i.e. Domain code kingdom) you won't find any reference to "Repository" types because you will name them instead with the (ubiquitous) language of your business (e.g. ProductCatalog, Lexicon, etc.)
+<br><br>
+- "the interface (port) and implementation class (adapter) are both public.". There has been much debate on this subject but after few checks with Alistair and other happy few, the "port" describe something you don't code (i.e. a middleware API, a database driver, a springboot REST exposition, etc.) whereas the "Adapter" is what we code in order to bridge the 2 separated worlds: the infrastructure code where the adapter belongs and the Domain code the Adapter interacts with.
+<br><br>
+- "especially if all types are marked as public.": Everything marked as public? Hell no! That's an orthogonal topic but you shouldn't do that of course. I'll have to dig more about how to make it in java but in .NET I used to create 2 projects/assemblies(packages?): one for the "MyAppOrServiceTopic.Domain" and the other for "MyAppOrServiceTopic.Infra". Since the "Infra" assembly is referencing the "Domain" one, there is no way for the Domain assembly code to reference any Infrastructure Implementation (you can't have such cross project reference in .NET). BTW, within the "Infra" assembly I only set 'public' the various (Repository) implementation types that are needed by the app bootstrapper (i.e. composition root which is part of the Infrastructure kingdom) or by the Domain code (via the magic of the Dependency Inversion Principle - DIP). All the other infrastructure types are set 'internal' (or 'public' if we become lazy) for my tests to work with.
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461685675972" class="response approved" style="padding-left: 46px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461685675972">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461685675972.title"><a name="comment1461685675972"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461685675972.author" class="authenticated"><a href="http://www.simonbrown.je/" target="_blank" title="http://www.simonbrown.je" rel="nofollow">Simon Brown</a></span> on 26 April 2016 16:47:55 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461685675972" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461685675972">#</a>
+  </div>
+
+  <div id="comment1461685675972.body" class="responseBody">
+    <p>
+Excellent, I'm glad that you picked up on the "Repository" naming thing. :-) But this naming strategy seems very common for some reason. What would you rename the CustomerRepository to? "Customers"?
+</p>
+
+<p>
+Again, having a physical separation between the domain and infrastructure parts of the application makes sense, and C# allows you to do this very neatly with the internal visibility modifier. Would you lump all infrastructure implementations (web, database, middleware API) into a single assembly? Or would you have one per adapter?
+</p>
+
+<p>
+To achieve physical separation in Java, you would really need to use a module framework (it's the public vs published types thing again) or setup a number of Maven modules/source code projects, and ensure the appropriate dependencies between them. As a number of comments have suggested, I think physical separation is a really important part of implementing the ports &amp; adapters pattern. Why don't people mention this?
+</p>
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461690315645" class="response approved" style="padding-left: 62px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461690315645">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461690315645.title"><a name="comment1461690315645"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461690315645.author" class="unauthenticated"><a href="http://tpierrain.blogspot.fr/" target="_blank" title="http://tpierrain.blogspot.fr/" rel="nofollow">Thomas PIERRAIN</a></span> on 26 April 2016 18:05:15 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461690315645" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461690315645">#</a>
+  </div>
+
+  <div id="comment1461690315645.body" class="responseBody">
+    Of course the name of the repository will depend on the (domain) context, but we can imagine a "OurCustomers" type for instance.
+<br><br>
+Regarding the adapters, I tend to (YAGNI ;-) start with one single assembly for the whole Infrastructure part (with all the adapters). I may split it afterwards if necessary (i.e. due to real deployment or release management constraint). I stopped for years to create tons of projects/assemblies just in case I'd like to release &amp; patch them separately (one day...)
+<br><br>
+"Why don't people mention this?" : because almost no one is using the Hexagonal Architecture pattern nowadays (unfortunately ;-(   Having a widely known architect like you promoting this kind of simple design may probably change that brutal fact ;-)
+
+
+
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461703830421" class="response approved" style="padding-left: 78px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461703830421">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461703830421.title"><a name="comment1461703830421"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461703830421.author" class="authenticated"><a href="http://www.simonbrown.je/" target="_blank" title="http://www.simonbrown.je" rel="nofollow">Simon Brown</a></span> on 26 April 2016 21:50:30 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461703830421" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461703830421">#</a>
+  </div>
+
+  <div id="comment1461703830421.body" class="responseBody">
+    <p>
+"one single assembly for the whole Infrastructure part" ... so that single assembly would contain all of the "outside" code? And therefore, in theory, web code could bypass the domain model and call the database code directly? ;-)
+</p>
+
+<p>
+If anything, I've probably made the situation worse! Judging by the discussions I've had, the blog posts out there and the questions on places like Stack Overflow, I don't think it's really clear what ports &amp; adapters is really about. Most examples being subtle twists on a layered architecture doesn't really help too. I believe there's an opportunity to create a canonical ports &amp; adapters example, but physical separation of code needs to be a big part of this ... it's essentially a plugin architecture, where adapter implementations are plugged in to the application at runtime. I think that's a far more compelling description of ports &amp; adapters that a simple variation of a layered architecture. The downside is this requires a much more rigorous and disciplined approach to development because you need to create an environment where domain code absolutely cannot see/use those adapter implementations directly. One assembly or source code project/module per adapter gives you that compile time check that the inside code isn't depending on the outside code. But those additional assemblies/source code projects/modules are a trade-off I don't think people are willing to make. Without this physical isolation, we're really back to a variation on a well implemented layered architecture.
+</p>
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1470153595771" class="response approved" style="padding-left: 62px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1470153595771">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1470153595771.title"><a name="comment1470153595771"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1470153595771.author" class="unauthenticated">Harry McIntyre</span> on 02 August 2016 16:59:55 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1470153595771" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1470153595771">#</a>
+  </div>
+
+  <div id="comment1470153595771.body" class="responseBody">
+    One adapter per project will unfortunately kill your build performance after a while. 
+
+It's better to use tooling (e.g. NsDepCop, NDepend) to allow you to set up dependencies between namespaces within a single project, although use of these isn't particularly widespread*.
+
+
+
+
+
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1506125766202" class="response approved" style="padding-left: 62px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1506125766202">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1506125766202.title"><a name="comment1506125766202"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1506125766202.author" class="unauthenticated">Juan</span> on 23 September 2017 01:16:06 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1506125766202" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1506125766202">#</a>
+  </div>
+
+  <div id="comment1506125766202.body" class="responseBody">
+    "I think physical separation is a really important part of implementing the ports &amp; adapters pattern. Why don't people mention this?"
+
+I agree, I consider it very important, I try to achieve it with several Maven projects. It's quite messy, lot of projects for every port , every adapter, and dependencies.
+
+I don't see it though in most of hexagonal architecture examples over the internet... they use to just split the whole application in two layers, the hexagon and the adapters, but they don't distinguish every adapter nor ports.
+
+I think it's more correct to physically split every port and adapter (ports being the api of the hexagon). The other way it would be just a layered architecture, not hexagonal.
+
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1461841984906" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1461841984906">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1461841984906.title"><a name="comment1461841984906"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1461841984906.author" class="unauthenticated">radmonger</span> on 28 April 2016 12:13:04 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461841984906" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1461841984906">#</a>
+  </div>
+
+  <div id="comment1461841984906.body" class="responseBody">
+    A hex architecture is only going to be different from a layered one where there are 4+ layers; 3 or fewer connected boxes can always be drawn either way.
+
+So any example involving simply web, domain and database is not enough to capture the distinction.
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1470153660008" class="response approved" style="padding-left: 46px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1470153660008">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1470153660008.title"><a name="comment1470153660008"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1470153660008.author" class="unauthenticated">Anonymous</span> on 02 August 2016 17:01:00 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1470153660008" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1470153660008">#</a>
+  </div>
+
+  <div id="comment1470153660008.body" class="responseBody">
+    I like to think of it as more of a honeycomb where you might have hexagons for each bounded context. Or maybe "hexagons all the way down".
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1474300923715" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1474300923715">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1474300923715.title"><a name="comment1474300923715"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1474300923715.author" class="unauthenticated"><a href="http://www.higherorderlogic.om/" target="_blank" title="http://www.higherorderlogic.om" rel="nofollow">Steve Freeman</a></span> on 19 September 2016 17:02:03 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1474300923715" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1474300923715">#</a>
+  </div>
+
+  <div id="comment1474300923715.body" class="responseBody">
+    I see you quoted some of our code. I made a conscious decision some years ago to simplify my use of java access scoping. Nowadays I tend to use only public and private. Having once used languages, such as Modula-3 and Ada95, with more sophisticated access scoping, I found that the coarse-grained control in Java didn't really carry its weight. Instead, I focus on using package conventions to make the public/published distinction. For really local code, I might use private inner classes.
+
+<p>This seems to work well enough on most teams that I've seen, and teams that don't understand this usually have deeper problems with their code. And sometimes the unrestricted prompting in the IDE throws up commonalities we hadn't noticed yet. 
+  </p></div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1474472983471" class="response approved" style="padding-left: 46px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1474472983471">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1474472983471.title"><a name="comment1474472983471"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1474472983471.author" class="unauthenticated"><a href="http://tpierrain.blogspot.fr/" target="_blank" title="http://tpierrain.blogspot.fr/" rel="nofollow">Thomas PIERRAIN</a></span> on 21 September 2016 16:49:43 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1474472983471" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1474472983471">#</a>
+  </div>
+
+  <div id="comment1474472983471.body" class="responseBody">
+    I just realized that I had not dropped my hexagonal architecture code sample here (done only on Twitter). 
+
+Explanations and code are available here: https://github.com/Lunch-box/SimpleOrderRouting/wiki/Logbook-7 
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1498605512453" class="response approved" style="padding-left: 62px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1498605512453">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1498605512453.title"><a name="comment1498605512453"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1498605512453.author" class="unauthenticated">Juan</span> on 28 June 2017 00:18:32 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1498605512453" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1498605512453">#</a>
+  </div>
+
+  <div id="comment1498605512453.body" class="responseBody">
+    Hello Thomas, I've taken a look a your hexagonal architecture sample. But it seems that you structure the project in layers (domain,infra,...). More like "onion" architecture, isn't it? For implementing hexagonal, I split the infra layer in separate project per adapter, and I separate the ports from the domain, so that every adapter depends just on its port.
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1498645934457" class="response approved" style="padding-left: 78px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1498645934457">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1498645934457.title"><a name="comment1498645934457"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1498645934457.author" class="unauthenticated"><a href="http://tpierrain.blogspot.fr/" target="_blank" title="http://tpierrain.blogspot.fr/" rel="nofollow">Thomas PIERRAIN</a></span> on 28 June 2017 11:32:14 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1498645934457" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1498645934457">#</a>
+  </div>
+
+  <div id="comment1498645934457.body" class="responseBody">
+    Hello Juan,<br><br>
+
+While I was preparing a live-coding session with Alistair Cockburn about his pattern, I realized that I didn't grasp correctly the notion of Port and Adapter so far.<br><br>
+
+A Port is what represent the intention of going-in/going-out the hexagon. In C# it is an interface which is part of the Domain. BTW, <b>Ports are always part of the Domain side.</b><br><br>
+
+An Adapter is whatever is needed to go-in/go-out the hexagon at runtime. It gathers things you code (i.e: mapping between infra&lt;-&gt;domain data models) but also things you don't code (like your favorite http stack for instance).
+<b>Adapters are always part of the Infrastructure side</b><br><br>
+
+Now regarding the pattern name. <b>An onion has much more than 2 layers in general ;-) </b> This is why I dislike it as a pattern. I'd prefer having 2 layers only: Domain and Infrastructure, so that we can keep being focused on the Domain problem without being lost in our tech talent to multiply the number of Layers (what I see everywhere).<br><br>
+
+To clarify more the implemention, I suggest you have a look at our recent live-coding session with Alistair:<br><br>
+
+Part1 (Alistair only): <a href="https://www.youtube.com/watch?v=th4AgBcrEHA">https://www.youtube.com/watch?v=th4AgBcrEHA</a>
+<br><br>
+Part2 (Alistair and me doing the live-coding): <a href="https://www.youtube.com/watch?v=iALcE8BPs94">https://www.youtube.com/watch?v=iALcE8BPs94</a>
+<br><br>
+Part3 (end of our live-coding session + Q&amp;A with Romeu Moura): <a href="https://www.youtube.com/watch?v=DAe0Bmcyt-4">https://www.youtube.com/watch?v=DAe0Bmcyt-4</a>
+<br><br>
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1498648793276" class="response approved" style="padding-left: 94px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1498648793276">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1498648793276.title"><a name="comment1498648793276"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1498648793276.author" class="unauthenticated">Harry McIntyre</span> on 28 June 2017 12:19:53 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1498648793276" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1498648793276">#</a>
+  </div>
+
+  <div id="comment1498648793276.body" class="responseBody">
+    I used to think of a 'Jigsaw' architecture where the holes in the pieces are ports, and the sticky-out bits are adaptors.
+
+I prefer "Ports and Adaptors" terminology - the terms 'Jigsaw', 'Onion' and 'Hexagonal' seem to confuse people by making them worry about which things should be adjacent to each other, probably because these are things from the physical world, where in fact the connections between software modules are arbitrary. 
+
+You can teach someone 'Port' and 'Adaptor' in 10 minutes, and doing so really helps people realise get the difference between a Domain Services and an Infrastructure Service (now an adaptor).
+
+Another thing I like to think about is that it's "Ports and Adaptors all the way down" (like with turtles), from the module level down to the class level.
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1503788336148" class="response approved" style="padding-left: 94px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1503788336148">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1503788336148.title"><a name="comment1503788336148"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1503788336148.author" class="unauthenticated">Juan</span> on 26 August 2017 23:58:56 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1503788336148" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1503788336148">#</a>
+  </div>
+
+  <div id="comment1503788336148.body" class="responseBody">
+    Hi Thomas, yes you are right, I consider ports belonging to the hexagon too, maybe I didn't express myself well, sorry. Is just that I split the hexagon in core and ports. Ports are the api/spi of the hexagon. They belong to the hexagon, they are for communication with the outside world.
+
+As some comments in this post pointed out, in my approach I have lot of subprojects (I use Java and Maven), in order to separate  physically every adapter, port, etc. and define the concrete dependencies (not just a dependendy from the outside towards the hexagon). If I don't do it this way the adapters, for example, could reference to each other, or they could reference more parts of the hexagon, not just the ports, that is not desirable to reach, etc. 
+
+The drawback of this approach is the complexity of the whole project, with lot of subprojects and dependencies.
+
+But I think that if I don't do it this way, it's more a "two layered architecture with DIP"(1) than a ports&amp;adapters.
+
+Ports &amp; Adapters would need a more complex project structure, in order to separate physically the distinct ports and adapters and configure the dependencies between them.
+
+(1) workaround name for "onion with 2 layers" :-)
+
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+      <div class="even">
+    
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1474999620375" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1474999620375">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1474999620375.title"><a name="comment1474999620375"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1474999620375.author" class="unauthenticated">Juan</span> on 27 September 2016 19:07:00 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1474999620375" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1474999620375">#</a>
+  </div>
+
+  <div id="comment1474999620375.body" class="responseBody">
+    Hello Simon, I like your articles about web software architecture.<br><br>
+
+I'm developing a new project from scratch trying to implement a "package by component" style. But one of the problems I have is how and where to put the generic data access services and daos, that I had when I used layers.<br><br>
+
+They implement the tipical crud operations and some search methods, and concrete services extends them in order to dont repeat code.<br><br>
+
+How do you deal with it? I've thought on having a generic data access component from which the concrete components extends. Do you think it's ok?<br><br>
+
+I see two problems here...<br><br>
+
+(1) Doing this it's like having an hexagonal architecture (data access component for accessing the external database)<br><br>
+
+(2) Generic data access component breaks encapsulation, as it has public implementing classes, for letting concrete components extends them.<br><br>
+
+The later can be solve using composition over inheritance, but I really don't like it very much, because you have to write lots of forwarding methods.<br><br>
+
+Another doubt I have is wether you have shared domain entities and database, or if you split the database, and every component has its entities and database tables. My approach is to have one database (and one entities package), shared by all the components. But if you split the database how do you deal with relationships between entities of different components?<br><br>
+
+Thank you very much.
+
+  </div>
+
+</div>
+
+      </div>
+
+  
+  
+    
+    
+      <div class="odd">
+    
+  
+      
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="comment1507243792844" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+    
+      <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995&amp;comment=1507243792844">Reply</a>
+
+    
+    
+  
+</div>
+
+  <h1>
+    <span id="comment1507243792844.title"><a name="comment1507243792844"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="comment1507243792844.author" class="unauthenticated">Johan Martinsson</span> on 05 October 2017 23:49:52 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1507243792844" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1507243792844">#</a>
+  </div>
+
+  <div id="comment1507243792844.body" class="responseBody">
+    Very insightful post, thanks. I've learned to do hexagonal architecture using the component model, number 4, and I even throw in the boot-logic (spring related code for instance) in that same package. I think the version 2 while, long-lived, was just training wheels until I learned about organising along probable change-patterns. i.e. covariant code goes close together. 
+
+There's a paper "on the criteria to be used in decomposing systems into modules" from 1972(!)
+  </div>
+
+</div>
+
+      </div>
+
+
+    
+
+
+
+
+
+
+
+<a name="trackbacks"></a>
+
+
+
+    
+
+    <div align="center">
+      <br>
+      
+        <a href="http://www.codingthearchitecture.com/replyToBlogEntry.action?entry=1461614533995" onclick="showCommentForm(); return false;">Add a comment</a>
+      
+      
+        <a href="http://www.codingthearchitecture.com/generateTrackBackLink.action?entry=1461614533995">Send a TrackBack</a>
+      
+    </div>
+
+    <div id="commentFormDiv" style="display:none;">
+
+<form id="commentForm" name="commentForm" action="http://www.codingthearchitecture.com/saveComment.action" method="post" accept-charset="UTF-8">
+  <input type="hidden" name="blogId" value="default">
+  <input type="hidden" name="entry" value="1461614533995">
+  <input type="hidden" name="comment" value="">
+
+<table width="99%">
+
+  
+
+  
+
+  <tbody><tr>
+    <td colspan="2">
+      
+      
+      <div id="previewComment">
+
+
+
+
+
+
+
+
+  
+  
+  
+<div id="previewComment" class="response approved" style="padding-left: 30px;">
+  
+
+
+  <div class="contentItemLinks">
+  
+</div>
+
+  <h1>
+    <span id="previewComment.title"><a name="comment1529890152304"></a>Re: Layers, hexagons, features and components</span>
+  </h1>
+
+  <div class="metadata">
+    
+    
+
+    Comment from <span id="previewComment.author" class="unauthenticated">Anonymous</span> on 25 June 2018 02:29:12 BST
+    <a href="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1529890152304" title="http://www.codingthearchitecture.com/2016/04/25/layers_hexagons_features_and_components.html#comment1529890152304">#</a>
+  </div>
+
+  <div id="previewComment.body" class="responseBody">
+    
+  </div>
+
+</div>
+</div>
+      <br>
+    </td>
+  </tr>
+
+  
+
+  <tr>
+    <td valign="top"><b>Title</b></td>
+    <td><input type="text" name="title" class="input-xxlarge" value="Re: Layers, hexagons, features and components"></td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>Body</b></td>
+    <td>
+      <textarea id="commentBody" name="commentBody" rows="10" class="input-xxlarge"></textarea>
+      <div class="small"><b>HTML</b> : b, strong, i, em, blockquote, br, p, pre, a href="", ul, ol, li, sub, sup</div>
+    </td>
+  </tr>
+
+  
+  <tr>
+    <td valign="top"><b>Name</b></td>
+    <td><input type="text" id="author" name="author" class="input-xxlarge" value="Anonymous"></td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>E-mail address</b></td>
+    <td>
+      <input type="text" name="email" class="input-xxlarge" value="">
+    </td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>Website</b></td>
+    <td><input type="text" name="website" class="input-xxlarge" value=""></td>
+  </tr>
+  
+
+  
+
+  <tr>
+    <td valign="top"><b>Remember me</b></td>
+    <td>
+      Yes&nbsp;
+      <input type="radio" name="rememberMe" value="true">
+      No&nbsp;<input type="radio" name="rememberMe" value="false" checked="checked">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <p>
+      <b>E-mail addresses are not publicly displayed</b>, so please only leave your e-mail address if you would like to be notified when new comments are added to this blog entry (you can opt-out later).
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="right">
+      <input name="submit" type="submit" value="Preview">
+      <input name="submit" type="submit" value="Add Comment">
+    </td>
+  </tr>
+
+</tbody></table>
+</form>
+</div>
+
+  
+
+</div>
+
+
+    </div>
+    </div>
+
+<footer>
+
+<div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0; vertical-align:middle;" src="./Layers, hexagons, features and components - Coding the Architecture_files/by-nc-sa-3.0-88x31.png"></a>
+</div>
+</footer>
+
+  </div>
+
+
+<!-- start of Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./Layers, hexagons, features and components - Coding the Architecture_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4643149-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- end of Google Analytics -->
+
+
+
+  
+
+
+</body></html>

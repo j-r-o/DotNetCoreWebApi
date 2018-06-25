@@ -1,0 +1,26 @@
+# this simulates manual inputs to fdisk
+# The sed script strips off all the comments
+# A blank line (commented as "default" will send a empty line terminated with a newline to take the fdisk default.
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${TGTDEV}
+  o # clear the in memory partition table
+  n # new partition
+  p # primary partition
+    # default - partition number 1
+    # default - start at beginning of disk 
+    # default - finish at end of disk 
+  w # write the partition table and quit
+  q # quit
+EOF
+
+
+
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk /dev/sdb
+  o # clear the in memory partition table
+  n # new partition
+  p # primary partition
+    # default - partition number 1
+    # default - start at beginning of disk 
+    # default - finish at end of disk 
+  w # write the partition table and quit
+  q # quit
+EOF

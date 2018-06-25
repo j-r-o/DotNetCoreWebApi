@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 using LaPlay.Sources.Log;
 
-
 namespace Api
 {
     public class Startup

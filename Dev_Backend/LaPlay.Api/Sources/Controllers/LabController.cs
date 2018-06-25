@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using LaPlay.Sources.Labo;
 using LaPlay.Sources.Log;
 
-
 namespace LaPlay.Api.Sources.Controllers
 {
     [Route("api/[controller]")]

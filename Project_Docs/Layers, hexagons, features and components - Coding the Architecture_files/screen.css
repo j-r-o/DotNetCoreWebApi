@@ -1,0 +1,430 @@
+body {
+    font-family: "Open Sans", "Trebuchet MS", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 120px;
+}
+ul li {
+    line-height: 1.5;
+}
+.centered {
+    text-align: center;
+}
+#shareme {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+.hero-unit h1 {
+    margin-bottom: 16px;
+}
+footer {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    color: gray;
+}
+.navbar {
+    font-size: 20px;
+}
+.navbar-inverse .navbar-inner {
+    background: black;
+}
+.navbar li {
+  margin-top: 15px;
+}
+.navbar-search {
+    margin-top: 20px;
+}
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.section {
+    border-bottom: 1px solid #cccccc;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.sectionWhite {
+    background: #ffffff;
+}
+.sectionShaded {
+    background: #dddddd;
+}
+.row {
+    padding-bottom: 20px;
+}
+h3 {
+    font-size: 20px;
+}
+.profileImage {
+    border: 1px solid #808080;
+    border-radius: 6px;
+    height: 48px;
+    width: 48px;
+}
+#body {
+}
+#page {
+  background: white;
+}
+#header {
+  background: transparent url( 'images/cta-banner-2012.png' ) no-repeat top left;
+  color: white;
+  font-weight: normal;
+  height: 210px;
+  text-align: left;
+  padding-right: 8px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#content {
+  background: white;
+  padding: 0px 24px 24px 24px;
+  text-align: justify;
+}
+#footer {
+  clear: both;
+  background: #aaaaaa;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 16px;
+}
+#footer a {
+  color: white;
+}
+
+#linearNavigation {
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+h2 {
+  border-bottom: none;
+  font-size: 24px;
+  font-weight: normal;
+  margin-top: 4px;
+  padding-top: 0px;
+}
+h3 {
+  border-bottom: none;
+  font-size: 20px;
+  font-weight: normal;
+  padding-top: 4px;
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+a img:hover {
+  background: none;
+}
+h1 a {
+  font-weight: normal;
+}
+
+
+
+.contentItem {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 60px;
+  background: white;
+}
+.contentItemBody {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: left;
+}
+.contentItemLinks {
+  float: right;
+  text-align: right;
+  font-size: 11px;
+  color: gray;
+}
+.contentItemLinks form {
+  padding: 0px;
+  margin: 0px;
+}
+.contentItemLinks a {
+  color: gray;
+}
+.even {
+  background: #F4F4F4;
+}
+.odd {
+  background: white;
+}
+.small {
+  font-size: 11px;
+}
+.smaller {
+  font-size: 13px;
+}
+.response {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 30px;
+  padding-right: 16px;
+  margin-bottom: 4px;
+}
+.response h1 {
+  font-size: 12px;
+  font-weight: normal;
+  background: transparent;
+  padding-left: 0px;
+}
+.responseBody {
+  line-height: 1.5;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: left;
+}
+.metadata, .metadata a {
+  font-size: 11px;
+  color: gray;
+  line-height: 1.5;
+  padding-top: 0px;
+}
+.approved {
+}
+.pending {
+  background: transparent url('images/pending.gif') no-repeat top left;
+  border: solid orange 1px;
+}
+.rejected {
+  background: transparent url('images/rejected.gif') no-repeat top left;
+  border: solid red 1px;
+}
+.published {
+}
+.unpublished {
+}
+blockquote {
+  background: white url('images/blockquote.png') no-repeat top left;
+  padding-top: 8px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: gray;
+  margin-left: 24px;
+  width: 780px;
+}
+.tags, .categories {
+  border: solid #F0F0F0 1px;
+  margin: 16px;
+  padding: 4px;
+  background: #F8F8F8;
+  font-weight: normal;
+  text-align: center;
+} 
+.tags span {
+  display: none;
+}
+.tags a, .categories a {
+  color: gray;
+  font-weight: normal;
+  text-decoration: none;
+}
+.tags a:hover, .categories a:hover {
+  color: white;
+  background: gray;
+  font-weight: normal;
+  text-decoration: none;
+}
+.tagCloud {
+  font-size: 24px;
+  line-height: 1.0em;
+  text-align: center;
+}
+.sidebarTagCloud {
+  background: gray;
+  color: white;
+  font-size: 22px;
+  line-height: 1.0em;
+  text-align: center;
+  clear: both;
+}
+.sidebarTagCloud a {
+  color: white;
+}
+.tagCloud1 {
+  font-size: 0.5em;
+}
+.tagCloud2 {
+  font-size: 0.6em;
+  font-weight: bold;
+}
+.tagCloud3 {
+  font-size: 0.65em;
+  font-weight: bold;
+}
+.tagCloud4 {
+  font-size: 0.7em;
+  font-weight: bold;
+}
+.tagCloud5 {
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.tagCloud6 {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.tagCloud7 {
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.tagCloud8 {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.tagCloud9 {
+  font-size: 1.0em;
+  font-weight: bold;
+}
+.tagCloud10 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.tagCloud ul, .sidebarTagCloud ul {
+  padding: 8px;
+  margin: 0px;
+}
+.tagCloud li, .sidebarTagCloud li {
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+  white-space: nowrap;
+}
+.tagCloud a, .sidebarTagCloud a {
+  text-decoration: none;
+}
+.tagCloud a:hover {
+  color: white;
+  background: #6e7d8e;
+}
+.sidebarTagCloud a:hover {
+  color: gray;
+  background: white;
+}
+
+.calendar {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.calendarDayHeader {
+  font-weight: bold;
+  text-align: right;
+}
+.calendarDay {
+  text-align: right;
+  padding: 2px;
+}
+.calendarDayWithEntries {
+  background: gray;
+  text-align: right;
+  padding: 2px;
+}
+.calendarDayWithEntries a {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+.calendarDayWithEntries:hover {
+  color: white;
+  background: #6e7d8e;
+}
+.calendarToday {
+  background : #6e7d8e;
+  color: white;
+  text-align: right;
+  padding: 2px;
+  font-weight: bold;
+}
+.calendarToday a {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+.photo {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  border: solid black 1px;
+  text-align: center;
+}
+.codeSample {
+  font-family: Courier, sans-serif;
+  font-size: 11px;
+  border: solid #F0F0F0 1px;
+  text-align: left;
+  background: #F8F8F8;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 8px;
+  overflow: auto;
+}
+#feeds {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: white;
+}
+#feeds a {
+  color: white;
+  text-decoration: none;
+}
+#feeds a:hover {
+  text-decoration: underline;
+}
+thead {
+  text-align: left;
+  background: #6e7d8e;
+  color: white;
+}
+th {
+  font-weight: normal;
+  color: white;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+th a:link, th a:visited {
+  font-weight: normal;
+  color: white;
+}
+.authenticated {
+  background: transparent url( 'images/authenticated.gif' ) no-repeat center left;
+  padding-left: 10px;
+}
+.unauthenticated {
+}
+.breakout {
+  background: #c0c0c0;
+  padding: 8px;
+}
+.imageCaption {
+  font-size: 13px;
+  text-align: center;
+}
+.keyword {
+  font-size: 24px;
+}
