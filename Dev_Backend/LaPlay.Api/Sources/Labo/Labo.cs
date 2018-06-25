@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-using LaPlay.Api.Sources.Log;
+using LaPlay.Sources.Log;
 
-namespace LaPlay.Api.Sources.Labo
+namespace LaPlay.Sources.Labo
 {
     public class Labo
     {

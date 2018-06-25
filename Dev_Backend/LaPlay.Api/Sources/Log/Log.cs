@@ -6,16 +6,22 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 
-namespace LaPlay.Api.Sources.Log
+namespace LaPlay.Sources.Log
 {
     public class Log : ILog
     {
+        private String logLevel;
         private FileStream _logFile;
         private StreamWriter _writer;
 
         private ReaderWriterLockSlim rwls = new ReaderWriterLockSlim();
 
-        public Log()
+        public ReaderWriterLockSlim getReaderWriterLockSlim()
+        {
+            return rwls;
+        }
+
+        public Log(String logLevel)
         {
             //_logFile = File.Open(@"log.txt", FileMode.Append, FileAccess.Write);
 

@@ -21,7 +21,7 @@ namespace Api.tests
             _client = _server.CreateClient();
         }
 
-        [Fact]
+        //[Fact]
         public async Task ReturnOK()
         {
             // Act
