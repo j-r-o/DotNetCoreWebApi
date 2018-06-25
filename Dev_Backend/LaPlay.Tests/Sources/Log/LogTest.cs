@@ -1,13 +1,9 @@
 using Xunit;
-<<<<<<< HEAD
 using System;
-=======
->>>>>>> develop
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-<<<<<<< HEAD
 using System.Text;
 using System.IO;
 using System.Diagnostics;
@@ -28,7 +24,6 @@ namespace LaPlay.Sources.Log
         }
 
         [Fact]
-<<<<<<< HEAD
         public void generateRandomString_shouldSucceed()
         {
             //Prepare sample and statistics
