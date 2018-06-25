@@ -11,8 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-using LaPlay.Api.Sources.Log;
-
+using LaPlay.Sources.Log;
 
 namespace Api
 {

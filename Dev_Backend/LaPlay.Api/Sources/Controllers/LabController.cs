@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using LaPlay.Api.Sources.Labo;
-using LaPlay.Api.Sources.Log;
-
+using LaPlay.Sources.Labo;
+using LaPlay.Sources.Log;
 
 namespace LaPlay.Api.Sources.Controllers
 {
@@ -14,12 +13,12 @@ namespace LaPlay.Api.Sources.Controllers
     [ApiController]
     public class LabController : ControllerBase
     {
-        private Labo.Labo _lab;
+        private Labo _lab;
 
         private ILog _log;
 
         public LabController(ILog log){
-            _lab = new Labo.Labo(log);
+            _lab = new Labo(log);
             _log = log;
         }
 

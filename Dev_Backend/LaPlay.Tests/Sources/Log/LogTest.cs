@@ -1,18 +1,19 @@
 using Xunit;
+using System;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
-using LaPlay.Api.Sources.Log;
+using LaPlay.Sources.Log;
 using System.Text.RegularExpressions;
+using System.Collections.Concurrent;
 
-namespace LaPlay.Test.Sources.Log
+namespace LaPlay.Sources.Log
 {
-    public class Log
+    public class LogTest
     {
 
         private string generateRandomString(int length)
@@ -23,25 +24,130 @@ namespace LaPlay.Test.Sources.Log
         }
 
         [Fact]
-        public void generateRandomString_shouldReturnRandomStringWithExpectedLength()
+        public void generateRandomString_shouldSucceed()
         {
-            Assert.Equal(1024, generateRandomString(1024).Length);
+            //Prepare sample and statistics
+            Int32 randomCharactersNumber = 1000000;
+            String randomCharacters = generateRandomString(randomCharactersNumber);
+            Double averageASCIICharacterCode = randomCharacters.Select(character => (int)character).Average();
 
-            
-            Console.WriteLine("###########");
-            Console.WriteLine(generateRandomString(1024).Length);
-            Console.WriteLine(Encoding.ASCII.GetBytes(generateRandomString(1024)).Select(x => (int)x).Average());
+            //Verify number corespond with what was asked
+            Assert.Equal(randomCharactersNumber, randomCharacters.Length);
+
+            //Verify that all ASCII charaters are generater
+            Assert.Equal(255, randomCharacters.Distinct().Count());
+
+            //Verify that the average is +/- 10 % around 127 : the middle of the ASCII code range [0;255]
+            Assert.True(0.9 * 127 <= averageASCIICharacterCode && averageASCIICharacterCode <= 1.1 * 127);
+        }
+
+        [Fact]
+        public void infoWarningDebug_shouldLogOnOwnLevel()
+        {
+            Func<Log, String> debugLog = (Log log) => {String logEntry = generateRandomString(10000); log.debug(logEntry); return logEntry;};
+            Func<Log, String> infoLog = (Log log) => {String logEntry = generateRandomString(10000); log.info(logEntry); return logEntry;};
+            Func<Log, String> warningLog = (Log log) => {String logEntry = generateRandomString(10000); log.warning(logEntry); return logEntry;};
+
+            List<dynamic> levelsToTest = new List<dynamic>()
+            {
+                new {threadsLog = new ConcurrentBag<dynamic>(), fileLog = new Log("Info"), infoAction = infoLog}//,
+                //new {threadsLog = new ConcurrentBag<dynamic>(), fileLog = new Log("Warning"), infoAction = warningLog},
+                //new {threadsLog = new ConcurrentBag<dynamic>(), fileLog = new Log("Debug"), infoAction = debugLog}
+            };
+
+            levelsToTest.ForEach(level => {
+
+                List<Thread> threads = Enumerable.Range(1, 10).Select(i =>
+
+                    new Thread(() => {
+                        
+                        Stopwatch s = new Stopwatch();
+                        s.Start();
+                        Console.Write("thread running");
+                        while (s.Elapsed < TimeSpan.FromMilliseconds(10)) {
+                        
+                            level.threadsLog.Add(level.infoAction.Invoke(level.fileLog));
+                        }
+
+                        s.Stop();
+                    })
+                ).ToList();
+
+                threads.ForEach(thread => thread.Start());
+                threads.ForEach(thread => thread.Join());
+            });
+
+            levelsToTest.ForEach(level => {Console.WriteLine(level.threadsLog.Lenght());});
+
+            // Assert.True(verifyLogContentWithThreadsResult)
+        }
+/*
+        [Fact]
+        public void info_shouldNotLogOnNonInfoLevel()
+        {
+            log = new Log("None");
+
+            Action logInfoAction = () => log.info(generateRandomString(10000));
+
+            floodAndVerify(10, logInfoAction);
+        }
+
+         [Fact]
+        public void warning_shouldLogOnWarningLevel()
+        {
+            log = new Log("Warning");
+
+            Action logInfoAction = () => log.info(generateRandomString(10000));
+
+            floodAndVerify(10, logInfoAction);
+        }
+
+         [Fact]
+        public void warning_shouldNotLogOnNonWarningLevel()
+        {
+            log = new Log("None");
+
+            Action logInfoAction = () => log.info(generateRandomString(10000));
+
+            floodAndVerify(10, logInfoAction);
+        }
+
+         [Fact]
+        public void debug_shouldLogOnDebugLevel()
+        {
+            Action logInfoAction = () => log.info(generateRandomString(10000));
+
+            floodAndVerify(10, logInfoAction);
+        }
+
+         [Fact]
+        public void debug_shouldNotLogOnNonDebugLevel()
+        {
+            log = new Log("None");
+
+            Action logInfoAction = () => log.info(generateRandomString(10000));
+
+            floodAndVerify(10, logInfoAction);
+        }
 
 
-            string s = generateRandomString(10);
+            new Thread (() => MyFunction(param1, param2))
 
-            Console.WriteLine(s);
-            Console.WriteLine(String.Join(", ", s.Select(x => (int)x)));
-            Console.WriteLine(s.Select(x => (int)x).Average());
-            Console.WriteLine(String.Join(", ", s.Select(x => (int)x).Select(x => (char)x)));
-            Console.WriteLine(s.Select(x => (int)x).Select(x => (char)x).Select(x => (int)x).Average());
 
-            Console.WriteLine("###########");
+            Func<Int32, Func<string, int>, Thread> callLoopThread = (durationInSeconds, Func<string, int> method) =>
+            {
+                int sum = int32A + int32B;
+                return sum;
+            };
+
+
+
+
+            //FloodThread(duration) : a thread that calls info() for a specific duration - it return all the written text as a list
+
+            //Flood : a loop that starts X FloodThread
+
+            //Verify that the text written by the threads is in the log file
         }
 
         private void testLogFile(){
@@ -104,7 +210,7 @@ namespace LaPlay.Test.Sources.Log
              //   .Select(i => new Thread(() => {
             for(int i = 0; i < 10 ; i++)
             {                    
-                //threads.Add(new Thread(() => {/*code here */}));
+                //threads.Add(new Thread(() => {code here}));
                 threads.Add(new Thread(new ParameterizedThreadStart(threadMission)));
             }
 
@@ -155,7 +261,7 @@ namespace LaPlay.Test.Sources.Log
 
             // Assert
             Assert.Equal("OK OK", responseString);
-            */
         }
+*/
     }
 }
