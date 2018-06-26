@@ -10,68 +10,74 @@ using System.Diagnostics;
 using LaPlay.Sources.Log;
 using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
+using Moq;
 
 namespace LaPlay.Sources.Log
 {
-    private class LogTestTools
-    {
-        private string generateRandomString(int length)
-        {
-            Random _random = new Random();
-
-            return string.Join("", Enumerable.Range(1,length).Select(i => (char)(_random.Next(0, 255))).ToList());
-        }
-
-        private Thread prepareThreadsForLogStress(Funct<Log, dynamic> function, Int32 threadsNumber, Int32 durationInMiliseconds)
-        {
-            retrun List<Thread> threads = Enumerable.Range(1, threadsNumber).Select(i =>
-
-                new Thread(() => {
-
-                    String threadId = Guid.NewGuid().ToString();
-                    Stopwatch stopWatch = new Stopwatch();
-                    
-                    stopWatch.Start();
-                    
-                    String sa;
-                    while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(10000)) {
-
-                        var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
-                        //sa = level.infoAction.Invoke(level.fileLog);
-                        //Console.WriteLine(sa);
-                        level.threadsLog.Add(logLine);
-                    }
-
-                    stopWatch.Stop();
-                })
-            ).ToList();
-
-        }
-    }
-
-    private class LogTestToolsTest
-    {
-        [Fact]
-        public void generateRandomString_shouldSucceed()
-        {
-            //Prepare sample and statistics
-            Int32 randomCharactersNumber = 1000000;
-            String randomCharacters = generateRandomString(randomCharactersNumber);
-            Double averageASCIICharacterCode = randomCharacters.Select(character => (int)character).Average();
-
-            //Verify number corespond with what was asked
-            Assert.Equal(randomCharactersNumber, randomCharacters.Length);
-
-            //Verify that all ASCII charaters are generater
-            Assert.Equal(255, randomCharacters.Distinct().Count());
-
-            //Verify that the average is +/- 10 % around 127 : the middle of the ASCII code range [0;255]
-            Assert.True(0.9 * 127 <= averageASCIICharacterCode && averageASCIICharacterCode <= 1.1 * 127);
-        }
-    }
-
     public class LogTest
     {
+        private class LogTestTools
+        {
+            private static string generateRandomString(int length)
+            {
+                Random _random = new Random();
+
+                return string.Join("", Enumerable.Range(1, length).Select(i => (char)(_random.Next(0, 255))).ToList());
+            }
+
+            private static List<Thread> prepareThreadsForLogStress(Log log, ConcurrentBag<dynamic> concurrentBag, Int32 threadsNumber, Int32 durationInMiliseconds, Int32 randomStringLength)
+            {
+                return Enumerable.Range(1, threadsNumber).Select(i =>
+                    new Thread(() => {
+                        String threadId = Guid.NewGuid().ToString();
+                        Stopwatch stopWatch = new Stopwatch();
+                        
+                        stopWatch.Start();
+                        
+                        while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(durationInMiliseconds))
+                        {
+                            var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
+                            log.Developpement(logLine.ThreadId + "-" + logLine.Content);
+                            concurrentBag.Add(logLine);
+                        }
+                        stopWatch.Stop();
+                    })
+                ).ToList();
+            }
+
+            [Fact]
+            public void generateRandomString_shouldSucceed()
+            {
+                //Prepare sample and statistics
+                Int32 randomCharactersNumber = 1000000;
+                String randomCharacters = LogTestTools.generateRandomString(randomCharactersNumber);
+                Double averageASCIICharacterCode = randomCharacters.Select(character => (int)character).Average();
+
+                //Verify number corespond with what was asked
+                Assert.Equal(randomCharactersNumber, randomCharacters.Length);
+
+                //Verify that all ASCII charaters are generater
+                Assert.Equal(255, randomCharacters.Distinct().Count());
+
+                //Verify that the average is +/- 10 % around 127 : the middle of the ASCII code range [0;255]
+                Assert.True(0.9 * 127 <= averageASCIICharacterCode && averageASCIICharacterCode <= 1.1 * 127);
+            }
+
+            [Fact]
+            public void prepareThreadsForLogStress_shouldWriteOneTime()
+            {
+                var mockedLog = new Mock<Log>();
+                ConcurrentBag<dynamic> concurrentBag = new ConcurrentBag<dynamic>();
+
+                List<Thread> threads = prepareThreadsForLogStress(mockedLog, concurrentBag, 1, 10, 1000);
+
+                threads.Select(thread => thread.Start());
+
+                mockedLog.VerifySet(log => log.Developpement(It.Is<String>(logLine => logLine.Length == 1025)));
+            }
+        }
+
+        /*
         [Fact]
         public void infoWarningDebug_shouldLogOnOwnLevel()
         {
