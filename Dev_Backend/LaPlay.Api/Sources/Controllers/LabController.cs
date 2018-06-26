@@ -38,7 +38,7 @@ namespace LaPlay.Api.Sources.Controllers
 
             for(int i = 0; i < 100000; i++){
 
-                _log.debug(logs[i]);
+                _log.Developpement(logs[i]);
             }
 
             var watch = System.Diagnostics.Stopwatch.StartNew();

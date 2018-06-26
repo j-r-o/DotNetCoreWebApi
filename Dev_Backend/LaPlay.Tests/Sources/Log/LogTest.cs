@@ -13,9 +13,8 @@ using System.Collections.Concurrent;
 
 namespace LaPlay.Sources.Log
 {
-    public class LogTest
+    private class LogTestTools
     {
-
         private string generateRandomString(int length)
         {
             Random _random = new Random();
@@ -23,6 +22,35 @@ namespace LaPlay.Sources.Log
             return string.Join("", Enumerable.Range(1,length).Select(i => (char)(_random.Next(0, 255))).ToList());
         }
 
+        private Thread prepareThreadsForLogStress(Funct<Log, dynamic> function, Int32 threadsNumber, Int32 durationInMiliseconds)
+        {
+            retrun List<Thread> threads = Enumerable.Range(1, threadsNumber).Select(i =>
+
+                new Thread(() => {
+
+                    String threadId = Guid.NewGuid().ToString();
+                    Stopwatch stopWatch = new Stopwatch();
+                    
+                    stopWatch.Start();
+                    
+                    String sa;
+                    while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(10000)) {
+
+                        var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
+                        //sa = level.infoAction.Invoke(level.fileLog);
+                        //Console.WriteLine(sa);
+                        level.threadsLog.Add(logLine);
+                    }
+
+                    stopWatch.Stop();
+                })
+            ).ToList();
+
+        }
+    }
+
+    private class LogTestToolsTest
+    {
         [Fact]
         public void generateRandomString_shouldSucceed()
         {
@@ -40,19 +68,21 @@ namespace LaPlay.Sources.Log
             //Verify that the average is +/- 10 % around 127 : the middle of the ASCII code range [0;255]
             Assert.True(0.9 * 127 <= averageASCIICharacterCode && averageASCIICharacterCode <= 1.1 * 127);
         }
+    }
 
+    public class LogTest
+    {
         [Fact]
         public void infoWarningDebug_shouldLogOnOwnLevel()
         {
             Int32 randomStringLength = 100;
 
-            Func<Log, String> debugLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.debug(logEntry); return logEntry;};
-            Func<Log, String> infoLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.info(logEntry); return logEntry;};
-            Func<Log, String> warningLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.warning(logEntry); return logEntry;};
+            Func<Log, String> debugLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.Developpement(logEntry); return logEntry;};
+            Func<Log, String> infoLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.Production(logEntry); return logEntry;};
 
             List<dynamic> levelsToTest = new List<dynamic>()
             {
-                new {threadsLog = new ConcurrentBag<dynamic>(), fileLog = new Log("Info"), infoAction = infoLog}//,
+                new {threadsLog = new ConcurrentBag<dynamic>(), fileLog = new Log(Log.Level.Developpement), infoAction = debugLog}//,
                 //new {threadsLog = new ConcurrentBag<dynamic>(), fileLog = new Log("Warning"), infoAction = warningLog},
                 //new {threadsLog = new ConcurrentBag<dynamic>(), fileLog = new Log("Debug"), infoAction = debugLog}
             };
@@ -62,17 +92,22 @@ namespace LaPlay.Sources.Log
                 List<Thread> threads = Enumerable.Range(1, 1024).Select(i =>
 
                     new Thread(() => {
-                        
-                        Stopwatch s = new Stopwatch();
-                        s.Start();
-                        //Console.Write("thread running");
-                        String sa;
-                        while (s.Elapsed < TimeSpan.FromMilliseconds(10000)) {
 
-                            sa = level.infoAction.Invoke(level.fileLog);
+                        String threadId = Guid.NewGuid().ToString();
+                        Stopwatch stopWatch = new Stopwatch();
+                        
+                        stopWatch.Start();
+                        
+                        String sa;
+                        while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(10000)) {
+
+                            var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
+                            //sa = level.infoAction.Invoke(level.fileLog);
                             //Console.WriteLine(sa);
+                            level.threadsLog.Add(logLine);
+
                             try{
-                            level.threadsLog.Add(s);
+                            //level.threadsLog.Add(s);
                             }
                             catch(Exception e){
                                 Console.WriteLine(e.ToString());
@@ -81,7 +116,7 @@ namespace LaPlay.Sources.Log
                             //level.threadsLog.Add(level.infoAction.Invoke(level.fileLog));
                         }
 
-                        s.Stop();
+                        stopWatch.Stop();
                     })
                 ).ToList();
 

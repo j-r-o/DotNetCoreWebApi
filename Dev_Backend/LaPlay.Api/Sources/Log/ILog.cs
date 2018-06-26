@@ -5,8 +5,7 @@ namespace LaPlay.Sources.Log
 {
     public interface ILog
     {
-        void info(String log);
-        void warning(String log);
-        void debug(String log);
+        void Production(String log);
+        void Developpement(String log);
     }
 }
