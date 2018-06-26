@@ -44,9 +44,11 @@ namespace LaPlay.Sources.Log
         [Fact]
         public void infoWarningDebug_shouldLogOnOwnLevel()
         {
-            Func<Log, String> debugLog = (Log log) => {String logEntry = generateRandomString(10000); log.debug(logEntry); return logEntry;};
-            Func<Log, String> infoLog = (Log log) => {String logEntry = generateRandomString(10000); log.info(logEntry); return logEntry;};
-            Func<Log, String> warningLog = (Log log) => {String logEntry = generateRandomString(10000); log.warning(logEntry); return logEntry;};
+            Int32 randomStringLength = 100;
+
+            Func<Log, String> debugLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.debug(logEntry); return logEntry;};
+            Func<Log, String> infoLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.info(logEntry); return logEntry;};
+            Func<Log, String> warningLog = (Log log) => {String logEntry = generateRandomString(randomStringLength); log.warning(logEntry); return logEntry;};
 
             List<dynamic> levelsToTest = new List<dynamic>()
             {
@@ -57,16 +59,26 @@ namespace LaPlay.Sources.Log
 
             levelsToTest.ForEach(level => {
 
-                List<Thread> threads = Enumerable.Range(1, 10).Select(i =>
+                List<Thread> threads = Enumerable.Range(1, 1024).Select(i =>
 
                     new Thread(() => {
                         
                         Stopwatch s = new Stopwatch();
                         s.Start();
-                        Console.Write("thread running");
-                        while (s.Elapsed < TimeSpan.FromMilliseconds(10)) {
+                        //Console.Write("thread running");
+                        String sa;
+                        while (s.Elapsed < TimeSpan.FromMilliseconds(10000)) {
+
+                            sa = level.infoAction.Invoke(level.fileLog);
+                            //Console.WriteLine(sa);
+                            try{
+                            level.threadsLog.Add(s);
+                            }
+                            catch(Exception e){
+                                Console.WriteLine(e.ToString());
+                            }
                         
-                            level.threadsLog.Add(level.infoAction.Invoke(level.fileLog));
+                            //level.threadsLog.Add(level.infoAction.Invoke(level.fileLog));
                         }
 
                         s.Stop();
@@ -77,7 +89,7 @@ namespace LaPlay.Sources.Log
                 threads.ForEach(thread => thread.Join());
             });
 
-            levelsToTest.ForEach(level => {Console.WriteLine(level.threadsLog.Lenght());});
+            levelsToTest.ForEach(level => {Console.WriteLine("concurrentbag htreadsLog size : " + level.threadsLog.Count);});
 
             // Assert.True(verifyLogContentWithThreadsResult)
         }
