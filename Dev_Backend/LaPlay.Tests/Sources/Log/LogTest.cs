@@ -16,7 +16,7 @@ namespace LaPlay.Sources.Log
 {
     public class LogTest
     {
-        private class LogTestTools
+        public class LogTestTools
         {
             private static string generateRandomString(int length)
             {
@@ -25,7 +25,7 @@ namespace LaPlay.Sources.Log
                 return string.Join("", Enumerable.Range(1, length).Select(i => (char)(_random.Next(0, 255))).ToList());
             }
 
-            private static List<Thread> prepareThreadsForLogStress(Log log, ConcurrentBag<dynamic> concurrentBag, Int32 threadsNumber, Int32 durationInMiliseconds, Int32 randomStringLength)
+            private static List<Thread> prepareThreadsForLogStress(ILog log, ConcurrentBag<dynamic> concurrentBag, Int32 threadsNumber, Int32 durationInMiliseconds, Int32 randomStringLength)
             {
                 return Enumerable.Range(1, threadsNumber).Select(i =>
                     new Thread(() => {
@@ -37,7 +37,7 @@ namespace LaPlay.Sources.Log
                         while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(durationInMiliseconds))
                         {
                             var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
-                            log.Developpement(logLine.ThreadId + "-" + logLine.Content);
+                            log.Developpement(logLine.ThreadId + "]======[" + logLine.Content);
                             concurrentBag.Add(logLine);
                         }
                         stopWatch.Stop();
@@ -66,17 +66,22 @@ namespace LaPlay.Sources.Log
             [Fact]
             public void prepareThreadsForLogStress_shouldWriteOneTime()
             {
-                var mockedLog = new Mock<Log>();
+                var mockedLog = new Mock<ILog>();
+                ConcurrentBag<String> res = new ConcurrentBag<String>();
+                mockedLog.Setup(log => log.Developpement(It.IsAny<String>())).Callback((String logLine) => {Console.WriteLine(">>>" + logLine + "<<<"); Console.WriteLine(">>>" + (logLine.Length - 44) + "chars <<<"); res.Add(logLine);});
                 ConcurrentBag<dynamic> concurrentBag = new ConcurrentBag<dynamic>();
 
-                List<Thread> threads = prepareThreadsForLogStress(mockedLog, concurrentBag, 1, 10, 1000);
+                List<Thread> threads = prepareThreadsForLogStress(mockedLog.Object, concurrentBag, 1, 10, 100);
 
-                threads.Select(thread => thread.Start());
+                threads.ForEach(thread => thread.Start());
+                threads.ForEach(thread => thread.Join());
 
-                mockedLog.VerifySet(log => log.Developpement(It.Is<String>(logLine => logLine.Length == 1025)));
+                //mockedLog.Verify(log => log.Developpement(It.Is<String>(logLine => logLine.Length == 36 + 1 + 1000)));
+
+                Console.WriteLine("#" + res.Count + "#");
+                //res.Select(logLine => Console.WriteLine(logLine));
             }
         }
-
         /*
         [Fact]
         public void infoWarningDebug_shouldLogOnOwnLevel()
