@@ -33,7 +33,6 @@ namespace LaPlay.Sources.Log
                         Stopwatch stopWatch = new Stopwatch();
                         
                         stopWatch.Start();
-                        
                         while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(durationInMiliseconds))
                         {
                             var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
@@ -64,22 +63,36 @@ namespace LaPlay.Sources.Log
             }
 
             [Fact]
-            public void prepareThreadsForLogStress_shouldWriteOneTime()
+            public void prepareThreadsForLogStress_shouldSucceed()
             {
                 var mockedLog = new Mock<ILog>();
-                ConcurrentBag<String> res = new ConcurrentBag<String>();
-                mockedLog.Setup(log => log.Developpement(It.IsAny<String>())).Callback((String logLine) => {Console.WriteLine(">>>" + logLine + "<<<"); Console.WriteLine(">>>" + (logLine.Length - 44) + "chars <<<"); res.Add(logLine);});
-                ConcurrentBag<dynamic> concurrentBag = new ConcurrentBag<dynamic>();
+                ConcurrentBag<String> mockedLogFile = new ConcurrentBag<String>();
+                mockedLog.Setup(log => log.Developpement(It.IsAny<String>())).Callback((String logLine) => {mockedLogFile.Add(logLine);});
+                ConcurrentBag<dynamic> threadWritings = new ConcurrentBag<dynamic>();
 
-                List<Thread> threads = prepareThreadsForLogStress(mockedLog.Object, concurrentBag, 1, 10, 100);
+                List<Thread> threads = prepareThreadsForLogStress(mockedLog.Object, threadWritings, 100, 10, 10);
 
                 threads.ForEach(thread => thread.Start());
                 threads.ForEach(thread => thread.Join());
 
-                //mockedLog.Verify(log => log.Developpement(It.Is<String>(logLine => logLine.Length == 36 + 1 + 1000)));
+                Console.WriteLine(mockedLogFile.Count + " - " + threadWritings.Count);
+                Assert.True(mockedLogFile.Count == threadWritings.Count);
 
-                Console.WriteLine("#" + res.Count + "#");
-                //res.Select(logLine => Console.WriteLine(logLine));
+                List<String> sortedThreadWritings = (from tw in threadWritings select tw.ThreadId + "]======[" + tw.Content).Cast<String>().ToList();
+                List<String> sortedMockedLogFileLines = (from mlf in mockedLogFile orderby mlf select mlf).Cast<String>().ToList();
+
+
+                List<Boolean> comparisons = Enumerable.Range(0, sortedThreadWritings.Count - 1).Select(i => sortedThreadWritings.ElementAt(i) == sortedMockedLogFileLines.ElementAt(i)).Distinct().Cast<Boolean>().ToList();
+
+                comparisons.ForEach(c => Console.WriteLine(c));
+
+
+                //Assert.True(comparisons 
+
+                // threadWritingsAsStringList.ForEach(logLine => Console.WriteLine(logLine));
+                // mockedLogFile.ToList().ForEach(logLine => Console.WriteLine(logLine));
+
+                //Console.WriteLine(mockedLogFile.Select(logLine => threadWritingsAsStringList.Contains(logLine)).Distinct());
             }
         }
         /*
