@@ -70,7 +70,7 @@ namespace LaPlay.Sources.Log
                 mockedLog.Setup(log => log.Developpement(It.IsAny<String>())).Callback((String logLine) => {mockedLogFile.Add(logLine);});
                 ConcurrentBag<dynamic> threadWritings = new ConcurrentBag<dynamic>();
 
-                List<Thread> threads = prepareThreadsForLogStress(mockedLog.Object, threadWritings, 100, 10, 10);
+                List<Thread> threads = prepareThreadsForLogStress(mockedLog.Object, threadWritings, 1000, 10, 10);
 
                 threads.ForEach(thread => thread.Start());
                 threads.ForEach(thread => thread.Join());
@@ -78,14 +78,27 @@ namespace LaPlay.Sources.Log
                 Console.WriteLine(mockedLogFile.Count + " - " + threadWritings.Count);
                 Assert.True(mockedLogFile.Count == threadWritings.Count);
 
-                List<String> sortedThreadWritings = (from tw in threadWritings select tw.ThreadId + "]======[" + tw.Content).Cast<String>().ToList();
+                List<String> sortedThreadWritings = (from tw in threadWritings.Select(l => l.ThreadId + "]======[" + l.Content) orderby tw select tw).Cast<String>().ToList();
                 List<String> sortedMockedLogFileLines = (from mlf in mockedLogFile orderby mlf select mlf).Cast<String>().ToList();
-
 
                 List<Boolean> comparisons = Enumerable.Range(0, sortedThreadWritings.Count - 1).Select(i => sortedThreadWritings.ElementAt(i) == sortedMockedLogFileLines.ElementAt(i)).Distinct().Cast<Boolean>().ToList();
 
+                Console.WriteLine("###");
                 comparisons.ForEach(c => Console.WriteLine(c));
+                Console.WriteLine("###");
 
+                FileStream fsa = new FileStream("a.txt", FileMode.Create);
+                using(TextWriter tw = new StreamWriter(fsa, Encoding.UTF8, 1024))
+                {
+                    sortedThreadWritings.ForEach(l => tw.WriteLine(l));
+                }
+
+                FileStream fsb = new FileStream("b.txt", FileMode.Create);
+                using(TextWriter tw = new StreamWriter(fsb, Encoding.UTF8, 1024))
+                {
+                    sortedMockedLogFileLines.ForEach(l => tw.WriteLine(l));
+                }
+                Console.WriteLine("===");
 
                 //Assert.True(comparisons 
 
