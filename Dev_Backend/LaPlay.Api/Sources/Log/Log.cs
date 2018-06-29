@@ -25,7 +25,10 @@ namespace LaPlay.Sources.Log
         private void ThreadSafeLog(String log)
         {
             _ReaderWriterLockSlim.EnterWriteLock();
-            _writer.Write(log);
+            _writer.WriteLine(log);
+
+            //Console.WriteLine("#" + log);
+
             _ReaderWriterLockSlim.ExitWriteLock();
         }
 
@@ -33,7 +36,8 @@ namespace LaPlay.Sources.Log
         {
             _level = level;
             _logFile = new FileStream(@"log.txt", FileMode.OpenOrCreate);
-            _writer = new StreamWriter(_logFile, Encoding.UTF8, 1048576, true); //1Mo buffer, default AutoFlush = false is faster then true
+            //_writer = new StreamWriter(_logFile, Encoding.Unicode, 1048576, true); //1Mo buffer, default AutoFlush = false is faster then true
+            _writer = new StreamWriter(_logFile, Encoding.Unicode, 1048576, true); //1Mo buffer, default AutoFlush = false is faster then true
         }
 
         public void Production(String log)

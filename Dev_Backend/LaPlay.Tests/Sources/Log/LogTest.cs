@@ -18,6 +18,7 @@ namespace LaPlay.Sources.Log
     {
         public class LogTestTools
         {
+
             private static string generateRandomString(int length)
             {
                 Random _random = new Random();
@@ -25,7 +26,7 @@ namespace LaPlay.Sources.Log
                 return string.Join("", Enumerable.Range(1, length).Select(i => (char)(_random.Next(0, 65535))).ToList());
             }
 
-            private static List<Thread> prepareThreadsForLogStress(ILog log, ConcurrentBag<dynamic> concurrentBag, Int32 threadsNumber, Int32 durationInMiliseconds, Int32 randomStringLength)
+            public static List<Thread> prepareThreadsForLogStress(ILog log, ConcurrentBag<dynamic> concurrentBag, Int32 threadsNumber, Int32 durationInMiliseconds, Int32 randomStringLength)
             {
                 return Enumerable.Range(1, threadsNumber).Select(i =>
                     new Thread(() => {
@@ -35,9 +36,14 @@ namespace LaPlay.Sources.Log
                         stopWatch.Start();
                         while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(durationInMiliseconds))
                         {
-                            var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
-                            log.Developpement(logLine.ThreadId + "]======[" + logLine.Content);
+                            String randomString = generateRandomString(randomStringLength);
+                            String logLine = threadId + " " + randomString;
+                            log.Developpement(logLine);
                             concurrentBag.Add(logLine);
+
+                            //var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
+                            //log.Developpement(logLine.ThreadId + " " + logLine.Content);
+                            //concurrentBag.Add(logLine);
                         }
                         stopWatch.Stop();
                     })
@@ -70,44 +76,43 @@ namespace LaPlay.Sources.Log
                 mockedLog.Setup(log => log.Developpement(It.IsAny<String>())).Callback((String logLine) => {mockedLogFile.Add(logLine);});
                 ConcurrentBag<dynamic> threadWritings = new ConcurrentBag<dynamic>();
 
-                List<Thread> threads = prepareThreadsForLogStress(mockedLog.Object, threadWritings, 1000, 10, 10);
+                List<Thread> threads = prepareThreadsForLogStress(mockedLog.Object, threadWritings, 1000, 10, 1000);
 
                 threads.ForEach(thread => thread.Start());
                 threads.ForEach(thread => thread.Join());
 
-                Console.WriteLine(mockedLogFile.Count + " - " + threadWritings.Count);
+                //Verify that number of log calls corresponds the sum of all threads calls 
                 Assert.True(mockedLogFile.Count == threadWritings.Count);
+                Console.WriteLine(mockedLogFile.Count + " - " + threadWritings.Count);
 
-                List<String> sortedThreadWritings = (from tw in threadWritings.Select(l => l.ThreadId + "]======[" + l.Content) orderby tw select tw).Cast<String>().ToList();
+                List<String> sortedThreadWritings = (from tw in threadWritings orderby tw select tw).Cast<String>().ToList();
                 List<String> sortedMockedLogFileLines = (from mlf in mockedLogFile orderby mlf select mlf).Cast<String>().ToList();
 
                 List<Boolean> comparisons = Enumerable.Range(0, sortedThreadWritings.Count - 1).Select(i => sortedThreadWritings.ElementAt(i) == sortedMockedLogFileLines.ElementAt(i)).Distinct().Cast<Boolean>().ToList();
 
-                Console.WriteLine("###");
-                comparisons.ForEach(c => Console.WriteLine(c));
-                Console.WriteLine("###");
-
-                FileStream fsa = new FileStream("a.txt", FileMode.Create);
-                using(TextWriter tw = new StreamWriter(fsa, Encoding.UTF8, 1024))
-                {
-                    sortedThreadWritings.ForEach(l => tw.WriteLine(l));
-                }
-
-                FileStream fsb = new FileStream("b.txt", FileMode.Create);
-                using(TextWriter tw = new StreamWriter(fsb, Encoding.UTF8, 1024))
-                {
-                    sortedMockedLogFileLines.ForEach(l => tw.WriteLine(l));
-                }
-                Console.WriteLine("===");
-
-                //Assert.True(comparisons 
-
-                // threadWritingsAsStringList.ForEach(logLine => Console.WriteLine(logLine));
-                // mockedLogFile.ToList().ForEach(logLine => Console.WriteLine(logLine));
-
-                //Console.WriteLine(mockedLogFile.Select(logLine => threadWritingsAsStringList.Contains(logLine)).Distinct());
+                //Verify that mocked log content is the same what the threads send
+                Assert.True(!comparisons.Contains(false));
             }
         }
+
+        [Fact]
+        public void productionDeveloppement_shouldLogOnOwnLevel()
+        {
+            Log log = new Log(Log.Level.Developpement);
+
+            ConcurrentBag<dynamic> threadWritings = new ConcurrentBag<dynamic>();
+
+            List<Thread> threads =  LogTestTools.prepareThreadsForLogStress(log, threadWritings, 10, 10, 1000);
+
+            threads.ForEach(thread => thread.Start());
+            threads.ForEach(thread => thread.Join());
+
+            List<string> logLines = new List<string>(File.ReadAllLines("log.txt"));
+
+            
+                Console.WriteLine(logLines.Count + " - " + threadWritings.Count);
+        }
+
         /*
         [Fact]
         public void infoWarningDebug_shouldLogOnOwnLevel()
