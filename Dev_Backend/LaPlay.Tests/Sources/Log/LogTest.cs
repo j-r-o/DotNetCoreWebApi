@@ -22,14 +22,14 @@ namespace LaPlay.Sources.Log
             {
                 Random _random = new Random();
 
-                return string.Join("", Enumerable.Range(1, length).Select(i => (char)(_random.Next(0, 255))).ToList());
+                return string.Join("", Enumerable.Range(1, length).Select(i => (char)(_random.Next(0, 65535))).ToList());
             }
 
             private static List<Thread> prepareThreadsForLogStress(ILog log, ConcurrentBag<dynamic> concurrentBag, Int32 threadsNumber, Int32 durationInMiliseconds, Int32 randomStringLength)
             {
                 return Enumerable.Range(1, threadsNumber).Select(i =>
                     new Thread(() => {
-                        String threadId = Guid.NewGuid().ToString();
+                        String threadId = Guid.NewGuid().ToString();
                         Stopwatch stopWatch = new Stopwatch();
                         
                         stopWatch.Start();
@@ -55,11 +55,11 @@ namespace LaPlay.Sources.Log
                 //Verify number corespond with what was asked
                 Assert.Equal(randomCharactersNumber, randomCharacters.Length);
 
-                //Verify that all ASCII charaters are generater
-                Assert.Equal(255, randomCharacters.Distinct().Count());
+                //Verify that all Unicode charaters are generater
+                Assert.Equal(65535, randomCharacters.Distinct().Count());
 
-                //Verify that the average is +/- 10 % around 127 : the middle of the ASCII code range [0;255]
-                Assert.True(0.9 * 127 <= averageASCIICharacterCode && averageASCIICharacterCode <= 1.1 * 127);
+                //Verify that the average is +/- 10 % around 32767 : the middle of the unicode code range [0;65535]
+                Assert.True(0.9 * 32767 <= averageASCIICharacterCode && averageASCIICharacterCode <= 1.1 * 32767);
             }
 
             [Fact]
