@@ -25,7 +25,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-		<img src="PlaystationLogo.svg" class="img-fluid" style="object-fit: cover ;" alt="Responsive image">
+		    <img src="PlaystationLogo.svg" class="img-fluid" style="object-fit: cover ;" alt="Responsive image">
         <a class="navbar-brand" href="#" style="font-family: Zrnic;">La Play</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
@@ -33,13 +33,13 @@
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Status</a>
+              <a class="nav-link" href="#">Manage drives</a>
             </li>
-			<li class="nav-item">
-              <a class="nav-link" href="#">Log</a>
+		      	<li class="nav-item">
+              <a class="nav-link" href="#">Manage replication</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+              <a class="nav-link" href="#">Read logs</a>
             </li>
           </ul>
         </div>
@@ -68,15 +68,29 @@
 		
 		<div class="container">
 		  <div class="row">
-			<div class="col-sm">
-			  One of three columns
-			</div>
-			<div class="col-sm">
-			  One of three columns
-			</div>
-			<div class="col-sm">
-			  One of three columns
-			</div>
+			  <div class="col">
+			    <div class="card">
+            <div class="card-header text-center">
+              Storage space 1
+            </div>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td rowspan="2><img src="Folder.svg" class="img-fluid" /></td>
+                  <td>/mount/main1<br>( /dev/sda1 )</td>
+                  <td>/mount/mirror1<br>( /dev/sdb1 )</td>
+                </tr>
+                <tr>
+                  <td colspan="2">45 Go free of 500 Go</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="card-footer text-center">
+                Synchronization >>>
+            </div>
+          </div>
+			  </div>
 		  </div>
 		</div>
 

@@ -18,6 +18,17 @@ namespace LaPlay.Sources.Log
     {
         public class LogTestTools
         {
+            public static Boolean SameLists(List<String> listOne,List<String> listTwo)
+            {
+                if (listOne.Count != listTwo.Count) return false;
+
+                List<String> listOneSorted = (from item in listOne orderby item select item).Cast<String>().ToList();
+                List<String> listTwoeSorted = (from item in listTwo orderby item select item).Cast<String>().ToList();
+                
+                List<Boolean> oneByOneComparison = Enumerable.Range(0, listOne.Count).Select(index => listOneSorted.ElementAt(index) == listTwoeSorted.ElementAt(index)).Distinct().ToList();
+                
+                return oneByOneComparison.Contains(false);
+            }
 
             private static string generateRandomString(int length)
             {
@@ -37,6 +48,13 @@ namespace LaPlay.Sources.Log
                         while (stopWatch.Elapsed < TimeSpan.FromMilliseconds(durationInMiliseconds))
                         {
                             String randomString = generateRandomString(randomStringLength);
+
+                            //Exclude line return character
+                            while(randomString.Contains((char)13)) 
+                            {
+                                randomString.Replace(((char)13), generateRandomString(1)[0]);
+                            }
+
                             String logLine = threadId + " " + randomString;
                             log.Developpement(logLine);
                             concurrentBag.Add(logLine);
@@ -51,6 +69,30 @@ namespace LaPlay.Sources.Log
             }
 
             [Fact]
+            public void sameLists_ShouldReturnTrueOneEmptyLists()
+            {
+                Assert.True(SameLists(new List<String>(),new List<String>()));
+            }
+
+            [Fact]
+            public void sameLists_ShouldReturnTrueOneSameLists()
+            {
+                Assert.True(SameLists(new List<String>(){"a", "c", "b"}, new List<String>(){"b", "a", "c"}));
+            }
+
+            [Fact]
+            public void sameLists_ShouldReturnFalseOnListsWithDifferentSizes()
+            {
+                Assert.False(SameLists(new List<String>(){"a", "b"}, new List<String>(){"b", "a", "c"}));
+            }
+
+            [Fact]
+            public void sameLists_ShouldReturnFalseOnDifferentLists()
+            {
+                Assert.False(SameLists(new List<String>(){"a", "b", "d"}, new List<String>(){"b", "a", "c"}));
+            }
+
+            [Fact]
             public void generateRandomString_shouldSucceed()
             {
                 //Prepare sample and statistics
@@ -61,7 +103,7 @@ namespace LaPlay.Sources.Log
                 //Verify number corespond with what was asked
                 Assert.Equal(randomCharactersNumber, randomCharacters.Length);
 
-                //Verify that all Unicode charaters are generater
+                //Verify that all Unicode charaters are generater except line return
                 Assert.Equal(65535, randomCharacters.Distinct().Count());
 
                 //Verify that the average is +/- 10 % around 32767 : the middle of the unicode code range [0;65535]
@@ -95,22 +137,37 @@ namespace LaPlay.Sources.Log
             }
         }
 
+        //dotnet test --filter "FullyQualifiedName=LaPlay.Sources.Log.LogTest.productionDeveloppement_shouldLogOnOwnLevel"
         [Fact]
         public void productionDeveloppement_shouldLogOnOwnLevel()
         {
+            Console.WriteLine("========================");
             Log log = new Log(Log.Level.Developpement);
 
             ConcurrentBag<dynamic> threadWritings = new ConcurrentBag<dynamic>();
 
             List<Thread> threads =  LogTestTools.prepareThreadsForLogStress(log, threadWritings, 10, 10, 1000);
 
+            Console.WriteLine("#1#");
             threads.ForEach(thread => thread.Start());
+            Console.WriteLine("#2#");
             threads.ForEach(thread => thread.Join());
 
-            List<string> logLines = new List<string>(File.ReadAllLines("log.txt"));
+            threadWritings.Select(logLine => Console.WriteLine(logLine));
+            Console.WriteLine("###");
 
-            
-                Console.WriteLine(logLines.Count + " - " + threadWritings.Count);
+            //List<string> logLines = new List<string>(File.ReadAllLines("log.txt"));
+
+            //Console.WriteLine(logLines.Count + " - " + threadWritings.Count);
+        }
+
+        //dotnet test --filter "FullyQualifiedName=LaPlay.Sources.Log.LogTest.aaabbbccc"
+
+        [Fact]
+        public void aaabbbccc()
+        {
+            Console.WriteLine("#");
+
         }
 
         /*
