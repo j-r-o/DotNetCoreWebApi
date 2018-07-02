@@ -27,7 +27,7 @@ namespace LaPlay.Sources.Log
             _ReaderWriterLockSlim.EnterWriteLock();
             _writer.WriteLine(log);
 
-            //Console.WriteLine("#" + log);
+            //Console.WriteLine("# ThreadSafeLog #");
 
             _ReaderWriterLockSlim.ExitWriteLock();
         }

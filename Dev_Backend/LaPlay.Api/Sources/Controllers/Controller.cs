@@ -6,16 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 
 using LaPlay.Api.Sources.Tools;
 
+using Microsoft.Extensions.Logging;
+
 namespace LaPlay.Api.Sources.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class v1Controller : ControllerBase
     {
+        private readonly ILogger<v1Controller> _logger;
+
+        public v1Controller(ILogger<v1Controller> logger)
+        {
+            _logger = logger;
+        }
+
         // api/v1/route/XXXXX
         [HttpGet("route/{id}")]
         public string Get(string id)
         {
+            _logger.LogTrace("get get get !!!!!");
+
             return id;
         }
 

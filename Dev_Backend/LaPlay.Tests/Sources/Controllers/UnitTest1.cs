@@ -21,11 +21,11 @@ namespace Api.tests
             _client = _server.CreateClient();
         }
 
-        //[Fact]
+        [Fact]
         public async Task ReturnOK()
         {
             // Act
-            var response = await _client.GetAsync("api/values/OK");
+            var response = await _client.GetAsync("api/v1/route/4654");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
 

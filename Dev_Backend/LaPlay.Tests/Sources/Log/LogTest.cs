@@ -27,7 +27,7 @@ namespace LaPlay.Sources.Log
                 
                 List<Boolean> oneByOneComparison = Enumerable.Range(0, listOne.Count).Select(index => listOneSorted.ElementAt(index) == listTwoeSorted.ElementAt(index)).Distinct().ToList();
                 
-                return oneByOneComparison.Contains(false);
+                return !oneByOneComparison.Contains(false);
             }
 
             private static string generateRandomString(int length)
@@ -56,8 +56,10 @@ namespace LaPlay.Sources.Log
                             }
 
                             String logLine = threadId + " " + randomString;
+                            Console.WriteLine("trying to log");
                             log.Developpement(logLine);
                             concurrentBag.Add(logLine);
+                            Console.WriteLine("OK !");
 
                             //var logLine = new {ThreadId = threadId, Content = generateRandomString(randomStringLength)}; 
                             //log.Developpement(logLine.ThreadId + " " + logLine.Content);
@@ -103,7 +105,7 @@ namespace LaPlay.Sources.Log
                 //Verify number corespond with what was asked
                 Assert.Equal(randomCharactersNumber, randomCharacters.Length);
 
-                //Verify that all Unicode charaters are generater except line return
+                //Verify that all Unicode charaters are generater
                 Assert.Equal(65535, randomCharacters.Distinct().Count());
 
                 //Verify that the average is +/- 10 % around 32767 : the middle of the unicode code range [0;65535]
@@ -146,15 +148,25 @@ namespace LaPlay.Sources.Log
 
             ConcurrentBag<dynamic> threadWritings = new ConcurrentBag<dynamic>();
 
-            List<Thread> threads =  LogTestTools.prepareThreadsForLogStress(log, threadWritings, 10, 10, 1000);
+            List<Thread> threads =  LogTestTools.prepareThreadsForLogStress(log, threadWritings, 10, 10, 50);
 
             Console.WriteLine("#1#");
             threads.ForEach(thread => thread.Start());
             Console.WriteLine("#2#");
-            threads.ForEach(thread => thread.Join());
 
-            threadWritings.Select(logLine => Console.WriteLine(logLine));
+            //threads.Select(thread => thread.ThreadState.Equals
+
+
+
+            threads.ForEach(thread => Console.WriteLine(thread.ThreadState));
+
+            threads.ForEach(thread => thread.Join());
+            threads.ForEach(thread => Console.WriteLine(thread.ThreadState));
+
+            threads.ForEach(thread => thread.Join());
+            Console.WriteLine(threadWritings.Count);
             Console.WriteLine("###");
+            threadWritings.Select(logLine => Console.WriteLine(logLine));
 
             //List<string> logLines = new List<string>(File.ReadAllLines("log.txt"));
 
