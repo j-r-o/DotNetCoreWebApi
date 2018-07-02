@@ -13,8 +13,50 @@ namespace LaPlay.Sources.Labo
     {
         private readonly ILog _logs;
 
-        public Labo(ILog logs){
+        public Labo(ILog logs)
+        {
             _logs = logs;
+        }
+
+        
+        public void listFreeSpaces()
+        {
+
+        }
+
+        public void createPartitionWithFreeSpace(String drive)
+        {
+
+        }
+
+        public void deletePartition(String partition)
+        {
+
+        }
+
+        public void createMountPointForPartition()
+        {
+
+        }
+
+        public void createStorageSpace(String mainFolder, String MirrorFolder)
+        {
+
+        }
+
+        public void updateStorageSpace(String Name, String mainFolder, String MirrorFolder)
+        {
+
+        }
+
+        public void deleteStorageSpace(String name)
+        {
+
+        }
+
+        public void listStorageSpaces()
+        {
+
         }
 
         public string drives()
