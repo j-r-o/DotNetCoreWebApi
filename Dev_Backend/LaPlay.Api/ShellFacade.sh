@@ -1,22 +1,62 @@
 #!/bin/bash
 
+#function myfunc()
+#{
+#    local  myresult='some value'
+#    echo "$myresult"
+#}
+
+#result=$(myfunc)   # or result=`myfunc`
+#echo $result
+
+
+
 #================================   HELPERS   =================================
+
+	listDiskPaths() {
+
+		echo lsblk | grep "disk" | cut -d " " -f1
+	}
+
+	countDiskPartitions() {
+
+		disk="$1"
+
+		partitionCount=$(lsblk | grep "part" | cut -d " " -f1 | grep -c "$disk")
+
+	}
+
+#==============================   VALIDATORS   ================================
+
+	drivePathMustBeReal() {
+
+		drivePath="$1"
+		
+		#Return 1 if drivePath is in diskPaths, 0 otherwise
+		echo $(listDiskPaths | grep -c -e "$drivePath")
+	}
+
+	driveMustHaveNoPartition() {
+
+		echo "driveMustHaveNoPartition"
+	}
+		
 
 #=================================   CORE    ==================================
 
 	createPartitionOnDrive() {
 
+		#Parameter must be somthing like "sd[a-z]"
 		drivePath=$1
-		validDrive=$(echo $drivePath | grep -c -e '^/dev/sd[a-z]$')
+
+		#if [ $(drivePathMustBeReal $drivePath) -ne 1 ] 
+		#then
+		#    echo ERROR: $drivePath' is not a valid drive path' 
+		#    exit 1 # terminate and indicate error
+		#fi
+
 		drive=$(echo $drivePath | grep -o 'sd[a-z]$')
 		partitionCount=$(grep -c -o $drive'[0-9]' /proc/partitions)
-
-		if [ $validDrive -ne 1 ]
-		then
-		    echo ERROR: $drivePath' is not a valid drive path' 
-		    exit 1 # terminate and indicate error
-		fi
-
 		if [ $partitionCount -ne 0 ]
 		then
 		    echo ERROR: $drivePath' has '$partitionCount' partitions. Delete them first before partitionning this drive' 
@@ -34,42 +74,70 @@
 			echo   # default - finish at end of disk 
 			echo w # write the partition table and quit
 			echo q # quit"
-			) | fdisk $1
-		#) | sudo fdisk $1
+		) | fdisk "/dev/$drivePath"
+		#) | sudo fdisk $drivePath
 
-		blkid : trouver uuid
-		mkfs.ntfs /dev/sdb1 -q : formater partition rapide
-		=> pleinds d'options, voir man
-
-		créer repertoire de montage
-		ajouter à /etc/fstab
-				
+		#Format new partition (/dev/sd.1) as ntfs.
+		newPartitionPath="/dev/"$drivePath"1"
+		mkfs.ntfs $newPartitionPath --fast --verbose --with-uuid -L "TheLabel"
+		
 	}
 
 	listPartitions() {
-		lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8
+
+		echo $(drivePathMustBeReal /dev/sda)
+
+		#lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8
 	}
 
 	deletePartitionsOnDrive() {
+
+		#Parameter must match "sd[a-z][1-9]"
+		drivePath=$1
+
+		#unmount all partitions of drive
+		
+
 		# this simulates manual inputs to fdisk
 		# A blank line (commented as "default" will send a empty line terminated with a newline to take the fdisk default.
 		(
 			echo o # clear the in memory partition table
 			echo w # write the partition table and quit
 			echo q # quit"
-			) | fdisk $1
+		) | fdisk "/dev/$1"
 		#) | sudo fdisk $1
 	}
 
 	createPartitionMountPoint() {
 		echo "createPartitionMountPoint $1"
+
+		#Parameter must match "sd[a-z][1-9]"
+		partitionName=$1
+
+		partitionUUID=$(lsblk -o NAME,UUID | grep $partitionName | cut -d ' ' -f2)
+
+		#Create mount directory
+		mkdir -p /laPlayStorageSpace/$partitionUUID
+
+		#ajouter à /etc/fstab avec le paramettre nofail pour que ca marche meme sans le disk
+		# voir man fstab
+		UUID=$partitionUUID    /mnt/$partitionUUID    ntfs-3g    default,nofail    0    2
+		
 	}
 
 	listPartitionMountPoints() {
+
 		lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8
 	}
 
 	deletePartitionMountPoint() {
+
+		targetFile="/home/julien.rocco/desktop/fstab"
+		lineToDelete=$(grep -n "00000000-2b99-4283-a5d9-2a942dd65e71" $targetFile | cut -d : -f1)
+		echo $lineToDelete
+		#sed -e $lineToDelete'd' $targetFile
+		sed -i -e 's/.*81164c31-2b99-4283-a5d9-2a942dd65e71.*//' $targetFile
+
 		echo "deletePartitionMountPoint $1"
 	}
 
