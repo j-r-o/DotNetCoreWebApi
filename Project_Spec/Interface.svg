@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="Interface.svg">
+  <defs
+     id="defs2">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5099">
+      <path
+         inkscape:connector-curvature="0"
+         d="M 0,0 H 512 V 512 H 0 Z"
+         id="path5101" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5099-0">
+      <path
+         inkscape:connector-curvature="0"
+         d="M 0,0 H 512 V 512 H 0 Z"
+         id="path5101-1" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506-8"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508-8"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5099-0-9">
+      <path
+         inkscape:connector-curvature="0"
+         d="M 0,0 H 512 V 512 H 0 Z"
+         id="path5101-1-6" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5099-04">
+      <path
+         inkscape:connector-curvature="0"
+         d="M 0,0 H 512 V 512 H 0 Z"
+         id="path5101-5" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506-8-3"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508-8-8"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506-8-3-4"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508-8-8-6"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506-8-1"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508-8-7"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506-8-1-9"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508-8-7-0"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506-8-1-9-4"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508-8-7-0-0"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3506-8-1-6"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3508-8-7-07"
+         d="M 0,0 H 512 V 512 H 0 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="643.74969"
+     inkscape:cy="800.18766"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       id="rect10"
+       width="66.699997"
+       height="109.2"
+       x="5.8208327"
+       y="10.000006"
+       style="stroke-width:0.34110147;fill:#efefff;fill-opacity:1" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.34748799;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528"
+       width="59.419178"
+       height="32.779179"
+       x="9.9779091"
+       y="30.488333" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.575001"
+       y="37.179173"
+       id="text4526"><tspan
+         sodipodi:role="line"
+         id="tspan4524"
+         x="28.575001"
+         y="37.179173"
+         style="font-size:4.23333311px;stroke-width:0.26458332">SS Name</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.045828"
+       y="43.793751"
+       id="text4532"><tspan
+         sodipodi:role="line"
+         id="tspan4530"
+         x="28.045828"
+         y="43.793751"
+         style="font-size:2.11666656px;stroke-width:0.26458332">80Go free out of 1To</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="15.090554"
+       y="49.345867"
+       id="text4532-7"><tspan
+         sodipodi:role="line"
+         id="tspan4530-6"
+         x="15.090554"
+         y="49.345867"
+         style="font-size:2.11666656px;stroke-width:0.26458332">/lpss/SSNameMain</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="41.913723"
+       y="49.47403"
+       id="text4532-7-0"><tspan
+         sodipodi:role="line"
+         id="tspan4530-6-0"
+         x="41.913723"
+         y="49.47403"
+         style="font-size:2.11666656px;stroke-width:0.26458332">/lpss/SSNameMirror</tspan></text>
+    <g
+       transform="matrix(0.01570463,0,0,-0.01570463,12.792821,39.781249)"
+       inkscape:label="Helveticons.58"
+       id="g5091">
+      <g
+         id="g5093" />
+      <g
+         id="g5095">
+        <g
+           clip-path="url(#clipPath5099)"
+           id="g5097">
+          <path
+             id="path5103"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 237.1631,424.375 -81.575,22.565 -119.117,-65.061 68.804,-32.178 z m 239.374,-42.496 -119.129,65.061 -81.576,-22.565 131.871,-74.674 z M 271.5801,256.913 V 64.887 l 146.047,84.302 v 66.551 l -67.317,-41.566 z m 15.061,10.508 66.678,-70.041 120.636,74.495 -65.73,65.742 z m -59.958,0.233 -121.569,70.175 -65.962,-65.954 120.638,-74.495 z M 94.8781,216.116 v -66.927 l 146.044,-84.302 v 191.371 l -78.138,-82.084 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="32.396473"
+       y="54.439095"
+       id="text4532-7-1"><tspan
+         sodipodi:role="line"
+         x="32.396473"
+         y="54.439095"
+         style="font-size:2.11666656px;stroke-width:0.26458332"
+         id="tspan8435">Synchronizing :</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="27.236061"
+       y="57.34383"
+       id="text4532-7-1-5"><tspan
+         sodipodi:role="line"
+         x="27.236061"
+         y="57.34383"
+         style="font-size:2.11666656px;stroke-width:0.26458332"
+         id="tspan8435-4">350 Mo left out of 500 Mo</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="31.673523"
+       y="60.197399"
+       id="text4532-7-1-5-9"><tspan
+         sodipodi:role="line"
+         x="31.673523"
+         y="60.197399"
+         style="font-size:2.11666656px;stroke-width:0.26458332"
+         id="tspan8435-4-2">~50 esconds left</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.34748799;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-0"
+       width="59.419178"
+       height="32.779179"
+       x="9.9779053"
+       y="64.974998" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.575008"
+       y="71.66584"
+       id="text4526-9"><tspan
+         sodipodi:role="line"
+         id="tspan4524-2"
+         x="28.575008"
+         y="71.66584"
+         style="font-size:4.23333311px;stroke-width:0.26458332">SS Name</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.045835"
+       y="78.280418"
+       id="text4532-9"><tspan
+         sodipodi:role="line"
+         id="tspan4530-7"
+         x="28.045835"
+         y="78.280418"
+         style="font-size:2.11666656px;stroke-width:0.26458332">80Go free out of 1To</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="15.09055"
+       y="83.832535"
+       id="text4532-7-9"><tspan
+         sodipodi:role="line"
+         id="tspan4530-6-9"
+         x="15.09055"
+         y="83.832535"
+         style="font-size:2.11666656px;stroke-width:0.26458332">/lpss/SSNameMain</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="41.913746"
+       y="83.960693"
+       id="text4532-7-0-4"><tspan
+         sodipodi:role="line"
+         id="tspan4530-6-0-4"
+         x="41.913746"
+         y="83.960693"
+         style="font-size:2.11666656px;stroke-width:0.26458332">/lpss/SSNameMirror</tspan></text>
+    <g
+       transform="matrix(0.01570463,0,0,-0.01570463,12.792825,74.267916)"
+       inkscape:label="Helveticons.58"
+       id="g5091-7">
+      <g
+         id="g5093-2" />
+      <g
+         id="g5095-4">
+        <g
+           clip-path="url(#clipPath5099-0)"
+           id="g5097-7">
+          <path
+             id="path5103-8"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 237.1631,424.375 -81.575,22.565 -119.117,-65.061 68.804,-32.178 z m 239.374,-42.496 -119.129,65.061 -81.576,-22.565 131.871,-74.674 z M 271.5801,256.913 V 64.887 l 146.047,84.302 v 66.551 l -67.317,-41.566 z m 15.061,10.508 66.678,-70.041 120.636,74.495 -65.73,65.742 z m -59.958,0.233 -121.569,70.175 -65.962,-65.954 120.638,-74.495 z M 94.8781,216.116 v -66.927 l 146.044,-84.302 v 191.371 l -78.138,-82.084 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="32.396484"
+       y="88.925758"
+       id="text4532-7-1-1"><tspan
+         sodipodi:role="line"
+         x="32.396484"
+         y="88.925758"
+         style="font-size:2.11666656px;stroke-width:0.26458332"
+         id="tspan8435-0">Synchronizing :</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="27.236067"
+       y="91.830498"
+       id="text4532-7-1-5-0"><tspan
+         sodipodi:role="line"
+         x="27.236067"
+         y="91.830498"
+         style="font-size:2.11666656px;stroke-width:0.26458332"
+         id="tspan8435-4-5">350 Mo left out of 500 Mo</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="31.673534"
+       y="94.684067"
+       id="text4532-7-1-5-9-0"><tspan
+         sodipodi:role="line"
+         x="31.673534"
+         y="94.684067"
+         style="font-size:2.11666656px;stroke-width:0.26458332"
+         id="tspan8435-4-2-3">~50 esconds left</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="26.19375"
+       y="17.864582"
+       id="text8555"><tspan
+         sodipodi:role="line"
+         id="tspan8553"
+         x="26.19375"
+         y="17.864582"
+         style="stroke-width:0.26458332">Dashboard</tspan></text>
+    <g
+       transform="matrix(0.01806826,0,0,-0.01806826,60.872005,29.999931)"
+       inkscape:label="Helveticons.4"
+       id="g3498">
+      <g
+         id="g3500" />
+      <g
+         id="g3502">
+        <g
+           clip-path="url(#clipPath3506)"
+           id="g3504">
+          <path
+             id="path3510"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 420.5918,297.7095 h -124.488 v 124.487 h -83.101 V 297.7095 H 88.5178 v -83.104 h 124.485 V 90.1175 h 83.101 v 124.488 h 124.488 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <rect
+       id="rect10-9"
+       width="66.699997"
+       height="109.2"
+       x="85.712502"
+       y="9.3020849"
+       style="fill:#efefff;fill-opacity:1;stroke-width:0.34110147" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.43402666;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4"
+       width="59.332638"
+       height="51.213474"
+       x="89.912849"
+       y="29.833683" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="94.443756"
+       y="35.6875"
+       id="text4526-5"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5"
+         x="94.443756"
+         y="35.6875"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Name :</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="99.206268"
+       y="16.637493"
+       id="text8555-2"><tspan
+         sodipodi:role="line"
+         id="tspan8553-2"
+         x="99.206268"
+         y="16.637493"
+         style="stroke-width:0.26458332">New storage space</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.13867824;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-9"
+       width="49.514877"
+       height="6.2650714"
+       x="94.084511"
+       y="38.681843" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="93.868172"
+       y="51.650639"
+       id="text4526-5-2"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0"
+         x="93.868172"
+         y="51.650639"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Main storage folder</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="94.041809"
+       y="67.076065"
+       id="text4526-5-2-7"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-8"
+         x="94.041809"
+         y="67.076065"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Mirror storage folder</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.13307215;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-9-1"
+       width="45.551735"
+       height="6.2706776"
+       x="94.037666"
+       y="53.887589" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.13421269;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-9-1-2"
+       width="46.344345"
+       height="6.269537"
+       x="93.773666"
+       y="69.498573" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.07326068px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 133.39157,54.945732 c 0.29304,0 2.72982,4.728202 2.72982,4.728202 l 2.67445,-4.728202 z"
+       id="path16290"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.07326068px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 134.56224,70.401871 c 0.29304,0 2.72982,4.728202 2.72982,4.728202 l 2.67445,-4.728202 z"
+       id="path16290-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       id="rect10-9-0"
+       width="66.699997"
+       height="109.2"
+       x="162.97084"
+       y="9.5666685"
+       style="fill:#efefff;fill-opacity:1;stroke-width:0.34110147" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.35709161;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-8"
+       width="59.409573"
+       height="34.621658"
+       x="167.13272"
+       y="30.059797" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="171.70209"
+       y="35.95208"
+       id="text4526-5-7"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-8"
+         x="171.70209"
+         y="35.95208"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Name :</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="176.4646"
+       y="16.902077"
+       id="text8555-2-7"><tspan
+         sodipodi:role="line"
+         id="tspan8553-2-8"
+         x="176.4646"
+         y="16.902077"
+         style="stroke-width:0.26458332">New storage folder</tspan></text>
+    <g
+       transform="matrix(0.01806826,0,0,-0.01806826,217.49728,61.654755)"
+       inkscape:label="Helveticons.4"
+       id="g3498-9-7">
+      <g
+         id="g3500-8-51" />
+      <g
+         id="g3502-0-4">
+        <g
+           clip-path="url(#clipPath3506-8-1)"
+           id="g3504-9-1">
+          <path
+             id="path3510-5-1"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 420.5918,297.7095 h -124.488 v 124.487 h -83.101 V 297.7095 H 88.5178 v -83.104 h 124.485 V 90.1175 h 83.101 v 124.488 h 124.488 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.13867824;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-9-2"
+       width="49.514881"
+       height="6.2650714"
+       x="171.34285"
+       y="38.946426" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="171.12651"
+       y="51.915222"
+       id="text4526-5-2-5"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2"
+         x="171.12651"
+         y="51.915222"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Partition</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.13268973;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-9-1-1"
+       width="45.287533"
+       height="6.27106"
+       x="171.29581"
+       y="54.151981" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.07326068px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 210.12073,55.210315 c 0.29304,0 2.72982,4.728202 2.72982,4.728202 l 2.67445,-4.728202 z"
+       id="path16290-57"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="94.948212"
+       y="58.599049"
+       id="text4526-5-2-72"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-1"
+         x="94.948212"
+         y="58.599049"
+         style="font-size:4.23333311px;stroke-width:0.26458332">/lpss/main1 (1To)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="93.887802"
+       y="74.209465"
+       id="text4526-5-2-72-3"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-1-2"
+         x="93.887802"
+         y="74.209465"
+         style="font-size:4.23333311px;stroke-width:0.26458332">/lpss/mirror1 (1To)</tspan></text>
+    <g
+       transform="matrix(0.01806826,0,0,-0.01806826,139.86312,61.651229)"
+       inkscape:label="Helveticons.4"
+       id="g3498-9-7-4">
+      <g
+         id="g3500-8-51-1" />
+      <g
+         id="g3502-0-4-3">
+        <g
+           clip-path="url(#clipPath3506-8-1-9)"
+           id="g3504-9-1-1">
+          <path
+             id="path3510-5-1-1"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 420.5918,297.7095 h -124.488 v 124.487 h -83.101 V 297.7095 H 88.5178 v -83.104 h 124.485 V 90.1175 h 83.101 v 124.488 h 124.488 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="matrix(0.01806826,0,0,-0.01806826,139.86313,77.26165)"
+       inkscape:label="Helveticons.4"
+       id="g3498-9-7-4-5">
+      <g
+         id="g3500-8-51-1-3" />
+      <g
+         id="g3502-0-4-3-6">
+        <g
+           clip-path="url(#clipPath3506-8-1-9-4)"
+           id="g3504-9-1-1-3">
+          <path
+             id="path3510-5-1-1-9"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 420.5918,297.7095 h -124.488 v 124.487 h -83.101 V 297.7095 H 88.5178 v -83.104 h 124.485 V 90.1175 h 83.101 v 124.488 h 124.488 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="173.35692"
+       y="58.540134"
+       id="text4526-5-2-5-5"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-0"
+         x="173.35692"
+         y="58.540134"
+         style="font-size:4.23333311px;stroke-width:0.26458332">/dev/sdb1 (1To)</tspan></text>
+    <rect
+       id="rect10-9-0-8"
+       width="66.699997"
+       height="109.2"
+       x="235.99583"
+       y="9.5666685"
+       style="fill:#efefff;fill-opacity:1;stroke-width:0.34110147" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.296435;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-8-5"
+       width="59.47023"
+       height="23.834396"
+       x="240.1274"
+       y="39.554478" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="249.48959"
+       y="16.902077"
+       id="text8555-2-7-2"><tspan
+         sodipodi:role="line"
+         id="tspan8553-2-8-4"
+         x="249.48959"
+         y="16.902077"
+         style="stroke-width:0.26458332">New partition</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="244.27446"
+       y="46.62355"
+       id="text4526-5-2-5-9"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6"
+         x="244.27446"
+         y="46.62355"
+         style="font-size:4.23333311px;stroke-width:0.26458332">/dev/sdb (1To)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="243.84451"
+       y="53.971951"
+       id="text4526-5-2-5-9-8"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-5"
+         x="243.84451"
+         y="53.971951"
+         style="font-size:4.23333311px;stroke-width:0.26458332">UUID : 987ezr654df98</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="243.79904"
+       y="60.193794"
+       id="text4526-5-2-5-9-8-1"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-5-2"
+         x="243.79904"
+         y="60.193794"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Label : Drive1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="242.07831"
+       y="25.926105"
+       id="text4526-5-2-5-9-0"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-6"
+         x="242.07831"
+         y="25.926105"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Select a drive</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="240.97958"
+       y="31.876129"
+       id="text4526-5-2-5-9-0-9"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-6-8"
+         x="240.97958"
+         y="31.876129"
+         style="font-size:4.23333311px;stroke-width:0.26458332">One partiion willbe created</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="240.77185"
+       y="37.038609"
+       id="text4526-5-2-5-9-0-9-5"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-6-8-1"
+         x="240.77185"
+         y="37.038609"
+         style="font-size:4.23333311px;stroke-width:0.26458332">with entire space</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.296435;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-8-5-3"
+       width="59.47023"
+       height="23.834396"
+       x="240.1274"
+       y="65.505539" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="244.27446"
+       y="72.574615"
+       id="text4526-5-2-5-9-3"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-57"
+         x="244.27446"
+         y="72.574615"
+         style="font-size:4.23333311px;stroke-width:0.26458332">/dev/sdc (1To)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="243.84451"
+       y="79.923012"
+       id="text4526-5-2-5-9-8-0"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-5-8"
+         x="243.84451"
+         y="79.923012"
+         style="font-size:4.23333311px;stroke-width:0.26458332">UUID : 987ezr654df98</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="243.79904"
+       y="86.144859"
+       id="text4526-5-2-5-9-8-1-0"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-5-2-0"
+         x="243.79904"
+         y="86.144859"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Label : Drive2</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.49803922;stroke:#7f7f7f;stroke-width:0.296435;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4528-4-8-5-3-1"
+       width="59.47023"
+       height="23.834396"
+       x="240.12741"
+       y="91.985771" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="244.27448"
+       y="99.054848"
+       id="text4526-5-2-5-9-3-2"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-57-7"
+         x="244.27448"
+         y="99.054848"
+         style="font-size:4.23333311px;stroke-width:0.26458332">/dev/sdd (1To)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="243.84454"
+       y="106.40324"
+       id="text4526-5-2-5-9-8-0-2"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-5-8-0"
+         x="243.84454"
+         y="106.40324"
+         style="font-size:4.23333311px;stroke-width:0.26458332">UUID : 987ezr654df98</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="243.79907"
+       y="112.62508"
+       id="text4526-5-2-5-9-8-1-0-2"><tspan
+         sodipodi:role="line"
+         id="tspan4524-5-0-2-6-5-2-0-7"
+         x="243.79907"
+         y="112.62508"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Label : Drive3</tspan></text>
+  </g>
+</svg>
