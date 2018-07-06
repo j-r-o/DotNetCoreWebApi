@@ -21,9 +21,9 @@ namespace LaPlay.Api.Sources.Tools
         }
 
         
-        public var listFreeSpaces()
+        public void listFreeSpaces()
         {
-            return new {Drive = "/dev/sda", FreeSpace = 12345698}; 
+            //return new {Drive = "/dev/sda", FreeSpace = 12345698}; 
         }
 
         public void createPartitionWithFreeSpace(String drive)

@@ -96,7 +96,7 @@
 		drivePath=$1
 
 		#unmount all partitions of drive
-		
+		umount "/dev/"$1
 
 		# this simulates manual inputs to fdisk
 		# A blank line (commented as "default" will send a empty line terminated with a newline to take the fdisk default.
@@ -118,6 +118,9 @@
 
 		#Create mount directory
 		mkdir -p /laPlayStorageSpace/$partitionUUID
+		#set owner
+		#set group
+		#set rights
 
 		#ajouter à /etc/fstab avec le paramettre nofail pour que ca marche meme sans le disk
 		# voir man fstab
