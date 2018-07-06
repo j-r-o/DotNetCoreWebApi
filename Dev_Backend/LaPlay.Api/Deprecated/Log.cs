@@ -6,7 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 
-namespace LaPlay.Sources.Log
+namespace Deprecated
 {
     public class Log : ILog
     {

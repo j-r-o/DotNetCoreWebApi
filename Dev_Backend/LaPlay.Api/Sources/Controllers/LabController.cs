@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using LaPlay.Sources.Labo;
-using LaPlay.Sources.Log;
 
 namespace LaPlay.Api.Sources.Controllers
 {

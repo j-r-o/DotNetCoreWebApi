@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
 using Moq;
 
-namespace LaPlay.Sources.Log
+namespace Deprecated
 {
     public class LogTest
     {
