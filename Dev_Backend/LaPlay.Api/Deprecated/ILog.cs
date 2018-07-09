@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LaPlay.Sources.Log
+namespace Deprecated
 {
     public interface ILog
     {

@@ -17,7 +17,7 @@ namespace LaPlay.Api.Sources.Tools
         public string RunCommand(String command)
         {
             var escapedArgs = command.Replace("\"", "\\\"");
-            
+
             var process = new Process()
             {
                 StartInfo = new ProcessStartInfo
@@ -35,6 +35,6 @@ namespace LaPlay.Api.Sources.Tools
             return result;
         }
 
-        
+
     }
 }

@@ -5,34 +5,32 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-using LaPlay.Sources.Log;
+//using LaPlay.Sources.Log;
 
 namespace LaPlay.Api.Sources.Tools
 {
     public class DriveManagerCompanion
     {
-        private readonly ILog _logs;
+        //private readonly ILog _logs;
         private readonly IBashRunner _bashRunner;
 
-        public DriveManagerCompanion(ILog logs, IBashRunner bashRunner)
+        public DriveManagerCompanion(/*ILog logs, */IBashRunner bashRunner)
         {
-            _logs = logs;
+            //_logs = logs;
             _bashRunner = bashRunner;
         }
 
-        
-        //list drive and partitions (-I 8 : filter MAJ)
-        //lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8
+        public String listBlockDevices()
+        {
+            //list drives and partitions (-J : json output, -I 8 : disks and partitions only)
+            String blockDevicesAsJson = _bashRunner.RunCommand("lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8");
+            //dynamic data = Json.Decode(blockDevicesAsJson);
+            return "";
+        }
 
-        //convert command result : from spaces separated values to coma separated values
-        //df -h | tr -s ' ' | cut -d ' ' -f 1- --output-delimiter "," 
-
-
-
-        
         public void createPartition(String drive)
         {
-            
+
         }
 
         public void listPartitions()
@@ -41,7 +39,7 @@ namespace LaPlay.Api.Sources.Tools
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void deletePartition(String partition)
         {
@@ -59,9 +57,11 @@ namespace LaPlay.Api.Sources.Tools
                                   +") | sudo fdisk /dev/" + partition);
             }
 
-        public void createPartitionMountPoint(String partition, String mountFolderName)
+        public void createPartitionMountPoint(String partitionLabel, String mountFolderName)
         {
-
+            //#ajouter à /etc/fstab avec le paramettre nofail pour que ca marche meme sans le disk
+    		//# voir man fstab
+    		//"LABEL=" + partitionLabel + "    /mnt/" + mountFolderName + "    ntfs-3g    default,nofail    0    2"
         }
 
         public void listPartitionMountPoints()
@@ -69,9 +69,13 @@ namespace LaPlay.Api.Sources.Tools
 
         }
 
-        public void deletePartitionMountPoint(String partition, String mountFolderName)
+        public void deletePartitionMountPoint(String partitionLabel)
         {
-
+            //targetFile="/home/julien.rocco/desktop/fstab"
+    		//lineToDelete=$(grep -n "partitionLabel" $targetFile | cut -d : -f1)
+    		//echo $lineToDelete
+    		//#sed -e $lineToDelete'd' $targetFile
+    		//sed -i -e 's/.*81164c31-2b99-4283-a5d9-2a942dd65e71.*//' $targetFile
         }
     }
 }

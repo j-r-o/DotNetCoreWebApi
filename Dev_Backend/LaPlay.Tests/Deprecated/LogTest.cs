@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
-using LaPlay.Sources.Log;
+//using LaPlay.Sources.Log;
 using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
 using Moq;
@@ -70,31 +70,31 @@ namespace Deprecated
                 ).ToList();
             }
 
-            [Fact]
+            
             public void sameLists_ShouldReturnTrueOneEmptyLists()
             {
                 Assert.True(SameLists(new List<String>(),new List<String>()));
             }
 
-            [Fact]
+            
             public void sameLists_ShouldReturnTrueOneSameLists()
             {
                 Assert.True(SameLists(new List<String>(){"a", "c", "b"}, new List<String>(){"b", "a", "c"}));
             }
 
-            [Fact]
+            
             public void sameLists_ShouldReturnFalseOnListsWithDifferentSizes()
             {
                 Assert.False(SameLists(new List<String>(){"a", "b"}, new List<String>(){"b", "a", "c"}));
             }
 
-            [Fact]
+            
             public void sameLists_ShouldReturnFalseOnDifferentLists()
             {
                 Assert.False(SameLists(new List<String>(){"a", "b", "d"}, new List<String>(){"b", "a", "c"}));
             }
 
-            [Fact]
+            //[Fact]
             public void generateRandomString_shouldSucceed()
             {
                 //Prepare sample and statistics
@@ -112,7 +112,7 @@ namespace Deprecated
                 Assert.True(0.9 * 32767 <= averageASCIICharacterCode && averageASCIICharacterCode <= 1.1 * 32767);
             }
 
-            [Fact]
+            //[Fact]
             public void prepareThreadsForLogStress_shouldSucceed()
             {
                 var mockedLog = new Mock<ILog>();
@@ -140,7 +140,7 @@ namespace Deprecated
         }
 
         //dotnet test --filter "FullyQualifiedName=LaPlay.Sources.Log.LogTest.productionDeveloppement_shouldLogOnOwnLevel"
-        [Fact]
+        //[Fact]
         public void productionDeveloppement_shouldLogOnOwnLevel()
         {
             Console.WriteLine("========================");

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using LaPlay.Sources.Labo;
+//using LaPlay.Sources.Labo;
 
 namespace LaPlay.Api.Sources.Controllers
 {
@@ -12,13 +12,10 @@ namespace LaPlay.Api.Sources.Controllers
     [ApiController]
     public class LabController : ControllerBase
     {
-        private Labo _lab;
+        //private Labo _lab;
 
-        private ILog _log;
-
-        public LabController(ILog log){
-            _lab = new Labo(log);
-            _log = log;
+        public LabController(){
+            //_lab = new Labo(log);
         }
 
         // api/lab/logBench
@@ -37,7 +34,7 @@ namespace LaPlay.Api.Sources.Controllers
 
             for(int i = 0; i < 100000; i++){
 
-                _log.Developpement(logs[i]);
+                //_log.Developpement(logs[i]);
             }
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -54,7 +51,8 @@ namespace LaPlay.Api.Sources.Controllers
         [HttpGet("drives")]
         public ActionResult<string> drives()
         {
-            return _lab.drives();
+            //return _lab.drives();
+            return null;
         }
 
         // api/lab/bash
@@ -64,9 +62,10 @@ namespace LaPlay.Api.Sources.Controllers
             string cmd = "lsblk -J -o NAME,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTLABEL,PARTUUID,TYPE,MAJ:MIN -I 8";
 
             // LaPlay.Api.Sources.Tools.Tools.Bash("lsblk -o \"NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID\"");
-            Console.WriteLine(_lab.Bash(cmd));
+            //Console.WriteLine(_lab.Bash(cmd));
 
-            return (_lab.Bash(cmd));
+            //return (_lab.Bash(cmd));
+            return null;
         }
     }
 }

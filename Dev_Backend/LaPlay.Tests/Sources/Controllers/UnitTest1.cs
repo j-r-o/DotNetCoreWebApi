@@ -32,7 +32,7 @@ namespace Api.tests
             
 
             // Assert
-            Assert.Equal("OK OK", responseString);
+            Assert.Equal("4654", responseString);
         }
     }
 }

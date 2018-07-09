@@ -5,25 +5,25 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-using LaPlay.Sources.Log;
+
 
 namespace LaPlay.Api.Sources.Tools
 {
     public class DriveManager
     {
-        private readonly ILog _logs;
+        //private readonly ILog _logs;
         private readonly IBashRunner _bashRunner;
 
-        public DriveManager(ILog logs, IBashRunner bashRunner)
+        public DriveManager(/*ILog logs, */IBashRunner bashRunner)
         {
-            _logs = logs;
+            //_logs = logs;
             _bashRunner = bashRunner;
         }
 
-        
+
         public void listFreeSpaces()
         {
-            //return new {Drive = "/dev/sda", FreeSpace = 12345698}; 
+            //return new {Drive = "/dev/sda", FreeSpace = 12345698};
         }
 
         public void createPartitionWithFreeSpace(String drive)
@@ -42,9 +42,11 @@ namespace LaPlay.Api.Sources.Tools
 
         }
 
-        public void createMountPointForPartition(String partition, String mountFolderName)
+        public void createMountPointForPartition(String partitionLabel, String mountFolderName)
         {
-
+            //#ajouter à /etc/fstab avec le paramettre nofail pour que ca marche meme sans le disk
+    		//# voir man fstab
+    		//"LABEL=" + partitionLabel + "    /mnt/" + mountFolderName + "    ntfs-3g    default,nofail    0    2"
         }
 
         public void deleteMountPointForPartition(String partition, String mountFolderName)

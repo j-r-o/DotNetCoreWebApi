@@ -5,17 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-using LaPlay.Sources.Log;
+//using LaPlay.Sources.Log;
 
 namespace LaPlay.Sources.Labo
 {
     public class Labo
     {
-        private readonly ILog _logs;
+        //private readonly ILog _logs;
 
-        public Labo(ILog logs)
+        public Labo(/*ILog logs*/)
         {
-            _logs = logs;
+            //_logs = logs;
         }
 
         

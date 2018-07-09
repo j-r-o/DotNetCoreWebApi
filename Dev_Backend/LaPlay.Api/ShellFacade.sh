@@ -31,7 +31,7 @@
 	drivePathMustBeReal() {
 
 		drivePath="$1"
-		
+
 		#Return 1 if drivePath is in diskPaths, 0 otherwise
 		echo $(listDiskPaths | grep -c -e "$drivePath")
 	}
@@ -40,7 +40,7 @@
 
 		echo "driveMustHaveNoPartition"
 	}
-		
+
 
 #=================================   CORE    ==================================
 
@@ -49,9 +49,9 @@
 		#Parameter must be somthing like "sd[a-z]"
 		drivePath=$1
 
-		#if [ $(drivePathMustBeReal $drivePath) -ne 1 ] 
+		#if [ $(drivePathMustBeReal $drivePath) -ne 1 ]
 		#then
-		#    echo ERROR: $drivePath' is not a valid drive path' 
+		#    echo ERROR: $drivePath' is not a valid drive path'
 		#    exit 1 # terminate and indicate error
 		#fi
 
@@ -59,7 +59,7 @@
 		partitionCount=$(grep -c -o $drive'[0-9]' /proc/partitions)
 		if [ $partitionCount -ne 0 ]
 		then
-		    echo ERROR: $drivePath' has '$partitionCount' partitions. Delete them first before partitionning this drive' 
+		    echo ERROR: $drivePath' has '$partitionCount' partitions. Delete them first before partitionning this drive'
 		    exit 1 # terminate and indicate error
 		fi
 
@@ -70,8 +70,8 @@
 			echo n # new partition
 			echo p # primary partition
 			echo   # default - partition number 1
-			echo   # default - start at beginning of disk 
-			echo   # default - finish at end of disk 
+			echo   # default - start at beginning of disk
+			echo   # default - finish at end of disk
 			echo w # write the partition table and quit
 			echo q # quit"
 		) | fdisk "/dev/$drivePath"
@@ -80,7 +80,7 @@
 		#Format new partition (/dev/sd.1) as ntfs.
 		newPartitionPath="/dev/"$drivePath"1"
 		mkfs.ntfs $newPartitionPath --fast --verbose --with-uuid -L "TheLabel"
-		
+
 	}
 
 	listPartitions() {
@@ -125,7 +125,7 @@
 		#ajouter à /etc/fstab avec le paramettre nofail pour que ca marche meme sans le disk
 		# voir man fstab
 		UUID=$partitionUUID    /mnt/$partitionUUID    ntfs-3g    default,nofail    0    2
-		
+
 	}
 
 	listPartitionMountPoints() {
@@ -145,7 +145,7 @@
 	}
 
 #=================================   MENU   ===================================
-	
+
 	usage() {
 		echo "Usage: ./ShellFacade -f <fonction> [-p <parameters>]"
 		echo "  -f  name of function to run"
@@ -160,7 +160,7 @@
 		echo "	ex : ./ShellFacade -f listPartitions"
 		echo ""
 		echo "  deletePartitionsOnDrive(path)"
-		echo "	ex : ./ShellFacade -f deletePartitionsOnDrive -p /dev/sda1"
+		echo "	ex : ./ShellFacade -f deletePartitionsOnDrive -p /dev/sdb1"
 		echo ""
 		echo "  createPartitionMountPoint(path)"
 		echo "	ex : ./ShellFacade -f createPartitionMountPoint -p /dev/sda1,/mnt/sda1"
@@ -183,10 +183,22 @@
 
 	case $function in
 		createPartitionOnDrive		) createPartitionOnDrive $parameters;;
-		listPartitions			) listPartitions;;
+		listPartitions				) listPartitions;;
 		deletePartitionsOnDrive		) deletePartitionsOnDrive $parameters;;
 		createPartitionMountPoint	) createPartitionMountPoint $parameters;;
 		listPartitionMountPoints	) listPartitionMountPoints;;
 		deletePartitionMountPoint	) deletePartitionMountPoint $parameters;;
-		*				) usage;; 
+		*							) usage;;
 	esac
+
+#sudo ./ShellFacade.sh -f createPartitionOnDrive -p sdb
+# umount does not work if drive is busy
+#sudo umount /dev/sdb?*
+#sudo wipefs -a -f /dev/sdb
+#lsblk
+#sudo fdisk /dev/sdb
+
+
+
+#convert command result : from spaces separated values to coma separated values
+#df -h | tr -s ' ' | cut -d ' ' -f 1- --output-delimiter ","
