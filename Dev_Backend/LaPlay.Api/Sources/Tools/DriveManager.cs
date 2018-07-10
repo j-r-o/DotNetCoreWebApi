@@ -5,18 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-
-
 namespace LaPlay.Api.Sources.Tools
 {
     public class DriveManager
     {
-        //private readonly ILog _logs;
         private readonly IBashRunner _bashRunner;
 
-        public DriveManager(/*ILog logs, */IBashRunner bashRunner)
+        public DriveManager(IBashRunner bashRunner)
         {
-            //_logs = logs;
             _bashRunner = bashRunner;
         }
 
@@ -44,9 +40,8 @@ namespace LaPlay.Api.Sources.Tools
 
         public void createMountPointForPartition(String partitionLabel, String mountFolderName)
         {
-            //#ajouter à /etc/fstab avec le paramettre nofail pour que ca marche meme sans le disk
-    		//# voir man fstab
-    		//"LABEL=" + partitionLabel + "    /mnt/" + mountFolderName + "    ntfs-3g    default,nofail    0    2"
+            
+
         }
 
         public void deleteMountPointForPartition(String partition, String mountFolderName)

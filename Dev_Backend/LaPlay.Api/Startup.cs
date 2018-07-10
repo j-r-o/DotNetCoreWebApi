@@ -15,12 +15,21 @@ namespace Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
 
-        public IConfiguration Configuration { get; }
+            var b = Configuration.GetSection("StorageSpaces");
+            var StorageSpaces = configuration["StorageSpaces"];
+
+            IEnumerable<string> StorageSpaces2 = configuration.GetSection("StorageSpaces").GetChildren().Select(x => x.Value);
+
+            IEnumerable<string> users = configuration.GetSection("Auth:Users").GetChildren().Select(x => x.Value);
+
+            Console.WriteLine("#");
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

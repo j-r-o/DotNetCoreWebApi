@@ -21,7 +21,7 @@ namespace Api
             try
             {
                 logger.Debug("init main");
-                CreateWebHostBuilder(args).Build().Run();
+                buildWebHost(args).Run();
             }
             catch (Exception ex)
             {
@@ -36,7 +36,77 @@ namespace Api
             }
         }
 
+        public static IWebHost buildWebHost(string[] args)
+        {
+            IConfigurationRoot configurationBuilder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false, true)
+                .AddCommandLine(args)
+                .Build();
+
+            IWebHostBuilder webHostBuilder = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(configurationBuilder)
+                
+                // .ConfigureServices(
+                //     servicesCollection =>
+                //     {
+                //         servicesCollection.AddSingleton<ICustomClass>(new CustomClass()
+                //         {
+                //             MyInt = myInt,
+                //             MyString = myString
+                //         });
+                //     })
+                .UseStartup<Startup>()
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                })
+                .UseNLog();  // NLog: setup NLog for Dependency injection;
+
+                return webHostBuilder.Build();
+
+            // return new WebHostBuilder()
+            // .UseKestrel()
+            // .UseContentRoot(Directory.GetCurrentDirectory())
+            // .ConfigureAppConfiguration((builderContext, config) =>
+            // {
+            //     IHostingEnvironment env = builderContext.HostingEnvironment;
+
+            //     config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+            // })
+            // .UseIISIntegration()
+            // .UseDefaultServiceProvider((context, options) =>
+            // {
+            //     options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+            // })
+            // .UseStartup<Startup>()
+            // .Build();
+
+
+            // public Startup(IHostingEnvironment env)
+            // {
+            //     var builder = new ConfigurationBuilder()
+            //         .SetBasePath(env.ContentRootPath)
+            //         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+            //         .AddJsonFile($"config/myConfig.json", optional: false, reloadOnChange: true)
+            //         .AddEnvironmentVariables();
+            //     Configuration = builder.Build();
+            // }
+
+
+
+            //https://stackoverflow.com/questions/37365277/how-to-specify-the-port-an-asp-net-core-application-is-hosted-on
+            //https://andrewlock.net/configuring-urls-with-kestrel-iis-and-iis-express-with-asp-net-core/
+            //https://andrewlock.net/reloading-strongly-typed-options-when-appsettings-change-in-asp-net-core-rc2/
+        }
+
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .ConfigureLogging(logging =>
