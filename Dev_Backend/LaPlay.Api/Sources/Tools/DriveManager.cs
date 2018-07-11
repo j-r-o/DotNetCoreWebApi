@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-namespace LaPlay.Api.Sources.Tools
+namespace LaPlay.Tools
 {
     public class DriveManager
     {

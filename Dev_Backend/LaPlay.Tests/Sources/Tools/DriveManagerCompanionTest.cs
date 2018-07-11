@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
 using Moq;
 
-namespace LaPlay.Api.Sources.Tools
+namespace LaPlay.Tools
 {
     public class DriveManagerCompanionTest
     {

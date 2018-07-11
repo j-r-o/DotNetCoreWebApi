@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using LaPlay.Api.Sources.Tools;
+using LaPlay.Tools;
+using LaPlay.AppData;
 
 using Microsoft.Extensions.Logging;
 
-namespace LaPlay.Api.Sources.Controllers
+namespace LaPlay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,12 +17,12 @@ namespace LaPlay.Api.Sources.Controllers
     {
         private readonly ILogger<v1Controller> _logger;
 
-        public v1Controller(ILogger<v1Controller> logger)
+        public v1Controller(ILogger<v1Controller> logger, IAppData appData)
         {
             _logger = logger;
         }
 
-        // api/v1/route/XXXXX
+        // /api/v1/route/XXXXX
         [HttpGet("route/{id}")]
         public string Get(string id)
         {

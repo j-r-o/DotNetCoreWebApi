@@ -58,3 +58,117 @@
 2018-07-10 17:35:39.4961 Info Adding target File Target[ownFile-web]
 2018-07-10 17:35:39.5042 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
 2018-07-10 17:35:39.5184 Info Found 45 configuration items
+2018-07-11 11:12:25.8779 Info Message Template Auto Format enabled
+2018-07-11 11:12:25.8868 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 11:12:25.9903 Info Adding target File Target[allfile]
+2018-07-11 11:12:26.0280 Info Adding target File Target[ownFile-web]
+2018-07-11 11:12:26.0356 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 11:12:26.0483 Info Found 45 configuration items
+2018-07-11 11:32:05.0824 Info Message Template Auto Format enabled
+2018-07-11 11:32:05.0941 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 11:32:05.2009 Info Adding target File Target[allfile]
+2018-07-11 11:32:05.2356 Info Adding target File Target[ownFile-web]
+2018-07-11 11:32:05.2432 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 11:32:05.2566 Info Found 45 configuration items
+2018-07-11 11:36:52.9792 Info Message Template Auto Format enabled
+2018-07-11 11:36:52.9876 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 11:36:53.0957 Info Adding target File Target[allfile]
+2018-07-11 11:36:53.1306 Info Adding target File Target[ownFile-web]
+2018-07-11 11:36:53.1396 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 11:36:53.1522 Info Found 45 configuration items
+2018-07-11 11:54:08.0965 Info Message Template Auto Format enabled
+2018-07-11 11:54:08.1051 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 11:54:08.2230 Info Adding target File Target[allfile]
+2018-07-11 11:54:08.2587 Info Adding target File Target[ownFile-web]
+2018-07-11 11:54:08.2656 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 11:54:08.2780 Info Found 45 configuration items
+2018-07-11 11:58:16.1648 Info Message Template Auto Format enabled
+2018-07-11 11:58:16.1748 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 11:58:16.2750 Info Adding target File Target[allfile]
+2018-07-11 11:58:16.3063 Info Adding target File Target[ownFile-web]
+2018-07-11 11:58:16.3138 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 11:58:16.3265 Info Found 45 configuration items
+2018-07-11 12:18:48.3356 Info Message Template Auto Format enabled
+2018-07-11 12:18:48.3453 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:18:48.4582 Info Adding target File Target[allfile]
+2018-07-11 12:18:48.4970 Info Adding target File Target[ownFile-web]
+2018-07-11 12:18:48.5071 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:18:48.5208 Info Found 45 configuration items
+2018-07-11 12:25:30.4217 Info Message Template Auto Format enabled
+2018-07-11 12:25:30.4323 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:25:30.5380 Info Adding target File Target[allfile]
+2018-07-11 12:25:30.5781 Info Adding target File Target[ownFile-web]
+2018-07-11 12:25:30.5854 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:25:30.5981 Info Found 45 configuration items
+2018-07-11 12:36:42.0106 Info Message Template Auto Format enabled
+2018-07-11 12:36:42.0221 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:36:42.1335 Info Adding target File Target[allfile]
+2018-07-11 12:36:42.1667 Info Adding target File Target[ownFile-web]
+2018-07-11 12:36:42.1746 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:36:42.1879 Info Found 45 configuration items
+2018-07-11 12:39:43.6004 Info Message Template Auto Format enabled
+2018-07-11 12:39:43.6102 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:39:43.7252 Info Adding target File Target[allfile]
+2018-07-11 12:39:43.7659 Info Adding target File Target[ownFile-web]
+2018-07-11 12:39:43.7732 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:39:43.7876 Info Found 45 configuration items
+2018-07-11 12:43:37.8628 Info Message Template Auto Format enabled
+2018-07-11 12:43:37.8747 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:43:37.9806 Info Adding target File Target[allfile]
+2018-07-11 12:43:38.0130 Info Adding target File Target[ownFile-web]
+2018-07-11 12:43:38.0205 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:43:38.0334 Info Found 45 configuration items
+2018-07-11 12:46:39.0213 Info Message Template Auto Format enabled
+2018-07-11 12:46:39.0303 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:46:39.1355 Info Adding target File Target[allfile]
+2018-07-11 12:46:39.1704 Info Adding target File Target[ownFile-web]
+2018-07-11 12:46:39.1780 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:46:39.1911 Info Found 45 configuration items
+2018-07-11 12:51:12.8684 Info Message Template Auto Format enabled
+2018-07-11 12:51:12.8776 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:51:12.9799 Info Adding target File Target[allfile]
+2018-07-11 12:51:13.0149 Info Adding target File Target[ownFile-web]
+2018-07-11 12:51:13.0219 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:51:13.0350 Info Found 45 configuration items
+2018-07-11 12:56:57.0999 Info Message Template Auto Format enabled
+2018-07-11 12:56:57.1117 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:56:57.2262 Info Adding target File Target[allfile]
+2018-07-11 12:56:57.2602 Info Adding target File Target[ownFile-web]
+2018-07-11 12:56:57.2682 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:56:57.2813 Info Found 45 configuration items
+2018-07-11 12:57:36.3281 Info Message Template Auto Format enabled
+2018-07-11 12:57:36.3386 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:57:36.4427 Info Adding target File Target[allfile]
+2018-07-11 12:57:36.4804 Info Adding target File Target[ownFile-web]
+2018-07-11 12:57:36.4896 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:57:36.5071 Info Found 45 configuration items
+2018-07-11 12:59:15.9843 Info Message Template Auto Format enabled
+2018-07-11 12:59:15.9928 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 12:59:16.1068 Info Adding target File Target[allfile]
+2018-07-11 12:59:16.1520 Info Adding target File Target[ownFile-web]
+2018-07-11 12:59:16.1610 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 12:59:16.1766 Info Found 45 configuration items
+2018-07-11 13:02:15.5711 Info Message Template Auto Format enabled
+2018-07-11 13:02:15.5795 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 13:02:15.6793 Info Adding target File Target[allfile]
+2018-07-11 13:02:15.7145 Info Adding target File Target[ownFile-web]
+2018-07-11 13:02:15.7224 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 13:02:15.7352 Info Found 45 configuration items
+2018-07-11 13:04:17.3546 Info Message Template Auto Format enabled
+2018-07-11 13:04:17.3639 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 13:04:17.4883 Info Adding target File Target[allfile]
+2018-07-11 13:04:17.5264 Info Adding target File Target[ownFile-web]
+2018-07-11 13:04:17.5344 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 13:04:17.5487 Info Found 45 configuration items
+2018-07-11 13:05:50.7145 Info Message Template Auto Format enabled
+2018-07-11 13:05:50.7245 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 13:05:50.8422 Info Adding target File Target[allfile]
+2018-07-11 13:05:50.8785 Info Adding target File Target[ownFile-web]
+2018-07-11 13:05:50.8863 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 13:05:50.9005 Info Found 45 configuration items
+2018-07-11 13:07:06.4907 Info Message Template Auto Format enabled
+2018-07-11 13:07:06.4996 Info Loading assembly: NLog.Web.AspNetCore
+2018-07-11 13:07:06.6071 Info Adding target File Target[allfile]
+2018-07-11 13:07:06.6411 Info Adding target File Target[ownFile-web]
+2018-07-11 13:07:06.6482 Info Configured from an XML element in /home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/bin/Debug/netcoreapp2.1/nlog.config...
+2018-07-11 13:07:06.6611 Info Found 45 configuration items

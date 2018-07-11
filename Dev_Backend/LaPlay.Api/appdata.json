@@ -1,15 +1,11 @@
 {
     "StorageSpaces": [{
-        "StorageSpace":{
             "Name":"SS1",
             "MainFolder":"/mnt/SS1Main",
             "MirrorFolder":"/mnt/SS1Mirror"
-        }
         }, {
-            "StorageSpace":{
-                "Name":"SS2",
-                "MainFolder":"/mnt/SS2Main",
-                "MirrorFolder":"/mnt/SS2Mirror"
-            }
+            "Name":"SS2",
+            "MainFolder":"/mnt/SS2Main",
+            "MirrorFolder":"/mnt/SS2Mirror"
     }]
 }

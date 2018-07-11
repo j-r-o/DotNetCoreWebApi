@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 //using LaPlay.Sources.Log;
 
-namespace LaPlay.Sources.Labo
+namespace LaPlay.Labo
 {
     public class Labo
     {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.TestHost;
 using System.Threading.Tasks;
 using System.Net.Http;
 
-namespace Api.tests
+namespace LaPlay.Controllers
 {
     public class UnitTest1
     {
