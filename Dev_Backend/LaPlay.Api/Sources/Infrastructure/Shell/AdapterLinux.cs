@@ -5,15 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-namespace LaPlay.Tools
+namespace LaPlay.Infrastructure.Shell
 {
-    public interface IBashRunner
+    public class AdapterLinux : IShellContract
     {
-        string RunCommand(String log);
-    }
-    public class BashRunner : IBashRunner
-    {
-
         public string RunCommand(String command)
         {
             var escapedArgs = command.Replace("\"", "\\\"");
@@ -34,7 +29,5 @@ namespace LaPlay.Tools
             process.WaitForExit();
             return result;
         }
-
-
     }
 }

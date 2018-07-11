@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 //using LaPlay.Sources.Log;
 
-namespace LaPlay.Tools
+namespace LaPlay.Infrastructure
 {
     public class DriveManagerCompanion
     {
