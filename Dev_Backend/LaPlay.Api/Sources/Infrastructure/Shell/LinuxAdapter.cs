@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace LaPlay.Infrastructure.Shell
 {
-    public class AdapterLinux : IShellContract
+    public class LinuxAdapter : IShellContract
     {
         public string RunCommand(String command)
         {

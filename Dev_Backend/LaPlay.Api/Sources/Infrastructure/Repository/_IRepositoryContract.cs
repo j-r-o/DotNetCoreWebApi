@@ -1,4 +1,17 @@
-public interface IRepositoryContract
+
+using System;
+using System.Collections.Generic;
+
+using LaPlay.Business.Model;
+
+namespace LaPlay.Infrastructure.Repository
 {
-    void Save();
+    public interface IRepositoryContract
+    {
+        void CreateStorageSpace(StorageSpace storageSpace);
+        StorageSpace ReadStorageSpace(Guid id);
+        List<StorageSpace> ReadStorageSpaces();
+        void UpdateStorageSpace(StorageSpace storageSpace);
+        void DeleteStorageSpaces(Guid id);
+    }
 }

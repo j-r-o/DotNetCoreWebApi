@@ -9,12 +9,7 @@ namespace LaPlay.Tools
 {
     public class DriveManager
     {
-        private readonly IBashRunner _bashRunner;
-
-        public DriveManager(IBashRunner bashRunner)
-        {
-            _bashRunner = bashRunner;
-        }
+        
 
 
         public void listFreeSpaces()

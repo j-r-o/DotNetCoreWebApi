@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using LaPlay.Business;
+using LaPlay.Business.Model;
 
 using Microsoft.Extensions.Logging;
 
@@ -14,20 +15,20 @@ namespace LaPlay.Access
     [ApiController]
     public class v1Controller : ControllerBase
     {
-        private readonly ILogger<v1Controller> _logger;
+        private readonly ILogger<v1Controller> _Logger;
+        private readonly IStorageSpaceContract _StorageSpace;
 
-        public v1Controller(ILogger<v1Controller> logger)
+        public v1Controller(ILogger<v1Controller> logger, IStorageSpaceContract storageSpace)
         {
-            _logger = logger;
+            _Logger = logger;
+            _StorageSpace = storageSpace;
         }
 
-        // /api/v1/route/XXXXX
-        [HttpGet("route/{id}")]
-        public string Get(string id)
+        // /api/v1/CreateStorageSpace
+        [HttpPost("CreateStorageSpace")]
+        public void CreateStorageSpace([FromBody] StorageSpace storageSpace)
         {
-            _logger.LogTrace("get get get !!!!!");
-
-            return id;
+            _StorageSpace.CreateStorageSpace(storageSpace);
         }
 
         // POST api/values

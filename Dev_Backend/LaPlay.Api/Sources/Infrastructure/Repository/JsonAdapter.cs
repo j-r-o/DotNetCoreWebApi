@@ -17,46 +17,52 @@ using LaPlay.Business.Model;
 
 namespace LaPlay.Infrastructure.Repository
 {
-    public class AdapterJson : IRepositoryContract
+    public class JsonAdapter : IRepositoryContract
     {
         private readonly IConfiguration _Configuration;
 
         private JObject _JsonData;
 
-        private List<StorageSpace> StorageSpaces;
+        private void Save()
+        {
+            File.WriteAllText(_Configuration["AppDataFile"], _JsonData.ToString());
+        }
 
-        public AdapterJson(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        public JsonAdapter(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             _Configuration = configuration;
             
             _JsonData = JObject.Parse(File.ReadAllText(hostingEnvironment.ContentRootPath + "/" + _Configuration["AppDataFile"]));
-
-            StorageSpaces = JsonConvert.DeserializeObject<List<StorageSpace>>(jsonData["StorageSpaces"].ToString());
         }
 
-        private void Save()
+        public void CreateStorageSpace(StorageSpace storageSpace)
         {
-            String json = JsonConvert.SerializeObject(StorageSpaces);
-            File.WriteAllText(_Configuration["AppDataFile"], json);
+            ((JArray) _JsonData["StorageSpaces"]).Add(JsonConvert.SerializeObject(storageSpace));
+            Save();
         }
 
-        public StorageSpace readStorageSpace(Guid id)
+        public StorageSpace ReadStorageSpace(Guid id)
         {
             return (StorageSpace) from a in JsonConvert.DeserializeObject<List<StorageSpace>>(_JsonData["StorageSpaces"].ToString())
                                   where a.Id.Equals(id)
                                   select a;
         }
 
-        public List<StorageSpace> readStorageSpaces()
+        public List<StorageSpace> ReadStorageSpaces()
         {
             return JsonConvert.DeserializeObject<List<StorageSpace>>(_JsonData["StorageSpaces"].ToString());
         }
 
-        public StorageSpace createStorageSpace(StorageSpace storageSpace)
+        public void UpdateStorageSpace(StorageSpace storageSpace)
         {
-            ((JArray) _JsonData["StorageSpaces"]).Add(JsonConvert.SerializeObject(storageSpace));
+            _JsonData.SelectToken("$.StorageSpaces[?(@.Id == '" + storageSpace.Id + "')]").Replace(JsonConvert.SerializeObject(storageSpace));
             Save();
-            return readStorageSpace(storageSpace.Id);
+        }
+
+        public void DeleteStorageSpaces(Guid id)
+        {
+            _JsonData.SelectToken("$.StorageSpaces[?(@.Id == '" + id + "')]").Remove();
+            Save();
         }
     }
 }

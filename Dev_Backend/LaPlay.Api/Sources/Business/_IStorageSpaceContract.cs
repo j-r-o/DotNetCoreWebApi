@@ -7,10 +7,10 @@ namespace LaPlay.Business
 {
     public interface IStorageSpaceContract
     {
-        StorageSpace createStorageSpace(String name, String mainDirectoryPath, String mirrorDirectoryPath);
-        StorageSpace readStorageSpace(Guid id);
-        List<StorageSpace> readStorageSpaces();
-        StorageSpace updateStorageSpace(StorageSpace storageSpace);
-        void deleteStorageSpaces(Guid id);
+        void CreateStorageSpace(StorageSpace storageSpace);
+        StorageSpace ReadStorageSpace(Guid id);
+        List<StorageSpace> ReadStorageSpaces();
+        void UpdateStorageSpace(StorageSpace storageSpace);
+        void DeleteStorageSpace(Guid id);
     }
 }

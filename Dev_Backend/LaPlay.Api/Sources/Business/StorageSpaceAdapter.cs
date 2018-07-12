@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 using LaPlay.Business.Model;
 using LaPlay.Infrastructure.Shell;
+using LaPlay.Infrastructure.Repository;
 
 namespace LaPlay.Business
 {
-    class StorageSpaceAdapter : IStorageSpaceContract
+    public class StorageSpaceAdapter : IStorageSpaceContract
     {
         private readonly IRepositoryContract _Repository;
 
@@ -15,25 +16,25 @@ namespace LaPlay.Business
             _Repository = repository;
         }
 
-        public StorageSpace createStorageSpace(StorageSpace storageSpace)
+        public void CreateStorageSpace(StorageSpace storageSpace)
         {
-            return _Repository.
+            _Repository.CreateStorageSpace(storageSpace);
         }
-        StorageSpace readStorageSpace(Guid id)
+        public StorageSpace ReadStorageSpace(Guid id)
         {
-
+            return _Repository.ReadStorageSpace(id);
         }
-        List<StorageSpace> readStorageSpaces()
+        public List<StorageSpace> ReadStorageSpaces()
         {
-
+            return _Repository.ReadStorageSpaces();
         }
-        StorageSpace updateStorageSpace(StorageSpace storageSpace)
+        public void UpdateStorageSpace(StorageSpace storageSpace)
         {
-
+            _Repository.UpdateStorageSpace(storageSpace);
         }
-        void deleteStorageSpaces(Guid id)
+        public void DeleteStorageSpace(Guid id)
         {
-            
+            _Repository.DeleteStorageSpaces(id);
         }
     }
 }
