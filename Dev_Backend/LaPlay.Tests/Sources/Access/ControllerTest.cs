@@ -6,18 +6,16 @@ using Microsoft.AspNetCore.TestHost;
 using System.Threading.Tasks;
 using System.Net.Http;
 
-namespace LaPlay.Controllers
+namespace LaPlay.Access
 {
-    public class UnitTest1
+    public class ControllerTest
     {
         private readonly TestServer _server;
         private readonly HttpClient _client;
 
-        public UnitTest1()
+        public ControllerTest()
         {
-            // Arrange
-            _server = new TestServer(new WebHostBuilder()
-            .UseStartup<Startup>());
+            _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
             _client = _server.CreateClient();
         }
 
@@ -25,14 +23,12 @@ namespace LaPlay.Controllers
         public async Task ReturnOK()
         {
             // Act
-            var response = await _client.GetAsync("api/v1/route/4654");
+            var response = await _client.GetAsync("/api/v1/fixedString");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
 
-            
-
             // Assert
-            Assert.Equal("4654", responseString);
+            Assert.Equal("fixedString", responseString);
         }
     }
 }

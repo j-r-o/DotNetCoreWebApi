@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-//using LaPlay.Sources.Log;
+using LaPlay.Infrastructure.Shell;
 
 namespace LaPlay.Infrastructure
 {
     public class DriveManagerCompanion
     {
         //private readonly ILog _logs;
-        private readonly IBashRunner _bashRunner;
+        private readonly IShellContract _bashRunner;
 
-        public DriveManagerCompanion(/*ILog logs, */IBashRunner bashRunner)
+        public DriveManagerCompanion(/*ILog logs, */IShellContract bashRunner)
         {
             //_logs = logs;
             _bashRunner = bashRunner;

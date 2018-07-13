@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
-//using LaPlay.Sources.Log;
 using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
 using Moq;
@@ -21,7 +20,7 @@ namespace LaPlay.Tools
         public void deletePartition_shouldSucceed()
         {
             //Log log = new Log(Log.Level.Developpement);
-            BashRunner bashRunner = new BashRunner();
+            //BashRunner bashRunner = new BashRunner();
 
             //DriveManagerCompanion driveManagerCompanion = new DriveManagerCompanion(log, bashRunner);
             //driveManagerCompanion.deletePartition("sdb");

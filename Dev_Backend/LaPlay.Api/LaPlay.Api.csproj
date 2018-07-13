@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appdata.json" CopyToOutputDirectory="Always" />
     <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

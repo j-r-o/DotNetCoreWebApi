@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+using LaPlay.Business;
 using LaPlay.Infrastructure.Repository;
 
 namespace LaPlay
@@ -29,6 +30,7 @@ namespace LaPlay
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
+            services.AddTransient<IStorageSpaceContract, StorageSpaceAdapter>();
             services.AddSingleton<IRepositoryContract, JsonAdapter>();
             //services.AddTransient<ISmsSender, AuthMessageSender>();
         }

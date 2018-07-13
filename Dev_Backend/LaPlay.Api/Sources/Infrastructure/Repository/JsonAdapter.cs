@@ -20,24 +20,26 @@ namespace LaPlay.Infrastructure.Repository
     public class JsonAdapter : IRepositoryContract
     {
         private readonly IConfiguration _Configuration;
+        private readonly IHostingEnvironment _HostingEnvironment;
 
         private JObject _JsonData;
 
         private void Save()
         {
-            File.WriteAllText(_Configuration["AppDataFile"], _JsonData.ToString());
+            File.WriteAllText(_HostingEnvironment.ContentRootPath + "/" + _Configuration["AppDataFile"], _JsonData.ToString());
         }
 
         public JsonAdapter(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             _Configuration = configuration;
+            _HostingEnvironment = hostingEnvironment;
             
-            _JsonData = JObject.Parse(File.ReadAllText(hostingEnvironment.ContentRootPath + "/" + _Configuration["AppDataFile"]));
+            _JsonData = JObject.Parse(File.ReadAllText(_HostingEnvironment.ContentRootPath + "/" + _Configuration["AppDataFile"]));
         }
 
         public void CreateStorageSpace(StorageSpace storageSpace)
         {
-            ((JArray) _JsonData["StorageSpaces"]).Add(JsonConvert.SerializeObject(storageSpace));
+            ((JArray) _JsonData["StorageSpaces"]).Add(JToken.FromObject(storageSpace));
             Save();
         }
 
@@ -55,7 +57,7 @@ namespace LaPlay.Infrastructure.Repository
 
         public void UpdateStorageSpace(StorageSpace storageSpace)
         {
-            _JsonData.SelectToken("$.StorageSpaces[?(@.Id == '" + storageSpace.Id + "')]").Replace(JsonConvert.SerializeObject(storageSpace));
+            _JsonData.SelectToken("$.StorageSpaces[?(@.Id == '" + storageSpace.Id + "')]").Replace(JToken.FromObject(storageSpace));
             Save();
         }
 

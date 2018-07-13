@@ -5,13 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Diagnostics;
 
-namespace LaPlay.Tools
+namespace LaPlay.Infrastructure.Shell
 {
     public class DriveManager
     {
-        
-
-
         public void listFreeSpaces()
         {
             //return new {Drive = "/dev/sda", FreeSpace = 12345698};
@@ -21,7 +18,7 @@ namespace LaPlay.Tools
         {
             String createPartitionWithFreeSpace = "";
 
-            String bashResult = _bashRunner.RunCommand(createPartitionWithFreeSpace);
+            //String bashResult = _bashRunner.RunCommand(createPartitionWithFreeSpace);
 
         }
 
