@@ -34,7 +34,9 @@ namespace LaPlay.Infrastructure.Repository
             _Configuration = configuration;
             _HostingEnvironment = hostingEnvironment;
             
-            _JsonData = JObject.Parse(File.ReadAllText(_HostingEnvironment.ContentRootPath + "/" + _Configuration["AppDataFile"]));
+            String Path = _HostingEnvironment.ContentRootPath + "/" + _Configuration["AppDataFile"];
+
+            _JsonData = JObject.Parse(File.ReadAllText(Path));
         }
 
         public void CreateStorageSpace(StorageSpace storageSpace)

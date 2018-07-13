@@ -15,6 +15,17 @@ namespace LaPlay.Access
 
         public ControllerTest()
         {
+
+            //pour mocker le controller ca se passe ici : 
+            // il faut mocker startup
+
+            var MockedStorageSpace = new {};
+
+            var webHost = new WebHostBuilder()
+                .UseStartup<Startup>()
+                .ConfigureTestServices(s => s.AddSingleton<IStorageSpaceContract, MockedStorageSpace>())              
+                ;
+
             _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
             _client = _server.CreateClient();
         }
@@ -30,5 +41,7 @@ namespace LaPlay.Access
             // Assert
             Assert.Equal("fixedString", responseString);
         }
+
+
     }
 }

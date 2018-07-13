@@ -9,8 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appsettings.json" CopyToOutputDirectory="Always" />
     <Content Update="appdata.json" CopyToOutputDirectory="Always" />
-    <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="nlog.config" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
   <ItemGroup>

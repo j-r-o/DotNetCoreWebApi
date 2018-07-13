@@ -16,7 +16,7 @@ namespace LaPlay.Infrastructure.Shell
 
         public void createPartitionWithFreeSpace(String drive)
         {
-            String createPartitionWithFreeSpace = "";
+            //String createPartitionWithFreeSpace = "";
 
             //String bashResult = _bashRunner.RunCommand(createPartitionWithFreeSpace);
 
