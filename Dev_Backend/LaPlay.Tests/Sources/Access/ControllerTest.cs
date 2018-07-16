@@ -5,6 +5,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
+
+using LaPlay.Business;
+using LaPlay.Business.Model;
 
 namespace LaPlay.Access
 {
@@ -15,18 +20,14 @@ namespace LaPlay.Access
 
         public ControllerTest()
         {
-
-            //pour mocker le controller ca se passe ici : 
-            // il faut mocker startup
-
-            var MockedStorageSpace = new {};
-
+            IStorageSpaceContract mockedStorageSpaceContract = Mock.Of<IStorageSpaceContract>();
+            //mockedStorageSpaceContract.Setup(m => m.CreateStorageSpace()).Returns(null);
+            
             var webHost = new WebHostBuilder()
-                .UseStartup<Startup>()
-                .ConfigureTestServices(s => s.AddSingleton<IStorageSpaceContract, MockedStorageSpace>())              
-                ;
+                .ConfigureTestServices(s => s.AddSingleton<IStorageSpaceContract>(mockedStorageSpaceContract))
+                .UseStartup<Startup>();
 
-            _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+            _server = new TestServer(webHost);
             _client = _server.CreateClient();
         }
 
