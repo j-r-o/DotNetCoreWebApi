@@ -73,12 +73,7 @@ namespace LaPlay.Access
 
         /* NOT TESTED */
         
-        // /api/v1/CreateStorageSpace
-        [HttpGet("CreateStorageSpace")]
-        public void CreateStorageSpace([FromBody] StorageSpace storageSpace)
-        {
-            _StorageSpace.CreateStorageSpace(storageSpace);
-        }
+        
 
         // /api/values
         [HttpGet("a")]
@@ -97,5 +92,61 @@ namespace LaPlay.Access
         public void Delete(int id)
         {
         }
+
+        /* ========================= LaPlay API ========================= */
+        
+        // /api/v1/CreateStorageSpace
+        [HttpPost("storagespace")]
+        public IActionResult CreateStorageSpace([FromBody] StorageSpace storageSpace)
+        {
+            _StorageSpace.CreateStorageSpace(storageSpace);
+
+            return StatusCode(StatusCodes.Status200OK);
+        }
+
+        // /api/v1/storagespace
+        [HttpGet("storagespace")]
+        public IActionResult ReadStorageSpaces(Guid id)
+        {
+            return StatusCode(StatusCodes.Status200OK, _StorageSpace.ReadStorageSpaces());
+        }
+
+        // /api/v1/storagespace/42f63332-9a2b-41b3-9862-234d767057a0
+        [HttpGet("storagespace/{id}")]
+        public IActionResult ReadStorageSpace(Guid id)
+        {
+            return StatusCode(StatusCodes.Status200OK, _StorageSpace.ReadStorageSpace(id));
+        }
+
+        // /api/v1/storagespace
+        [HttpPut("storagespace")]
+        public IActionResult UpdateStorageSpace([FromBody] StorageSpace storageSpace)
+        {
+            _StorageSpace.UpdateStorageSpace(storageSpace);
+            return StatusCode(StatusCodes.Status200OK);
+        }
+
+        // /api/v1/storagespace/42f63332-9a2b-41b3-9862-234d767057a0
+        [HttpDelete("storagespace")]
+        public IActionResult DeleteStorageSpace(Guid id)
+        {
+            _StorageSpace.DeleteStorageSpace(id);
+            return StatusCode(StatusCodes.Status200OK);
+        }
+
+        /*
+        // /api/v1/storagespace?id=42f63332-9a2b-41b3-9862-234d767057a0?id=c7a368d6-12f3-4957-a0c1-81b644ac5e3d
+        // /api/v1/storagespace
+        [HttpGet("storagespace")]
+        public IActionResult ReadStorageSpaces([FromQuery(Name="id")] List<Guid> ids)
+        {
+            dynamic storageSpaces = null;
+
+            if(ids.Count == 0) storageSpaces = _StorageSpace.ReadStorageSpaces();
+            else storageSpaces = (from id in ids select _StorageSpace.ReadStorageSpace(id)).ToList();
+
+            return StatusCode(StatusCodes.Status200OK, storageSpaces);
+        }
+        */
     }
 }

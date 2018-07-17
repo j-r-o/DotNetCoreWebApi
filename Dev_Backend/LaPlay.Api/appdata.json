@@ -1,11 +1,13 @@
 {
   "StorageSpaces": [
     {
+      "Id": "42f63332-9a2b-41b3-9862-234d767057a0",
       "Name": "SS1",
       "MainFolder": "/mnt/SS1Main",
       "MirrorFolder": "/mnt/SS1Mirror"
     },
     {
+      "Id": "ffc658ff-7aaf-427b-b137-477a3f97edc5",
       "Name": "SS2",
       "MainFolder": "/mnt/SS2Main",
       "MirrorFolder": "/mnt/SS2Mirror"

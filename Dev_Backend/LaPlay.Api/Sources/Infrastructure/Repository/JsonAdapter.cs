@@ -47,9 +47,7 @@ namespace LaPlay.Infrastructure.Repository
 
         public StorageSpace ReadStorageSpace(Guid id)
         {
-            return (StorageSpace) from a in JsonConvert.DeserializeObject<List<StorageSpace>>(_JsonData["StorageSpaces"].ToString())
-                                  where a.Id.Equals(id)
-                                  select a;
+            return _JsonData.SelectToken("$.StorageSpaces[?(@.Id == '" + id + "')]").ToObject<StorageSpace>();
         }
 
         public List<StorageSpace> ReadStorageSpaces()
