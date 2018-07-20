@@ -202,3 +202,5 @@
 
 #convert command result : from spaces separated values to coma separated values
 #df -h | tr -s ' ' | cut -d ' ' -f 1- --output-delimiter ","
+
+#inotifywait -mr -e modify,attrib,moved_to,moved_from,create,delete --format '{"dir":"%w", "file":"%f", "event":"%e", "datet":"%T"}' --timefmt '%F %T' /home/julien.rocco ^Cecho ####

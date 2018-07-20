@@ -44,12 +44,6 @@ namespace LaPlay.Access
             return "# " + p1 + " # " + p2 + " # ";
         }
 
-        // /api/v1/urlParam/value
-        [HttpGet("urlParam/{param}")]
-        public string urlParam(String param){
-            return param + " # ";
-        }
-
         // curl https://localhost:5001/api/v1/4 -k
         // GET api/v1/5
         [HttpGet("{id}")]
@@ -59,43 +53,9 @@ namespace LaPlay.Access
             return StatusCode(StatusCodes.Status200OK, a);
         }
 
-        // curl -X POST -H "Content-Type: application/json" -d '{"Id":"c7a368d6-12f3-4957-a0c1-81b644ac5e3d", "Name": "Name1", "MainFolder": "MF1", "MirrorFolder": "MF1"}' https://localhost:5001/api/v1/postSimple -k
-        [HttpPost("postSimple")]
-        public IActionResult PostSimple([FromBody] StorageSpace storageSpace)
-        {
-           _StorageSpace.CreateStorageSpace(storageSpace);
-
-            return StatusCode(StatusCodes.Status200OK);
-        }
-
-        /* KO */
-
-
-        /* NOT TESTED */
-        
-        
-
-        // /api/values
-        [HttpGet("a")]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
         /* ========================= LaPlay API ========================= */
         
-        // /api/v1/CreateStorageSpace
+        // curl -k -X POST -H "Content-Type: application/json" -d '{"Id":"5e50af4a-4b61-46a4-bca0-ce273a3aab00", "Name": "Name1", "MainFolder": "MF1", "MirrorFolder": "MF1"}' https://localhost:5001/api/v1/storagespace
         [HttpPost("storagespace")]
         public IActionResult CreateStorageSpace([FromBody] StorageSpace storageSpace)
         {
@@ -118,7 +78,7 @@ namespace LaPlay.Access
             return StatusCode(StatusCodes.Status200OK, _StorageSpace.ReadStorageSpace(id));
         }
 
-        // /api/v1/storagespace
+        // curl -k -X PUT -H "Content-Type: application/json" -d '{"Id":"5e50af4a-4b61-46a4-bca0-ce273a3aab00", "Name": "Name1Update", "MainFolder": "MF1", "MirrorFolder": "MF1"}' https://localhost:5001/api/v1/storagespace
         [HttpPut("storagespace")]
         public IActionResult UpdateStorageSpace([FromBody] StorageSpace storageSpace)
         {

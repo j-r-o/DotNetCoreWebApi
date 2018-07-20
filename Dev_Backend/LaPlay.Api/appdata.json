@@ -17,6 +17,24 @@
       "Name": "Name1",
       "MainFolder": "MF1",
       "MirrorFolder": "MF1"
+    },
+    {
+      "Id": "00000000-0000-0000-0000-000000000000",
+      "Name": "Name1",
+      "MainFolder": "MF1",
+      "MirrorFolder": "MF1"
+    },
+    {
+      "Id": "5e50af4a-4b61-46a4-bca0-ce273a3aaad9",
+      "Name": "Name1",
+      "MainFolder": "MF1",
+      "MirrorFolder": "MF1"
+    },
+    {
+      "Id": "5e50af4a-4b61-46a4-bca0-ce273a3aab00",
+      "Name": "Name1Update",
+      "MainFolder": "MF1",
+      "MirrorFolder": "MF1"
     }
   ]
 }
