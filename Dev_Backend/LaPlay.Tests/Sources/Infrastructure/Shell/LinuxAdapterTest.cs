@@ -8,6 +8,10 @@ using Xunit;
 using System.Text.RegularExpressions;
 using System.Linq;
 
+using Newtonsoft.Json;
+
+
+
 namespace LaPlay.Infrastructure.Shell
 {
     public class LinuxAdapterTest
@@ -16,48 +20,44 @@ namespace LaPlay.Infrastructure.Shell
         [Fact]
         public void RunCommand_ShouldSucceed()
         {
+            Func<String, String> FileType = typeChar =>
+            {
+                if (typeChar.Equals("-")) return "regularFile";
+                if (typeChar.Equals("d")) return "directory";
+                if (typeChar.Equals("c")) return "characterDeviceFile";
+                if (typeChar.Equals("b")) return "blockDeviceFile";
+                if (typeChar.Equals("s")) return "localSocketFile";
+                if (typeChar.Equals("p")) return "namedPipe";
+                if (typeChar.Equals("l")) return "symbolicLink";
+
+                throw new Exception("Unexpected file type");
+            };
+
             LinuxAdapter linuxAdapter = new LinuxAdapter();
 
-            String process = linuxAdapter.RunCommand("tree /media/sf_D_DRIVE/VM -a -f -i -D -F -s --timefmt \"%F %T\"");
+            String process = linuxAdapter.RunCommand("tree /home/julien.rocco -a -D -f -i -p -s --timefmt \"%F %T\"");
 
-            // String[] lines = process.Split('\n');
-            // from a in process.Split('\n')
-            // select new new { file = match.Groups[3].Value};
-
-            List<string> lines = new List<string>(process.Split('\n'));
-
-            lines.Select(l => {
-                var match = Regex.Match(l, "^\\[ *([0-9]*) (....-..-.. ..:..:..)]  (.*)$");
+            var lines2 = process.Split('\n').Select(l => {
+                var match = Regex.Match(l, "^\\[(.)......... *([0-9]*) (....-..-.. ..:..:..)]  (.*)$");
                 if(match.Success)
                 {
-                    return "{\"File\":\"" + match.Groups[3].Value + "\", \"ModifiedOn\":\"" + match.Groups[2].Value + "\", \"Bytes\":" + match.Groups[1].Value + "}";
+                    return new {path = match.Groups[4].Value,
+                                type = FileType.Invoke(match.Groups[1].Value),
+                                modifiedOn = DateTime.ParseExact(match.Groups[3].Value, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture),
+                                modifiedOnS = match.Groups[3].Value,
+                                bytes = match.Groups[2].Value};
                 }
-                return "";
-            }).Where(l => !String.IsNullOrEmpty(l))
-            .select new { file = match.Groups[3].Value};
+                return null;
+            }).Where(d => d != null);
 
-            var json = from l in lines
-                       select new { file = match.Groups[3].Value};
+            String json = JsonConvert.SerializeObject(lines2);
 
-
-            FileStream fsb = new FileStream("b.txt", FileMode.Create);
-            using(TextWriter tw = new StreamWriter(fsb))
+            using(StreamWriter fsb2 = new StreamWriter("b2.txt", false))
             {
-                foreach(String line in lines)
-                {
-                    var match = Regex.Match(line, "^\\[ *([0-9]*) (....-..-.. ..:..:..)]  (.*)$");
-                        
-                    if(match.Success)
-                    {
-                        string b = "{\"File\":\"" + match.Groups[3].Value + "\", \"ModifiedOn\":\"" + match.Groups[2].Value + "\", \"Bytes\":" + match.Groups[1].Value + "}";
-                        tw.WriteLine(b);
-                    }
-                    //else tw.Write("!!! " + line);
-                    DateTime myDate = DateTime.ParseExact("2009-05-08 14:40:52", "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                }
+                fsb2.Write(json);
             }
-
-            Console.WriteLine(lines.Length);
+            
+            Console.WriteLine(lines2.Count());
             Console.WriteLine("#");
             Console.WriteLine(process);
         }
