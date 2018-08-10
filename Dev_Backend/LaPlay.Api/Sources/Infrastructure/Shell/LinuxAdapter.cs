@@ -62,8 +62,7 @@ namespace LaPlay.Infrastructure.Shell
             RunCommand("tree " + path + " -a -D -f -i -p -s --timefmt \"%F %T\"").Split('\n')
             .Where(line => ((String)line).StartsWith("["))
             .Select(file => Regex.Match(file, "^\\[(.)......... *([0-9]*) (....-..-.. ..:..:..)]  (.*)$"))
-            .Select(matche => new System.IO.FileInfo(matche.Groups[4].Value))
-            );
+            .Select(matche => new System.IO.FileInfo(matche.Groups[4].Value));
 
             //=========================
             var treeCommandWatch = System.Diagnostics.Stopwatch.StartNew();

@@ -12,16 +12,18 @@ using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
 using Moq;
 
+using LaPlay.Infrastructure.Shell;
+
 namespace LaPlay.Infrastructure.Synchronization
 {
     public class SynchronizationAdapterTest
     {
         [Fact]
-        public void RunNeverEndingCommand_ShouldSucceed()
+        public void Synchronize_ShouldSucceed()
         {
-            SynchronizationAdapter synchronizationAdapter = new SynchronizationAdapter();
+            SynchronizationAdapter synchronizationAdapter = new SynchronizationAdapter(new LinuxAdapter());
 
-            synchronizationAdapter.ListFiles("/home/julien.rocco/EclipseWorkspace/connect-resources-backend_INSTABLE");
+            synchronizationAdapter.Synchronize("/media/sf_D_DRIVE/Apps/7-Zip/", "/media/sf_D_DRIVE/Apps/Audacity/");
         }
     }
 }
