@@ -43,7 +43,7 @@ namespace LaPlay.Infrastructure.Synchronization
 
 
 
-        [Fact]
+        //[Fact]
         public void Synchronize_ShouldSucceed()
         {
 

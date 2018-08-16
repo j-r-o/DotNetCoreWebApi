@@ -18,14 +18,14 @@ namespace LaPlay.Infrastructure.Shell
     public class LinuxAdapterTest
     {
 
-        [Fact]
+        //[Fact]
         public void RunCommand_ShouldSucceed()
         {
             LinuxAdapter linuxAdapter = new LinuxAdapter();
             linuxAdapter.ListFiles("/home/julien.rocco");
         }
 
-        [Fact]
+        //[Fact]
         public void RunNeverEndingCommand_ShouldSucceed()
         {
             LinuxAdapter linuxAdapter = new LinuxAdapter();
