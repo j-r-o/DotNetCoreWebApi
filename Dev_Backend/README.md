@@ -18,7 +18,13 @@ Pour avoir la couverture de code :
 
     Lancer les tests avec la generation de couverture
 
-        dotnet test LaPlay.Tests/ /p:CollectCoverage=true /p:CoverletOutput='../../coverage/lcov.info' /p:CoverletOutputFormat=lcov
+        contraintes pour que coverage gutters fonctionne :
+            -le fichier doit s appeler lcov.info
+            -le fichier doit être dans le repertoire de la sollution
+
+
+        dotnet test LaPlay.Tests/ /p:CollectCoverage=true /p:CoverletOutput='../lcov.info' /p:CoverletOutputFormat=lcov
+
 
 
     Afficher le rapport dans vscode
