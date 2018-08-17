@@ -41,6 +41,21 @@ namespace LaPlay.Infrastructure.Synchronization
             });
         }
 
+        [Fact]
+        public void ListFiles_ShouldSucceed()
+        {
+            List<String> expectedResult = new LinuxAdapter().RunCommand("tree /etc  -a -D -f -i -p -s").Split("\n").ToList();
+            System.Text.RegularExpressions.Match counts = Regex.Match(expectedResult.ElementAt(expectedResult.Count() - 2), "([0-9]*).*, ([0-9]*).*");
+            Int32 expectedDirectoryCount = Convert.ToInt32(counts.Groups[1].Value);
+            Int32 expectedFileCount = Convert.ToInt32(counts.Groups[2].Value);
+
+            SynchronizationAdapter synchronizationAdapter = new SynchronizationAdapter(new LinuxAdapter());
+
+            List<SynchronizationAdapter.LSFile> files = synchronizationAdapter.ListFiles("/etc");
+
+            Assert.True(expectedDirectoryCount + expectedFileCount == files.Count());
+        }
+
 
 
         //[Fact]

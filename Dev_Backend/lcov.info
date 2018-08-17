@@ -196,17 +196,17 @@ FNH:0
 end_of_record
 SF:/home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/Sources/Infrastructure/Synchronization/SynchronizationAdapter.cs
 FN:44,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::ListFiles(System.String)
-FNDA:0,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::ListFiles(System.String)
-DA:45,0
-DA:46,0
-DA:47,0
-DA:48,0
-DA:49,0
-DA:50,0
-BRDA:46,42,0,0
-BRDA:46,42,1,0
-BRDA:46,78,0,0
-BRDA:46,78,1,0
+FNDA:1,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::ListFiles(System.String)
+DA:45,1
+DA:46,1
+DA:47,3865
+DA:48,3861
+DA:49,1
+DA:50,1
+BRDA:46,42,0,1
+BRDA:46,42,1,1
+BRDA:46,78,0,1
+BRDA:46,78,1,1
 FN:52,System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FullJoin(System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>)
 FNDA:0,System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FullJoin(System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>)
 DA:53,0
@@ -305,50 +305,50 @@ DA:91,0
 DA:92,0
 DA:93,0
 FN:38,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::.ctor(LaPlay.Infrastructure.Shell.IShellContract)
-FNDA:0,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::.ctor(LaPlay.Infrastructure.Shell.IShellContract)
-DA:39,0
-DA:40,0
-DA:41,0
-DA:42,0
+FNDA:1,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::.ctor(LaPlay.Infrastructure.Shell.IShellContract)
+DA:39,1
+DA:40,1
+DA:41,1
+DA:42,1
 FN:18,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile::.ctor(System.String)
-FNDA:7,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile::.ctor(System.String)
-DA:19,7
-DA:26,7
-DA:27,7
-DA:28,7
-DA:30,7
-DA:31,7
-DA:32,7
-DA:33,7
-DA:34,7
+FNDA:3867,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile::.ctor(System.String)
+DA:19,3867
+DA:26,3867
+DA:27,3867
+DA:28,3867
+DA:30,3867
+DA:31,3867
+DA:32,3867
+DA:33,3867
+DA:34,3867
 LF:50
-LH:9
+LH:19
 BRF:56
-BRH:0
+BRH:4
 FNF:11
-FNH:1
+FNH:3
 end_of_record
 SF:/home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/Sources/Infrastructure/Shell/LinuxAdapter.cs
 FN:17,System.String LaPlay.Infrastructure.Shell.LinuxAdapter::RunCommand(System.String)
-FNDA:0,System.String LaPlay.Infrastructure.Shell.LinuxAdapter::RunCommand(System.String)
-DA:18,0
-DA:19,0
-DA:21,0
-DA:22,0
-DA:23,0
-DA:24,0
-DA:25,0
-DA:26,0
-DA:27,0
-DA:28,0
-DA:29,0
-DA:30,0
-DA:31,0
-DA:32,0
-DA:33,0
-DA:34,0
-DA:35,0
-DA:36,0
+FNDA:2,System.String LaPlay.Infrastructure.Shell.LinuxAdapter::RunCommand(System.String)
+DA:18,2
+DA:19,2
+DA:21,2
+DA:22,2
+DA:23,2
+DA:24,2
+DA:25,2
+DA:26,2
+DA:27,2
+DA:28,2
+DA:29,2
+DA:30,2
+DA:31,2
+DA:32,2
+DA:33,2
+DA:34,2
+DA:35,2
+DA:36,2
 FN:38,System.Diagnostics.Process LaPlay.Infrastructure.Shell.LinuxAdapter::RunNeverEndingCommand(System.String)
 FNDA:0,System.Diagnostics.Process LaPlay.Infrastructure.Shell.LinuxAdapter::RunNeverEndingCommand(System.String)
 DA:39,0
@@ -413,11 +413,11 @@ BRDA:94,578,1,0
 BRDA:94,614,0,0
 BRDA:94,614,1,0
 LF:61
-LH:0
+LH:18
 BRF:16
 BRH:0
 FNF:3
-FNH:0
+FNH:1
 end_of_record
 SF:/home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/z_StandBy/DriveManager.cs
 FN:12,System.Void LaPlay.Infrastructure.Shell.DriveManager::listFreeSpaces()
