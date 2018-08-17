@@ -80,7 +80,13 @@ namespace LaPlay.Infrastructure.Synchronization
 
         public void Synchronize(String mainPath, String mirrorPath)
         {
-            var comparisonResult = FullJoin(ListFiles(mainPath), ListFiles(mirrorPath));
+            List<LSFile> mainFilesWithRelativePath = ListFiles(mainPath);
+            mainFilesWithRelativePath.ForEach(file => file.path = file.path.Substring(0, mainPath.Length));
+
+            List<LSFile> mirrorFilesWithRelativePath = ListFiles(mainPath);
+            mirrorFilesWithRelativePath.ForEach(file => file.path = file.path.Substring(0, mirrorPath.Length));
+
+            var comparisonResult = FullJoin(mainFilesWithRelativePath, mirrorFilesWithRelativePath);
 
             FilterNewFiles(comparisonResult).ForEach(file => CopyToMirror(mainPath, mirrorPath, file));
             FilterUpdatedFiles(comparisonResult).ForEach(file => CopyToMirror(mainPath, mirrorPath, file));

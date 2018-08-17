@@ -44,7 +44,7 @@ namespace LaPlay.Infrastructure.Synchronization
         [Fact]
         public void ListFiles_ShouldSucceed()
         {
-            List<String> expectedResult = new LinuxAdapter().RunCommand("tree /etc  -a -D -f -i -p -s").Split("\n").ToList();
+            List<String> expectedResult = new LinuxAdapter().RunCommand("tree /etc  -a -D -f -i -p -s --timefmt \"%F %T\"").Split("\n").ToList();
             System.Text.RegularExpressions.Match counts = Regex.Match(expectedResult.ElementAt(expectedResult.Count() - 2), "([0-9]*).*, ([0-9]*).*");
             Int32 expectedDirectoryCount = Convert.ToInt32(counts.Groups[1].Value);
             Int32 expectedFileCount = Convert.ToInt32(counts.Groups[2].Value);
@@ -56,7 +56,57 @@ namespace LaPlay.Infrastructure.Synchronization
             Assert.True(expectedDirectoryCount + expectedFileCount == files.Count());
         }
 
+        [Fact]
+        public void FullJoin_ShouldSucceed()
+        {
+            Func<String> randomPath = () => String.Join("/", Enumerable.Range(1, new Random().Next(1, 10)).Select(i => (char) new Random().Next(65,90)));
+            Func<SynchronizationAdapter.LSFile> randomPathLSFile = () => new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  " + randomPath.Invoke());
 
+            List<SynchronizationAdapter.LSFile> mainFiles = new List<SynchronizationAdapter.LSFile>();
+            List<SynchronizationAdapter.LSFile> mirrorFiles = new List<SynchronizationAdapter.LSFile>();
+
+            List<SynchronizationAdapter.LSFile> leftFilesOnly = Enumerable.Range(1, new Random().Next(1, 10)).Select(i => randomPathLSFile.Invoke()).ToList();
+            List<SynchronizationAdapter.LSFile> joinFilesOnly = Enumerable.Range(1, new Random().Next(1, 10)).Select(i => randomPathLSFile.Invoke()).ToList();
+            List<SynchronizationAdapter.LSFile> rigthFilesOnly = Enumerable.Range(1, new Random().Next(1, 10)).Select(i => randomPathLSFile.Invoke()).ToList();
+
+            leftFilesOnly.ForEach(file => mainFiles.Add(file));
+            joinFilesOnly.ForEach(file => mainFiles.Add(file));
+            joinFilesOnly.ForEach(file => mirrorFiles.Add(file));
+            rigthFilesOnly.ForEach(file => mirrorFiles.Add(file));
+
+            List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>> fullJoinResult = new SynchronizationAdapter(null).FullJoin(mainFiles, mirrorFiles);
+
+            Assert.True(fullJoinResult.Count() == leftFilesOnly.Count() + joinFilesOnly.Count() + rigthFilesOnly.Count());
+
+            Assert.True(fullJoinResult
+                        .Where(line => line.Item1 != null && line.Item2 == null)
+                        .Select(line => line.Item1.path)
+                        .Intersect(leftFilesOnly.Select(file => file.path))
+                        .Count() == leftFilesOnly.Count());
+
+            Assert.True(fullJoinResult
+                        .Where(line => line.Item1 != null && line.Item2 != null)
+                        .Select(line => line.Item1.path)
+                        .Intersect(joinFilesOnly.Select(file => file.path))
+                        .Count() == joinFilesOnly.Count());
+
+            Assert.True(fullJoinResult
+                        .Where(line => line.Item1 == null && line.Item2 != null)
+                        .Select(line => line.Item2.path)
+                        .Intersect(rigthFilesOnly.Select(file => file.path))
+                        .Count() == rigthFilesOnly.Count());
+        }
+
+        [Fact]
+        public void CopyToMirror_ShouldSucceed()
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName("/tmp/a1/long/path/to/a/file"));
+            File.CreateText("/tmp/a1/long/path/to/a/file");
+
+            SynchronizationAdapter.LSFile file = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/a1/long/path/to/a/file");
+
+            new SynchronizationAdapter(new LinuxAdapter()).CopyToMirror("/tmp/a1", "/tmp/a2", file);
+        }
 
         //[Fact]
         public void Synchronize_ShouldSucceed()
