@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections.Concurrent;
 using Moq;
+using System.Security.Cryptography;
 
 using LaPlay.Infrastructure.Shell;
 
@@ -18,6 +19,93 @@ namespace LaPlay.Infrastructure.Synchronization
 {
     public class SynchronizationAdapterTest
     {
+        
+        [Fact]
+        public void dev()
+        {
+            var p = RandomFileGenerator.CreateRandomFileStructure(2, 10);
+            p.Sort((a,b) => a.path.CompareTo(b.path));
+            p.ForEach(d => Console.WriteLine(d.type + " " + d.bytes + " " + d.modifiedOn + " " + d.path));
+        }
+
+        private static class RandomFileGenerator
+        {
+            public static char GenerateRandomChar() {return (char) new Random().Next(65, 91);}
+
+            public static String GenerateRandomString(Int32 length)
+            {
+                return String.Concat(Enumerable.Range(0, length + 1).Select(letter => GenerateRandomChar()));
+            }
+
+            public static Char GenerateRandomFileType()
+            {
+                //generate a file 80% of the time 
+                return "------------------------dcbspl"[new Random().Next(0, 31)];
+            }
+
+            public static DateTime GenerateRandomDateTime()
+            {
+                return DateTime.MinValue.Add(TimeSpan.FromTicks((Int64) Math.Round(new Random().NextDouble() * DateTime.MaxValue.Ticks)));
+            }
+
+            public static String GenerateRandomPath(Int32 depth)
+            {
+                return String.Join('/', Enumerable.Range(1, new Random().Next(1, depth + 1)).Select(path => GenerateRandomString(8)));
+            }
+
+            public static SynchronizationAdapter.LSFile GenerateRandomLSFile(Int32 pathDepth, Char forceFileType = '0')
+            {
+                String type = (forceFileType.Equals('0') ? GenerateRandomFileType() : forceFileType).ToString();
+                String rigths = "rwxrwxrwx";
+                String size = new Random().Next().ToString();
+                String date = GenerateRandomDateTime().ToString("yyyy-MM-dd HH:mm:ss");
+                String path = GenerateRandomPath(pathDepth) + (type.Equals("directory") ? "" : "/file." + type);
+
+                return new SynchronizationAdapter.LSFile(String.Concat("[", type, rigths, " ", size, " ", date, "]  ", path));
+            }
+
+            public static List<SynchronizationAdapter.LSFile> GenerateParentDirectoriesForLSFile(SynchronizationAdapter.LSFile lsFile)
+            {
+                String[] pathElements = lsFile.path.Split('/');
+
+                List<SynchronizationAdapter.LSFile> parentDirectories = new List<SynchronizationAdapter.LSFile>();
+
+                Enumerable.Range(0, pathElements.Length - 1).ToList().ForEach(i => {
+
+                     String treeCommandResultLine = "[drwxrwxrwx 4096 "
+                                             + lsFile.modifiedOn.ToString("yyyy-MM-dd HH:mm:ss") + "]  "
+                                             + String.Join('/', Enumerable.Range(0, i + 1).Select(j => pathElements[j]));
+
+                    parentDirectories.Add(new SynchronizationAdapter.LSFile(treeCommandResultLine));
+                });
+
+                return parentDirectories;
+            }
+            
+            public static List<SynchronizationAdapter.LSFile> CreateRandomFileStructure(Int32 deepth, Int32 fileCount)
+            {
+                List<SynchronizationAdapter.LSFile> lsfiles = Enumerable.Range(0, fileCount).Select(i => GenerateRandomLSFile(deepth)).ToList();
+
+                List<SynchronizationAdapter.LSFile> parents = new List<SynchronizationAdapter.LSFile>();
+
+                lsfiles.ForEach(lsFile => {
+
+                    List<SynchronizationAdapter.LSFile> tmpParents = RandomFileGenerator.GenerateParentDirectoriesForLSFile(lsFile);
+
+                    tmpParents.ForEach(tp => {
+                        if(parents.Where(p => p.path == tp.path).Count() == 0)
+                            parents.Add(tp);
+                    });
+                });
+
+                parents.ForEach(p => lsfiles.Add(p));
+
+                return lsfiles;
+            }
+        }
+
+
+
         [Fact]
         public void LSFile_ShouldConstructWithTreeCommandResultLine()
         {
@@ -55,7 +143,7 @@ namespace LaPlay.Infrastructure.Synchronization
 
             Assert.True(expectedDirectoryCount + expectedFileCount == files.Count());
         }
-
+ 
         [Fact]
         public void FullJoin_ShouldSucceed()
         {
@@ -100,15 +188,148 @@ namespace LaPlay.Infrastructure.Synchronization
         [Fact]
         public void CopyToMirror_ShouldSucceed()
         {
-            Directory.CreateDirectory(Path.GetDirectoryName("/tmp/a1/long/path/to/a/file"));
-            File.CreateText("/tmp/a1/long/path/to/a/file");
+            Func<String, byte[]> SHA512 = (b) => SHA256Managed.Create().ComputeHash(File.ReadAllBytes(b));
 
-            SynchronizationAdapter.LSFile file = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/a1/long/path/to/a/file");
+            String map = "/tmp/a1";
+            String maf = map + "/file.txt";
+            String mip = "/tmp/a2";
 
-            new SynchronizationAdapter(new LinuxAdapter()).CopyToMirror("/tmp/a1", "/tmp/a2", file);
+            Directory.CreateDirectory(map);
+
+            using(StreamWriter debug = new StreamWriter(maf, false))
+            {
+                debug.WriteLine(Guid.NewGuid().ToString());
+            }
+
+            SynchronizationAdapter.LSFile file = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  " + maf);
+
+            new SynchronizationAdapter(new LinuxAdapter()).CopyToMirror(map, mip, file);
+
+            Assert.True(Enumerable.SequenceEqual(SHA512.Invoke(map + "/file.txt"), SHA512.Invoke(mip + "/file.txt")));
+
+            Directory.Delete(map, true);
+            Directory.Delete(mip, true);
         }
 
-        //[Fact]
+        [Fact]
+        public void DeleteFileOrDirectory_ShouldSucceed()
+        {
+            String map = "/tmp/LaPlayTest/a";
+            String maf = map + "/file.txt";
+
+            Directory.CreateDirectory(map);
+
+            using(StreamWriter debug = new StreamWriter(maf, false))
+            {
+                debug.WriteLine(Guid.NewGuid().ToString());
+            }
+
+            new SynchronizationAdapter(new LinuxAdapter()).DeleteFileOrDirectory(map);
+
+            Assert.True(Directory.Exists(map) == false);
+        }
+
+        [Fact]
+        public void FilterNewFiles_ShouldSucceed()
+        {
+            List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>> mockedComparisonResult = new List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>>();
+
+            SynchronizationAdapter.LSFile dir = new SynchronizationAdapter.LSFile("[d--------- 4096 0001-01-01 00:00:00]  /tmp/dir");
+            SynchronizationAdapter.LSFile leftOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftOnlyFile");
+            SynchronizationAdapter.LSFile nullFile = null;
+            SynchronizationAdapter.LSFile leftAndRightSameDateFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightSameDateFile");
+            SynchronizationAdapter.LSFile leftUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/LeftAndRightUpdatedFile");
+            SynchronizationAdapter.LSFile rightUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightUpdatedFile");
+            SynchronizationAdapter.LSFile rigthOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/RigthOnlyFile");
+
+            mockedComparisonResult.Add(Tuple.Create(dir, dir));
+            mockedComparisonResult.Add(Tuple.Create(leftOnlyFile, nullFile));
+            mockedComparisonResult.Add(Tuple.Create(leftAndRightSameDateFile, leftAndRightSameDateFile));
+            mockedComparisonResult.Add(Tuple.Create(leftUpdatedFile, rightUpdatedFile));
+            mockedComparisonResult.Add(Tuple.Create(nullFile, rigthOnlyFile));
+
+            List<SynchronizationAdapter.LSFile> newFiles = new SynchronizationAdapter(new LinuxAdapter()).FilterNewFiles(mockedComparisonResult);
+
+            Assert.True(newFiles.Count == 1);
+            Assert.True(newFiles.Contains(leftOnlyFile));
+        }
+
+        [Fact]
+        public void FilterUpdatedFiles_ShouldSucceed()
+        {
+            List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>> mockedComparisonResult = new List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>>();
+
+            SynchronizationAdapter.LSFile dir = new SynchronizationAdapter.LSFile("[d--------- 4096 0001-01-01 00:00:00]  /tmp/dir");
+            SynchronizationAdapter.LSFile leftOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftOnlyFile");
+            SynchronizationAdapter.LSFile nullFile = null;
+            SynchronizationAdapter.LSFile leftAndRightSameDateFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightSameDateFile");
+            SynchronizationAdapter.LSFile leftUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/LeftAndRightUpdatedFile");
+            SynchronizationAdapter.LSFile rightUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightUpdatedFile");
+            SynchronizationAdapter.LSFile rigthOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/RigthOnlyFile");
+
+            mockedComparisonResult.Add(Tuple.Create(dir, dir));
+            mockedComparisonResult.Add(Tuple.Create(leftOnlyFile, nullFile));
+            mockedComparisonResult.Add(Tuple.Create(leftAndRightSameDateFile, leftAndRightSameDateFile));
+            mockedComparisonResult.Add(Tuple.Create(leftUpdatedFile, rightUpdatedFile));
+            mockedComparisonResult.Add(Tuple.Create(nullFile, rigthOnlyFile));
+
+            List<SynchronizationAdapter.LSFile> updatedFiles = new SynchronizationAdapter(new LinuxAdapter()).FilterUpdatedFiles(mockedComparisonResult);
+
+            Assert.True(updatedFiles.Count == 1);
+            Assert.True(updatedFiles.Contains(leftUpdatedFile));
+        }
+
+        [Fact]
+        public void FilterDeletedFiles_ShouldSucceed()
+        {
+            List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>> mockedComparisonResult = new List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>>();
+
+            SynchronizationAdapter.LSFile dir = new SynchronizationAdapter.LSFile("[d--------- 4096 0001-01-01 00:00:00]  /tmp/dir");
+            SynchronizationAdapter.LSFile leftOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftOnlyFile");
+            SynchronizationAdapter.LSFile nullFile = null;
+            SynchronizationAdapter.LSFile leftAndRightSameDateFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightSameDateFile");
+            SynchronizationAdapter.LSFile leftUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/LeftAndRightUpdatedFile");
+            SynchronizationAdapter.LSFile rightUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightUpdatedFile");
+            SynchronizationAdapter.LSFile rigthOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/RigthOnlyFile");
+
+            mockedComparisonResult.Add(Tuple.Create(dir, dir));
+            mockedComparisonResult.Add(Tuple.Create(leftOnlyFile, nullFile));
+            mockedComparisonResult.Add(Tuple.Create(leftAndRightSameDateFile, leftAndRightSameDateFile));
+            mockedComparisonResult.Add(Tuple.Create(leftUpdatedFile, rightUpdatedFile));
+            mockedComparisonResult.Add(Tuple.Create(nullFile, rigthOnlyFile));
+
+            List<SynchronizationAdapter.LSFile> deletedFiles = new SynchronizationAdapter(new LinuxAdapter()).FilterDeletedFiles(mockedComparisonResult);
+
+            Assert.True(deletedFiles.Count == 1);
+            Assert.True(deletedFiles.Contains(rigthOnlyFile));
+        }
+
+        [Fact]
+        public void Synchronize_ShouldSucceedWithAnEmptyDirectory()
+        {
+            IShellContract shell = new LinuxAdapter();
+            shell.RunCommand("mkdir -p /tmp/LaPlayTest/a/anEmptyDirectory");
+            shell.RunCommand("mkdir -p /tmp/LaPlayTest/b");
+
+            new SynchronizationAdapter(new LinuxAdapter()).Synchronize("/tmp/LaPlayTest/a", "/tmp/LaPlayTest/b");
+
+            Assert.True(File.Exists("/tmp/LaPlayTest/b/anEmptyDirectory"));
+
+            shell.RunCommand("rm -r /tmp/LaPlayTest");
+        }
+
+        public void Synchronize_ShouldSucceedWithAnyFileType()
+        {
+        }
+
+        public void Synchronize_ShouldSucceedWithADeletedFile()
+        {
+        }
+
+        public void Synchronize_ShouldSucceedWithANewFileStructure()
+        {
+        }
+
         public void Synchronize_ShouldSucceed()
         {
 

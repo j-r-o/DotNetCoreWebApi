@@ -211,19 +211,19 @@ FN:52,System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Syn
 FNDA:1,System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FullJoin(System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>)
 DA:53,1
 DA:55,1
-DA:56,7
-DA:57,5
-DA:58,3
-DA:59,2
+DA:56,30
+DA:57,21
+DA:58,11
+DA:59,4
 DA:61,1
-DA:62,7
-DA:63,3
-DA:64,2
+DA:62,30
+DA:63,11
+DA:64,8
 DA:66,1
-DA:67,7
-DA:68,5
-DA:69,3
-DA:70,2
+DA:67,29
+DA:68,19
+DA:69,10
+DA:70,3
 DA:72,1
 DA:73,1
 BRDA:55,9,0,1
@@ -264,91 +264,98 @@ BRDA:66,582,0,1
 BRDA:66,582,1,1
 BRDA:66,618,0,1
 BRDA:66,618,1,1
-FN:74,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::CopyToMirror(System.String,System.String,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile)
-FNDA:0,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::CopyToMirror(System.String,System.String,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile)
-DA:75,0
-FN:75,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::RemoveFromMirror(LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile)
-FNDA:0,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::RemoveFromMirror(LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile)
-DA:76,0
-FN:76,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterNewFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
+FN:75,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::CopyToMirror(System.String,System.String,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile)
+FNDA:1,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::CopyToMirror(System.String,System.String,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile)
+DA:76,1
+DA:77,1
+DA:78,1
+DA:79,1
+FN:79,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::DeleteFileOrDirectory(System.String)
+FNDA:3,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::DeleteFileOrDirectory(System.String)
+DA:80,3
+FN:80,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterNewFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
 FNDA:0,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterNewFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
-DA:77,0
-BRDA:77,8,0,0
-BRDA:77,8,1,0
-BRDA:77,44,0,0
-BRDA:77,44,1,0
-FN:77,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterUpdatedFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
+DA:81,0
+BRDA:81,8,0,0
+BRDA:81,8,1,0
+BRDA:81,44,0,0
+BRDA:81,44,1,0
+FN:81,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterUpdatedFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
 FNDA:0,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterUpdatedFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
-DA:78,0
-BRDA:78,8,0,0
-BRDA:78,8,1,0
-BRDA:78,44,0,0
-BRDA:78,44,1,0
-FN:78,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterDeletedFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
-FNDA:0,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterDeletedFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
-DA:79,0
-BRDA:79,8,0,0
-BRDA:79,8,1,0
-BRDA:79,44,0,0
-BRDA:79,44,1,0
-FN:81,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::Synchronize(System.String,System.String)
-FNDA:0,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::Synchronize(System.String,System.String)
 DA:82,0
+BRDA:82,8,0,0
+BRDA:82,8,1,0
+BRDA:82,44,0,0
+BRDA:82,44,1,0
+FN:82,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterDeletedFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
+FNDA:0,System.Collections.Generic.List`1<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile> LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::FilterDeletedFiles(System.Collections.Generic.List`1<System.Tuple`2<LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile,LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile>>)
 DA:83,0
-DA:85,0
+BRDA:83,8,0,0
+BRDA:83,8,1,0
+BRDA:83,44,0,0
+BRDA:83,44,1,0
+FN:85,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::Synchronize(System.String,System.String)
+FNDA:0,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::Synchronize(System.String,System.String)
 DA:86,0
 DA:87,0
 DA:88,0
-FN:90,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::a()
-FNDA:0,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::a()
+DA:90,0
 DA:91,0
-DA:92,0
 DA:93,0
+DA:95,0
+DA:96,0
+DA:97,0
+DA:98,0
+FN:100,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::a()
+FNDA:0,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::a()
+DA:101,0
+DA:102,0
+DA:103,0
 FN:38,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::.ctor(LaPlay.Infrastructure.Shell.IShellContract)
-FNDA:2,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::.ctor(LaPlay.Infrastructure.Shell.IShellContract)
-DA:39,2
-DA:40,2
-DA:41,2
-DA:42,2
+FNDA:4,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter::.ctor(LaPlay.Infrastructure.Shell.IShellContract)
+DA:39,4
+DA:40,4
+DA:41,4
+DA:42,4
 FN:18,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile::.ctor(System.String)
-FNDA:3871,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile::.ctor(System.String)
-DA:19,3871
-DA:26,3871
-DA:27,3871
-DA:28,3871
-DA:30,3871
-DA:31,3871
-DA:32,3871
-DA:33,3871
-DA:34,3871
-LF:50
-LH:36
+FNDA:3880,System.Void LaPlay.Infrastructure.Synchronization.SynchronizationAdapter/LSFile::.ctor(System.String)
+DA:19,3880
+DA:26,3880
+DA:27,3880
+DA:28,3880
+DA:30,3880
+DA:31,3880
+DA:32,3880
+DA:33,3880
+DA:34,3880
+LF:57
+LH:41
 BRF:56
 BRH:42
 FNF:11
-FNH:4
+FNH:6
 end_of_record
 SF:/home/julien.rocco/EclipseWorkspace/_JRO_LaPlay/Dev_Backend/LaPlay.Api/Sources/Infrastructure/Shell/LinuxAdapter.cs
 FN:17,System.String LaPlay.Infrastructure.Shell.LinuxAdapter::RunCommand(System.String)
-FNDA:2,System.String LaPlay.Infrastructure.Shell.LinuxAdapter::RunCommand(System.String)
-DA:18,2
-DA:19,2
-DA:21,2
-DA:22,2
-DA:23,2
-DA:24,2
-DA:25,2
-DA:26,2
-DA:27,2
-DA:28,2
-DA:29,2
-DA:30,2
-DA:31,2
-DA:32,2
-DA:33,2
-DA:34,2
-DA:35,2
-DA:36,2
+FNDA:3,System.String LaPlay.Infrastructure.Shell.LinuxAdapter::RunCommand(System.String)
+DA:18,3
+DA:19,3
+DA:21,3
+DA:22,3
+DA:23,3
+DA:24,3
+DA:25,3
+DA:26,3
+DA:27,3
+DA:28,3
+DA:29,3
+DA:30,3
+DA:31,3
+DA:32,3
+DA:33,3
+DA:34,3
+DA:35,3
+DA:36,3
 FN:38,System.Diagnostics.Process LaPlay.Infrastructure.Shell.LinuxAdapter::RunNeverEndingCommand(System.String)
 FNDA:0,System.Diagnostics.Process LaPlay.Infrastructure.Shell.LinuxAdapter::RunNeverEndingCommand(System.String)
 DA:39,0

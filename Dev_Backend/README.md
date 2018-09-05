@@ -22,6 +22,7 @@ Pour avoir la couverture de code :
             -le fichier doit s appeler lcov.info
             -le fichier doit être dans le repertoire de la sollution
 
+        Se placer dans le repertoire DevBackend puis executer la commande :
 
         dotnet test LaPlay.Tests/ /p:CollectCoverage=true /p:CoverletOutput='../lcov.info' /p:CoverletOutputFormat=lcov
 

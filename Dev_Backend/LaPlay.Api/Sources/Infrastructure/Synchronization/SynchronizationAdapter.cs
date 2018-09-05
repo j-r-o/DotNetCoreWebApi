@@ -72,25 +72,39 @@ namespace LaPlay.Infrastructure.Synchronization
             return left.Concat(join).Concat(rigth).ToList();
         }
 
-        public void CopyToMirror(String mainPath, String mirrorPath, LSFile file){ _Shell.RunCommand("cp -f " + file.path + " " + mirrorPath + file.path.Substring(mainPath.Length));}
-        public void RemoveFromMirror(LSFile file){ _Shell.RunCommand("rm -d " + file.path);}
-        public List<LSFile> FilterNewFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item2 == null).Select(comparison => comparison.Item1).ToList();}
+        public void CopyToMirror(String mainPath, String mirrorPath, LSFile file)
+        {
+            if (!file.type.Equals("directory"))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(mirrorPath + file.path));
+                File.Copy(mainPath + file.path, mirrorPath + file.path, true);
+            }
+            else
+            {
+                Directory.CreateDirectory(mirrorPath + file.path);
+            }
+        }
+        public void DeleteFileOrDirectory(String path){_Shell.RunCommand("rm -d -r -f " + path);}
+        public List<LSFile> FilterNewFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item1 != null && comparison.Item2 == null).Select(comparison => comparison.Item1).ToList();}
         public List<LSFile> FilterUpdatedFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item1?.modifiedOn > comparison.Item2?.modifiedOn).Select(comparison => comparison.Item1).ToList();}
-        public List<LSFile> FilterDeletedFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item1 == null).Select(comparison => comparison.Item1).ToList();}
+        public List<LSFile> FilterDeletedFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item1 == null && comparison.Item2 != null).Select(comparison => comparison.Item2).ToList();}
 
         public void Synchronize(String mainPath, String mirrorPath)
         {
-            List<LSFile> mainFilesWithRelativePath = ListFiles(mainPath);
-            mainFilesWithRelativePath.ForEach(file => file.path = file.path.Substring(0, mainPath.Length));
+            Func<String, String, String> convertPathToRelative = (path, relativePart) => path.Substring(relativePart.Length);
 
-            List<LSFile> mirrorFilesWithRelativePath = ListFiles(mainPath);
-            mirrorFilesWithRelativePath.ForEach(file => file.path = file.path.Substring(0, mirrorPath.Length));
+
+            List<LSFile> mainFilesWithRelativePath = ListFiles(mainPath);
+            mainFilesWithRelativePath.ForEach(file => file.path = convertPathToRelative.Invoke(file.path, mainPath));
+
+            List<LSFile> mirrorFilesWithRelativePath = ListFiles(mirrorPath);
+            mirrorFilesWithRelativePath.ForEach(file => convertPathToRelative.Invoke(file.path, mirrorPath));
 
             var comparisonResult = FullJoin(mainFilesWithRelativePath, mirrorFilesWithRelativePath);
 
             FilterNewFiles(comparisonResult).ForEach(file => CopyToMirror(mainPath, mirrorPath, file));
             FilterUpdatedFiles(comparisonResult).ForEach(file => CopyToMirror(mainPath, mirrorPath, file));
-            FilterDeletedFiles(comparisonResult).ForEach(file => RemoveFromMirror(file));
+            FilterDeletedFiles(comparisonResult).ForEach(file => DeleteFileOrDirectory(file.path));
         }
 
         public void a()
