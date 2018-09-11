@@ -85,7 +85,7 @@ namespace LaPlay.Infrastructure.Synchronization
             }
         }
         public void DeleteFileOrDirectory(String path){_Shell.RunCommand("rm -d -r -f " + path);}
-        public List<LSFile> FilterNewFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item1 != null && comparison.Item2 == null).Select(comparison => comparison.Item1).ToList();}
+        public List<LSFile> FilterNewFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => (comparison.Item1 != null && comparison.Item2 == null) ||(comparison.Item1 != null && comparison.Item2 != null && comparison.Item1.modifiedOn != comparison.Item2.modifiedOn)).Select(comparison => comparison.Item1).ToList();}
         public List<LSFile> FilterUpdatedFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item1?.modifiedOn > comparison.Item2?.modifiedOn).Select(comparison => comparison.Item1).ToList();}
         public List<LSFile> FilterDeletedFiles(List<Tuple<LSFile, LSFile>> comparisonResult){ return comparisonResult.Where(comparison => comparison.Item1 == null && comparison.Item2 != null).Select(comparison => comparison.Item2).ToList();}
 

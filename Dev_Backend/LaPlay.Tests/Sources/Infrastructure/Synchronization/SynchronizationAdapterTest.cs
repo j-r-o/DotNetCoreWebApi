@@ -20,6 +20,7 @@ namespace LaPlay.Infrastructure.Synchronization
     public class SynchronizationAdapterTest
     {
         
+        
         [Fact]
         public void dev()
         {
@@ -233,25 +234,28 @@ namespace LaPlay.Infrastructure.Synchronization
         public void FilterNewFiles_ShouldSucceed()
         {
             List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>> mockedComparisonResult = new List<Tuple<SynchronizationAdapter.LSFile, SynchronizationAdapter.LSFile>>();
-
-            SynchronizationAdapter.LSFile dir = new SynchronizationAdapter.LSFile("[d--------- 4096 0001-01-01 00:00:00]  /tmp/dir");
-            SynchronizationAdapter.LSFile leftOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftOnlyFile");
             SynchronizationAdapter.LSFile nullFile = null;
-            SynchronizationAdapter.LSFile leftAndRightSameDateFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightSameDateFile");
-            SynchronizationAdapter.LSFile leftUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/LeftAndRightUpdatedFile");
-            SynchronizationAdapter.LSFile rightUpdatedFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:00]  /tmp/dir/LeftAndRightUpdatedFile");
-            SynchronizationAdapter.LSFile rigthOnlyFile = new SynchronizationAdapter.LSFile("[---------- 1024 0001-01-01 00:00:01]  /tmp/dir/RigthOnlyFile");
 
-            mockedComparisonResult.Add(Tuple.Create(dir, dir));
-            mockedComparisonResult.Add(Tuple.Create(leftOnlyFile, nullFile));
-            mockedComparisonResult.Add(Tuple.Create(leftAndRightSameDateFile, leftAndRightSameDateFile));
-            mockedComparisonResult.Add(Tuple.Create(leftUpdatedFile, rightUpdatedFile));
-            mockedComparisonResult.Add(Tuple.Create(nullFile, rigthOnlyFile));
+            //Should identify as new when null or updated on rigth
+            mockedComparisonResult.Add(Tuple.Create(
+                new SynchronizationAdapter.LSFile("[---------- 4096 0001-01-01 00:00:00]  /file1"),
+                nullFile
+            ));
+            mockedComparisonResult.Add(Tuple.Create(
+                new SynchronizationAdapter.LSFile("[---------- 4096 0001-01-01 00:00:01]  /file2"),
+                new SynchronizationAdapter.LSFile("[---------- 4096 0001-01-01 00:00:00]  /file2")
+            ));
+            //Should not identify as new when not null on rigth and not updated
+            mockedComparisonResult.Add(Tuple.Create(
+                new SynchronizationAdapter.LSFile("[---------- 4096 0001-01-01 00:00:00]  /file3"),
+                new SynchronizationAdapter.LSFile("[---------- 4096 0001-01-01 00:00:00]  /file3")
+            ));
 
             List<SynchronizationAdapter.LSFile> newFiles = new SynchronizationAdapter(new LinuxAdapter()).FilterNewFiles(mockedComparisonResult);
 
-            Assert.True(newFiles.Count == 1);
-            Assert.True(newFiles.Contains(leftOnlyFile));
+            Assert.True(newFiles.Count == 2);
+            Assert.True(newFiles.Where(file => file.path.Equals("/file1")).Count().Equals(1));
+            Assert.True(newFiles.Where(file => file.path.Equals("/file2")).Count().Equals(1));
         }
 
         [Fact]
